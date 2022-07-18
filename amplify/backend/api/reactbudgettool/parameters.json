@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "reactbudgettool",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authreactbudgettool4e8ad8b54e8ad8b5",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

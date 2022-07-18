@@ -1,0 +1,28 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-reactbudgettool-dev-122333-authRole",
+      "UnauthRoleArn": "arn:aws:iam::482698549225:role/amplify-reactbudgettool-dev-122333-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::482698549225:role/amplify-reactbudgettool-dev-122333-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-reactbudgettool-dev-122333-deployment",
+      "UnauthRoleName": "amplify-reactbudgettool-dev-122333-unauthRole",
+      "StackName": "amplify-reactbudgettool-dev-122333",
+      "StackId": "arn:aws:cloudformation:us-east-1:482698549225:stack/amplify-reactbudgettool-dev-122333/5aa43fe0-06be-11ed-842d-0e62bae32ce5",
+      "AmplifyAppId": "d3b9342c6w0ra9",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-reactbudgettool-dev-122333-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "reactbudgettool4e8ad8b54e8ad8b5": {}
+      },
+      "function": {
+        "reactbudgettool4e8ad8b54e8ad8b5PreSignup": {
+          "DOMAINALLOWLIST": "hauflertechservices.com",
+          "deploymentBucketName": "amplify-reactbudgettool-dev-122333-deployment",
+          "s3Key": "amplify-builds/reactbudgettool4e8ad8b54e8ad8b5PreSignup-355a4e4b672b582b2f37-build.zip"
+        }
+      }
+    }
+  }
+}
