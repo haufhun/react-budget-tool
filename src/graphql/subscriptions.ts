@@ -17,6 +17,7 @@ export const onCreateBankAccount = /* GraphQL */ `
           createdAt
           updatedAt
           bankAccountTransactionsId
+          categoryTransactionsId
           owner
         }
         nextToken
@@ -42,6 +43,7 @@ export const onUpdateBankAccount = /* GraphQL */ `
           createdAt
           updatedAt
           bankAccountTransactionsId
+          categoryTransactionsId
           owner
         }
         nextToken
@@ -67,6 +69,85 @@ export const onDeleteBankAccount = /* GraphQL */ `
           createdAt
           updatedAt
           bankAccountTransactionsId
+          categoryTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateCategory = /* GraphQL */ `
+  subscription OnCreateCategory($owner: String) {
+    onCreateCategory(owner: $owner) {
+      id
+      name
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          bankAccountTransactionsId
+          categoryTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateCategory = /* GraphQL */ `
+  subscription OnUpdateCategory($owner: String) {
+    onUpdateCategory(owner: $owner) {
+      id
+      name
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          bankAccountTransactionsId
+          categoryTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteCategory = /* GraphQL */ `
+  subscription OnDeleteCategory($owner: String) {
+    onDeleteCategory(owner: $owner) {
+      id
+      name
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          bankAccountTransactionsId
+          categoryTransactionsId
           owner
         }
         nextToken
@@ -95,9 +176,20 @@ export const onCreateTransaction = /* GraphQL */ `
         updatedAt
         owner
       }
+      category {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       bankAccountTransactionsId
+      categoryTransactionsId
       owner
     }
   }
@@ -120,9 +212,20 @@ export const onUpdateTransaction = /* GraphQL */ `
         updatedAt
         owner
       }
+      category {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       bankAccountTransactionsId
+      categoryTransactionsId
       owner
     }
   }
@@ -145,9 +248,20 @@ export const onDeleteTransaction = /* GraphQL */ `
         updatedAt
         owner
       }
+      category {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       bankAccountTransactionsId
+      categoryTransactionsId
       owner
     }
   }

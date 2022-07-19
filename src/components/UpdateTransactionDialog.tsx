@@ -3,60 +3,56 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
-  Input,
   InputAdornment,
   InputLabel,
   MenuItem,
   OutlinedInput,
   Select,
-  Stack,
   TextField,
-  Typography,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useEffect, useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
-import { createTransaction as createTransactionMutation } from "../graphql/mutations";
+import { updateTransaction as updateTransactionMutation } from "../graphql/mutations";
 import {
   BankAccount,
-  Category,
-  CreateTransactionMutationVariables,
+  Transaction,
+  UpdateTransactionMutationVariables,
   ListBankAccountsQuery,
+  Category,
   ListCategoriesQuery,
 } from "../API";
 import { listBankAccounts, listCategories } from "../graphql/queries";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
-import { Container } from "@mui/system";
 
-type CreateTransactionDialogProps = {
+type UpdateTransactionDialogProps = {
+  transaction: Transaction;
   refresh: () => Promise<void>;
   open: boolean;
   handleClose: () => void;
 };
 
-function CreateTransactionDialog({
+function UpdateTransactionDialog({
+  transaction,
   refresh,
   open,
   handleClose,
-}: CreateTransactionDialogProps) {
-  const [isGettingBankAccounts, setIsGettingBankAccounts] = useState(false);
-  const [isCreateLoading, setIsCreateLoading] = useState(false);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState("2022-07-18");
-  const [amount, setAmount] = useState("0.0");
-  const [selectedAccountName, setSelectedAccountName] = useState("");
+}: UpdateTransactionDialogProps) {
+  const [isUpdateLoading, setIsUpdateLoading] = useState(false);
+  const [name, setName] = useState(transaction.name);
+  const [description, setDescription] = useState(transaction.description);
+  const [date, setDate] = useState(transaction.date);
+  const [amount, setAmount] = useState(transaction.amount.toString());
   const [bankAccounts, setBankAccounts] = useState<any>([]);
+  const [accountName, setAccountName] = useState(transaction.account.name);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [categoryName, setCategoryName] = useState("");
+  const [categoryName, setCategoryName] = useState(transaction.account.name);
 
-  const selectedAccount = bankAccounts.find(
-    (a: BankAccount) => a.name === selectedAccountName
+  const selectedAccount: BankAccount = bankAccounts.find(
+    (a: BankAccount) => a.name === accountName
   );
-
   const selectedCategory: Category | undefined = categories.find(
     (c: Category) => c.name === categoryName
   );
@@ -71,15 +67,16 @@ function CreateTransactionDialog({
     setDescription("");
     setDate("2022-07-18");
     setAmount("0.0");
-    setSelectedAccountName("");
+    setAccountName("");
   };
 
-  const createTransaction = async () => {
-    setIsCreateLoading(true);
+  const updateTransaction = async () => {
+    setIsUpdateLoading(true);
     const parsedAmount = parseFloat(amount);
     try {
-      const input: CreateTransactionMutationVariables = {
+      const input: UpdateTransactionMutationVariables = {
         input: {
+          id: transaction.id,
           name,
           description,
           date,
@@ -88,27 +85,23 @@ function CreateTransactionDialog({
           // categoryTransactionsId: "1234", // TODO: Update this to be correct
         },
       };
-      await API.graphql(graphqlOperation(createTransactionMutation, input));
+      await API.graphql(graphqlOperation(updateTransactionMutation, input));
 
       await refresh();
       clearForm();
     } catch (e) {
       console.error(e);
     } finally {
-      setIsCreateLoading(false);
+      setIsUpdateLoading(false);
     }
   };
 
   const getBankAccounts = async () => {
-    setIsGettingBankAccounts(true);
-
     const accountsResponse = (await API.graphql(
       graphqlOperation(listBankAccounts)
     )) as GraphQLResult<ListBankAccountsQuery>;
     const accounts = accountsResponse?.data?.listBankAccounts?.items;
     setBankAccounts(accounts);
-
-    setIsGettingBankAccounts(false);
   };
 
   const getCategories = async () => {
@@ -124,12 +117,11 @@ function CreateTransactionDialog({
     getBankAccounts();
     getCategories();
   }, []);
+
   return (
     <>
       <Dialog disableEscapeKeyDown open={open} onClose={closeDialog}>
-        <DialogTitle sx={{ paddingBottom: 2 }}>
-          Create New Transaction
-        </DialogTitle>
+        <DialogTitle sx={{ paddingBottom: 2 }}>Update Transaction</DialogTitle>
         <DialogContent sx={{ paddingY: 3 }}>
           <TextField
             fullWidth
@@ -161,8 +153,8 @@ function CreateTransactionDialog({
             <InputLabel>Account</InputLabel>
             <Select
               label="Account"
-              value={selectedAccountName}
-              onChange={(e) => setSelectedAccountName(e.target.value)}
+              value={accountName}
+              onChange={(e) => setAccountName(e.target.value)}
             >
               {bankAccounts.map((account: any) => (
                 <MenuItem key={account.id} value={account.name}>
@@ -201,18 +193,12 @@ function CreateTransactionDialog({
               Cancel
             </Button>
             <LoadingButton
-              onClick={createTransaction}
-              loading={isCreateLoading}
-            >
-              Create (Another)
-            </LoadingButton>
-            <LoadingButton
               onClick={() => {
-                createTransaction().then(handleClose);
+                updateTransaction().then(handleClose);
               }}
-              loading={isCreateLoading}
+              loading={isUpdateLoading}
             >
-              Create
+              Update
             </LoadingButton>
           </DialogActions>
         </DialogContent>
@@ -221,4 +207,4 @@ function CreateTransactionDialog({
   );
 }
 
-export default CreateTransactionDialog;
+export default UpdateTransactionDialog;

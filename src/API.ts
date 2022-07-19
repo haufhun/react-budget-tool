@@ -78,9 +78,21 @@ export type Transaction = {
   date: string,
   amount: number,
   account: BankAccount,
+  category?: Category | null,
   createdAt: string,
   updatedAt: string,
   bankAccountTransactionsId: string,
+  categoryTransactionsId?: string | null,
+  owner?: string | null,
+};
+
+export type Category = {
+  __typename: "Category",
+  id: string,
+  name: string,
+  transactions?: ModelTransactionConnection | null,
+  createdAt: string,
+  updatedAt: string,
   owner?: string | null,
 };
 
@@ -93,6 +105,27 @@ export type DeleteBankAccountInput = {
   id: string,
 };
 
+export type CreateCategoryInput = {
+  id?: string | null,
+  name: string,
+};
+
+export type ModelCategoryConditionInput = {
+  name?: ModelStringInput | null,
+  and?: Array< ModelCategoryConditionInput | null > | null,
+  or?: Array< ModelCategoryConditionInput | null > | null,
+  not?: ModelCategoryConditionInput | null,
+};
+
+export type UpdateCategoryInput = {
+  id: string,
+  name?: string | null,
+};
+
+export type DeleteCategoryInput = {
+  id: string,
+};
+
 export type CreateTransactionInput = {
   id?: string | null,
   name: string,
@@ -100,6 +133,7 @@ export type CreateTransactionInput = {
   date: string,
   amount: number,
   bankAccountTransactionsId: string,
+  categoryTransactionsId?: string | null,
 };
 
 export type ModelTransactionConditionInput = {
@@ -111,6 +145,7 @@ export type ModelTransactionConditionInput = {
   or?: Array< ModelTransactionConditionInput | null > | null,
   not?: ModelTransactionConditionInput | null,
   bankAccountTransactionsId?: ModelIDInput | null,
+  categoryTransactionsId?: ModelIDInput | null,
 };
 
 export type ModelFloatInput = {
@@ -148,6 +183,7 @@ export type UpdateTransactionInput = {
   date?: string | null,
   amount?: number | null,
   bankAccountTransactionsId?: string | null,
+  categoryTransactionsId?: string | null,
 };
 
 export type DeleteTransactionInput = {
@@ -168,6 +204,20 @@ export type ModelBankAccountConnection = {
   nextToken?: string | null,
 };
 
+export type ModelCategoryFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelCategoryFilterInput | null > | null,
+  or?: Array< ModelCategoryFilterInput | null > | null,
+  not?: ModelCategoryFilterInput | null,
+};
+
+export type ModelCategoryConnection = {
+  __typename: "ModelCategoryConnection",
+  items:  Array<Category | null >,
+  nextToken?: string | null,
+};
+
 export type ModelTransactionFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -178,6 +228,7 @@ export type ModelTransactionFilterInput = {
   or?: Array< ModelTransactionFilterInput | null > | null,
   not?: ModelTransactionFilterInput | null,
   bankAccountTransactionsId?: ModelIDInput | null,
+  categoryTransactionsId?: ModelIDInput | null,
 };
 
 export type CreateBankAccountMutationVariables = {
@@ -202,6 +253,7 @@ export type CreateBankAccountMutation = {
         createdAt: string,
         updatedAt: string,
         bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -234,6 +286,7 @@ export type UpdateBankAccountMutation = {
         createdAt: string,
         updatedAt: string,
         bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -266,6 +319,106 @@ export type DeleteBankAccountMutation = {
         createdAt: string,
         updatedAt: string,
         bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateCategoryMutationVariables = {
+  input: CreateCategoryInput,
+  condition?: ModelCategoryConditionInput | null,
+};
+
+export type CreateCategoryMutation = {
+  createCategory?:  {
+    __typename: "Category",
+    id: string,
+    name: string,
+    transactions?:  {
+      __typename: "ModelTransactionConnection",
+      items:  Array< {
+        __typename: "Transaction",
+        id: string,
+        name: string,
+        description: string,
+        date: string,
+        amount: number,
+        createdAt: string,
+        updatedAt: string,
+        bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateCategoryMutationVariables = {
+  input: UpdateCategoryInput,
+  condition?: ModelCategoryConditionInput | null,
+};
+
+export type UpdateCategoryMutation = {
+  updateCategory?:  {
+    __typename: "Category",
+    id: string,
+    name: string,
+    transactions?:  {
+      __typename: "ModelTransactionConnection",
+      items:  Array< {
+        __typename: "Transaction",
+        id: string,
+        name: string,
+        description: string,
+        date: string,
+        amount: number,
+        createdAt: string,
+        updatedAt: string,
+        bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteCategoryMutationVariables = {
+  input: DeleteCategoryInput,
+  condition?: ModelCategoryConditionInput | null,
+};
+
+export type DeleteCategoryMutation = {
+  deleteCategory?:  {
+    __typename: "Category",
+    id: string,
+    name: string,
+    transactions?:  {
+      __typename: "ModelTransactionConnection",
+      items:  Array< {
+        __typename: "Transaction",
+        id: string,
+        name: string,
+        description: string,
+        date: string,
+        amount: number,
+        createdAt: string,
+        updatedAt: string,
+        bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -301,9 +454,22 @@ export type CreateTransactionMutation = {
       updatedAt: string,
       owner?: string | null,
     },
+    category?:  {
+      __typename: "Category",
+      id: string,
+      name: string,
+      transactions?:  {
+        __typename: "ModelTransactionConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     bankAccountTransactionsId: string,
+    categoryTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -333,9 +499,22 @@ export type UpdateTransactionMutation = {
       updatedAt: string,
       owner?: string | null,
     },
+    category?:  {
+      __typename: "Category",
+      id: string,
+      name: string,
+      transactions?:  {
+        __typename: "ModelTransactionConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     bankAccountTransactionsId: string,
+    categoryTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -365,9 +544,22 @@ export type DeleteTransactionMutation = {
       updatedAt: string,
       owner?: string | null,
     },
+    category?:  {
+      __typename: "Category",
+      id: string,
+      name: string,
+      transactions?:  {
+        __typename: "ModelTransactionConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     bankAccountTransactionsId: string,
+    categoryTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -393,6 +585,7 @@ export type GetBankAccountQuery = {
         createdAt: string,
         updatedAt: string,
         bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -414,6 +607,63 @@ export type ListBankAccountsQuery = {
     __typename: "ModelBankAccountConnection",
     items:  Array< {
       __typename: "BankAccount",
+      id: string,
+      name: string,
+      transactions?:  {
+        __typename: "ModelTransactionConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetCategoryQueryVariables = {
+  id: string,
+};
+
+export type GetCategoryQuery = {
+  getCategory?:  {
+    __typename: "Category",
+    id: string,
+    name: string,
+    transactions?:  {
+      __typename: "ModelTransactionConnection",
+      items:  Array< {
+        __typename: "Transaction",
+        id: string,
+        name: string,
+        description: string,
+        date: string,
+        amount: number,
+        createdAt: string,
+        updatedAt: string,
+        bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListCategoriesQueryVariables = {
+  filter?: ModelCategoryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCategoriesQuery = {
+  listCategories?:  {
+    __typename: "ModelCategoryConnection",
+    items:  Array< {
+      __typename: "Category",
       id: string,
       name: string,
       transactions?:  {
@@ -452,9 +702,22 @@ export type GetTransactionQuery = {
       updatedAt: string,
       owner?: string | null,
     },
+    category?:  {
+      __typename: "Category",
+      id: string,
+      name: string,
+      transactions?:  {
+        __typename: "ModelTransactionConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     bankAccountTransactionsId: string,
+    categoryTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -483,9 +746,18 @@ export type ListTransactionsQuery = {
         updatedAt: string,
         owner?: string | null,
       },
+      category?:  {
+        __typename: "Category",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       bankAccountTransactionsId: string,
+      categoryTransactionsId?: string | null,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
@@ -513,6 +785,7 @@ export type OnCreateBankAccountSubscription = {
         createdAt: string,
         updatedAt: string,
         bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -544,6 +817,7 @@ export type OnUpdateBankAccountSubscription = {
         createdAt: string,
         updatedAt: string,
         bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -575,6 +849,103 @@ export type OnDeleteBankAccountSubscription = {
         createdAt: string,
         updatedAt: string,
         bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateCategorySubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateCategorySubscription = {
+  onCreateCategory?:  {
+    __typename: "Category",
+    id: string,
+    name: string,
+    transactions?:  {
+      __typename: "ModelTransactionConnection",
+      items:  Array< {
+        __typename: "Transaction",
+        id: string,
+        name: string,
+        description: string,
+        date: string,
+        amount: number,
+        createdAt: string,
+        updatedAt: string,
+        bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateCategorySubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateCategorySubscription = {
+  onUpdateCategory?:  {
+    __typename: "Category",
+    id: string,
+    name: string,
+    transactions?:  {
+      __typename: "ModelTransactionConnection",
+      items:  Array< {
+        __typename: "Transaction",
+        id: string,
+        name: string,
+        description: string,
+        date: string,
+        amount: number,
+        createdAt: string,
+        updatedAt: string,
+        bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteCategorySubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteCategorySubscription = {
+  onDeleteCategory?:  {
+    __typename: "Category",
+    id: string,
+    name: string,
+    transactions?:  {
+      __typename: "ModelTransactionConnection",
+      items:  Array< {
+        __typename: "Transaction",
+        id: string,
+        name: string,
+        description: string,
+        date: string,
+        amount: number,
+        createdAt: string,
+        updatedAt: string,
+        bankAccountTransactionsId: string,
+        categoryTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -609,9 +980,22 @@ export type OnCreateTransactionSubscription = {
       updatedAt: string,
       owner?: string | null,
     },
+    category?:  {
+      __typename: "Category",
+      id: string,
+      name: string,
+      transactions?:  {
+        __typename: "ModelTransactionConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     bankAccountTransactionsId: string,
+    categoryTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -640,9 +1024,22 @@ export type OnUpdateTransactionSubscription = {
       updatedAt: string,
       owner?: string | null,
     },
+    category?:  {
+      __typename: "Category",
+      id: string,
+      name: string,
+      transactions?:  {
+        __typename: "ModelTransactionConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     bankAccountTransactionsId: string,
+    categoryTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -671,9 +1068,22 @@ export type OnDeleteTransactionSubscription = {
       updatedAt: string,
       owner?: string | null,
     },
+    category?:  {
+      __typename: "Category",
+      id: string,
+      name: string,
+      transactions?:  {
+        __typename: "ModelTransactionConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     bankAccountTransactionsId: string,
+    categoryTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };

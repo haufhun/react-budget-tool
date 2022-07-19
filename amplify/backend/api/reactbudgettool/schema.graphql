@@ -4,6 +4,12 @@ type BankAccount @model @auth(rules: [{ allow: owner }]) {
   transactions: [Transaction!]! @hasMany
 }
 
+type Category @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  transactions: [Transaction] @hasMany
+}
+
 type Transaction @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   name: String!
@@ -11,4 +17,5 @@ type Transaction @model @auth(rules: [{ allow: owner }]) {
   date: AWSDate!
   amount: Float!
   account: BankAccount! @belongsTo
+  category: Category @belongsTo
 }

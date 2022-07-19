@@ -12,13 +12,82 @@ import {
 import { listTransactions } from "../graphql/queries";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CreateTransactionDialog from "./CreateTransactionDialog";
+import TransactionsTable from "./TransactionsTable";
+import UpdateTransactionDialog from "./UpdateTransactionDialog";
+
+const TransactionsCardTable = ({
+  transactions,
+  setSelectedTransaction,
+  setIsUpdateDialogOpen,
+  isDeleteLoading,
+  deleteAccount,
+}) => {
+  return (
+    <Stack spacing={2}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{
+          paddingX: 2,
+          paddingY: 2,
+          borderRadius: 2,
+        }}
+      >
+        <Typography>Name</Typography>
+        <Typography>Date</Typography>
+        <Typography>Account Name</Typography>
+        <Typography>Amount</Typography>
+        <Typography>Action</Typography>
+      </Stack>
+
+      {transactions.map((transaction: Transaction) => (
+        <Stack
+          key={transaction.id}
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={2}
+          sx={{
+            backgroundColor: "#3f6c8a",
+            paddingX: 2,
+            paddingY: 2,
+            borderRadius: 2,
+          }}
+          onClick={() => {
+            setSelectedTransaction(transaction);
+            setIsUpdateDialogOpen(true);
+          }}
+        >
+          <Typography>{transaction.name}</Typography>
+          <Typography>{transaction.date}</Typography>
+          <Typography>{transaction.account.name}</Typography>
+          <Typography>${transaction.amount.toFixed(2)}</Typography>
+
+          <LoadingButton
+            color="error"
+            variant="contained"
+            loading={isDeleteLoading}
+            onClick={() => deleteAccount(transaction.id)}
+          >
+            Delete
+          </LoadingButton>
+        </Stack>
+      ))}
+    </Stack>
+  );
+};
 
 function Transactions() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false);
+
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [isRefreshLoading, setIsRefreshLoading] = useState(false);
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<Transaction | null>(null);
 
   const deleteAccount = async (id: string) => {
     setIsDeleteLoading(true);
@@ -65,6 +134,17 @@ function Transactions() {
         open={isCreateDialogOpen}
         handleClose={() => setIsCreateDialogOpen(false)}
       />
+      {selectedTransaction && (
+        <UpdateTransactionDialog
+          transaction={selectedTransaction}
+          refresh={refresh}
+          open={isUpdateDialogOpen}
+          handleClose={() => {
+            setIsUpdateDialogOpen(false);
+            setSelectedTransaction(null);
+          }}
+        />
+      )}
       <Container>
         <Stack>
           <Stack
@@ -79,54 +159,14 @@ function Transactions() {
             </LoadingButton>
             <Button onClick={() => setIsCreateDialogOpen(true)}>Create</Button>
           </Stack>
-          <Stack spacing={2}>
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              sx={{
-                paddingX: 2,
-                paddingY: 2,
-                borderRadius: 2,
-              }}
-            >
-              <Typography>Name</Typography>
-              <Typography>Date</Typography>
-              <Typography>Account Name</Typography>
-              <Typography>Amount</Typography>
-              <Typography>Action</Typography>
-            </Stack>
 
-            {transactions.map((transaction: Transaction) => (
-              <Stack
-                key={transaction.id}
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                spacing={2}
-                sx={{
-                  backgroundColor: "#3f6c8a",
-                  paddingX: 2,
-                  paddingY: 2,
-                  borderRadius: 2,
-                }}
-              >
-                <Typography>{transaction.name}</Typography>
-                <Typography>{transaction.date}</Typography>
-                <Typography>{transaction.account.name}</Typography>
-                <Typography>${transaction.amount.toFixed(2)}</Typography>
-
-                <LoadingButton
-                  color="error"
-                  variant="contained"
-                  loading={isDeleteLoading}
-                  onClick={() => deleteAccount(transaction.id)}
-                >
-                  Delete
-                </LoadingButton>
-              </Stack>
-            ))}
-          </Stack>
+          <TransactionsCardTable
+            transactions={transactions}
+            setSelectedTransaction={setSelectedTransaction}
+            setIsUpdateDialogOpen={setIsUpdateDialogOpen}
+            isDeleteLoading={isDeleteLoading}
+            deleteAccount={deleteAccount}
+          />
         </Stack>
       </Container>
     </>

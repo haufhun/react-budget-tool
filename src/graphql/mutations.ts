@@ -20,6 +20,7 @@ export const createBankAccount = /* GraphQL */ `
           createdAt
           updatedAt
           bankAccountTransactionsId
+          categoryTransactionsId
           owner
         }
         nextToken
@@ -48,6 +49,7 @@ export const updateBankAccount = /* GraphQL */ `
           createdAt
           updatedAt
           bankAccountTransactionsId
+          categoryTransactionsId
           owner
         }
         nextToken
@@ -76,6 +78,94 @@ export const deleteBankAccount = /* GraphQL */ `
           createdAt
           updatedAt
           bankAccountTransactionsId
+          categoryTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createCategory = /* GraphQL */ `
+  mutation CreateCategory(
+    $input: CreateCategoryInput!
+    $condition: ModelCategoryConditionInput
+  ) {
+    createCategory(input: $input, condition: $condition) {
+      id
+      name
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          bankAccountTransactionsId
+          categoryTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateCategory = /* GraphQL */ `
+  mutation UpdateCategory(
+    $input: UpdateCategoryInput!
+    $condition: ModelCategoryConditionInput
+  ) {
+    updateCategory(input: $input, condition: $condition) {
+      id
+      name
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          bankAccountTransactionsId
+          categoryTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteCategory = /* GraphQL */ `
+  mutation DeleteCategory(
+    $input: DeleteCategoryInput!
+    $condition: ModelCategoryConditionInput
+  ) {
+    deleteCategory(input: $input, condition: $condition) {
+      id
+      name
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          bankAccountTransactionsId
+          categoryTransactionsId
           owner
         }
         nextToken
@@ -107,9 +197,20 @@ export const createTransaction = /* GraphQL */ `
         updatedAt
         owner
       }
+      category {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       bankAccountTransactionsId
+      categoryTransactionsId
       owner
     }
   }
@@ -135,9 +236,20 @@ export const updateTransaction = /* GraphQL */ `
         updatedAt
         owner
       }
+      category {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       bankAccountTransactionsId
+      categoryTransactionsId
       owner
     }
   }
@@ -163,9 +275,20 @@ export const deleteTransaction = /* GraphQL */ `
         updatedAt
         owner
       }
+      category {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       bankAccountTransactionsId
+      categoryTransactionsId
       owner
     }
   }

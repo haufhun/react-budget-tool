@@ -17,6 +17,7 @@ export const getBankAccount = /* GraphQL */ `
           createdAt
           updatedAt
           bankAccountTransactionsId
+          categoryTransactionsId
           owner
         }
         nextToken
@@ -34,6 +35,53 @@ export const listBankAccounts = /* GraphQL */ `
     $nextToken: String
   ) {
     listBankAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getCategory = /* GraphQL */ `
+  query GetCategory($id: ID!) {
+    getCategory(id: $id) {
+      id
+      name
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          bankAccountTransactionsId
+          categoryTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listCategories = /* GraphQL */ `
+  query ListCategories(
+    $filter: ModelCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCategories(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
@@ -66,9 +114,20 @@ export const getTransaction = /* GraphQL */ `
         updatedAt
         owner
       }
+      category {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       bankAccountTransactionsId
+      categoryTransactionsId
       owner
     }
   }
@@ -93,9 +152,17 @@ export const listTransactions = /* GraphQL */ `
           updatedAt
           owner
         }
+        category {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         bankAccountTransactionsId
+        categoryTransactionsId
         owner
       }
       nextToken
