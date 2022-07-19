@@ -25,6 +25,22 @@ function AppLayout() {
               >
                 Budgeting
               </Link>
+              <Link
+                component={RouterLink}
+                to="/"
+                color="inherit"
+                underline="none"
+              >
+                Transactions
+              </Link>
+              <Link
+                component={RouterLink}
+                to="/accounts"
+                color="inherit"
+                underline="none"
+              >
+                Accounts
+              </Link>
             </Stack>
 
             <Box sx={{ flexGrow: 1 }} />

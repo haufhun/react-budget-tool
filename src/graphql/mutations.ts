@@ -10,6 +10,20 @@ export const createBankAccount = /* GraphQL */ `
     createBankAccount(input: $input, condition: $condition) {
       id
       name
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          bankAccountTransactionsId
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -24,6 +38,20 @@ export const updateBankAccount = /* GraphQL */ `
     updateBankAccount(input: $input, condition: $condition) {
       id
       name
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          bankAccountTransactionsId
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -38,8 +66,106 @@ export const deleteBankAccount = /* GraphQL */ `
     deleteBankAccount(input: $input, condition: $condition) {
       id
       name
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          bankAccountTransactionsId
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+      owner
+    }
+  }
+`;
+export const createTransaction = /* GraphQL */ `
+  mutation CreateTransaction(
+    $input: CreateTransactionInput!
+    $condition: ModelTransactionConditionInput
+  ) {
+    createTransaction(input: $input, condition: $condition) {
+      id
+      name
+      description
+      date
+      amount
+      account {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      bankAccountTransactionsId
+      owner
+    }
+  }
+`;
+export const updateTransaction = /* GraphQL */ `
+  mutation UpdateTransaction(
+    $input: UpdateTransactionInput!
+    $condition: ModelTransactionConditionInput
+  ) {
+    updateTransaction(input: $input, condition: $condition) {
+      id
+      name
+      description
+      date
+      amount
+      account {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      bankAccountTransactionsId
+      owner
+    }
+  }
+`;
+export const deleteTransaction = /* GraphQL */ `
+  mutation DeleteTransaction(
+    $input: DeleteTransactionInput!
+    $condition: ModelTransactionConditionInput
+  ) {
+    deleteTransaction(input: $input, condition: $condition) {
+      id
+      name
+      description
+      date
+      amount
+      account {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      bankAccountTransactionsId
       owner
     }
   }

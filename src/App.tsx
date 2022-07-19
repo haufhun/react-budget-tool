@@ -2,6 +2,7 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import Accounts from "./components/Accounts";
+import Transactions from "./components/Transactions";
 
 import "@aws-amplify/ui-react/styles.css";
 const theme = createTheme({
@@ -17,7 +18,7 @@ function App() {
         <CssBaseline />
         <Routes>
           <Route element={<AppLayout />}>
-            <Route path="/" element={<div>Hello World</div>} />
+            <Route path="/" element={<Transactions />} />
             <Route path="/accounts" element={<Accounts />} />
           </Route>
         </Routes>

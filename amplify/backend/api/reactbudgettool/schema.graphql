@@ -1,4 +1,14 @@
 type BankAccount @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   name: String!
+  transactions: [Transaction!]! @hasMany
+}
+
+type Transaction @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  description: String!
+  date: AWSDate!
+  amount: Float!
+  account: BankAccount! @belongsTo
 }
