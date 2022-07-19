@@ -14,6 +14,7 @@ import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CreateTransactionDialog from "./CreateTransactionDialog";
 import TransactionsTable from "./TransactionsTable";
 import UpdateTransactionDialog from "./UpdateTransactionDialog";
+import EnhancedTable from "./EnhancedTable";
 
 const TransactionsCardTable = ({
   transactions,
@@ -37,6 +38,7 @@ const TransactionsCardTable = ({
         <Typography>Name</Typography>
         <Typography>Date</Typography>
         <Typography>Account Name</Typography>
+        <Typography>Category</Typography>
         <Typography>Amount</Typography>
         <Typography>Action</Typography>
       </Stack>
@@ -62,6 +64,7 @@ const TransactionsCardTable = ({
           <Typography>{transaction.name}</Typography>
           <Typography>{transaction.date}</Typography>
           <Typography>{transaction.account.name}</Typography>
+          <Typography>{transaction.category?.name ?? "null"}</Typography>
           <Typography>${transaction.amount.toFixed(2)}</Typography>
 
           <LoadingButton
@@ -160,13 +163,18 @@ function Transactions() {
             <Button onClick={() => setIsCreateDialogOpen(true)}>Create</Button>
           </Stack>
 
-          <TransactionsCardTable
+          {/* // TODO: Pick our which way to display transactions */}
+
+          {/* <TransactionsTable /> */}
+          {/* <EnhancedTable /> */}
+
+          {/* <TransactionsCardTable
             transactions={transactions}
             setSelectedTransaction={setSelectedTransaction}
             setIsUpdateDialogOpen={setIsUpdateDialogOpen}
             isDeleteLoading={isDeleteLoading}
             deleteAccount={deleteAccount}
-          />
+          /> */}
         </Stack>
       </Container>
     </>

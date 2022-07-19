@@ -65,9 +65,9 @@ function Categories() {
       const response = (await API.graphql(
         graphqlOperation(listCategories)
       )) as GraphQLResult<ListCategoriesQuery>;
-      const categorys = response?.data?.listCategories?.items;
+      const categories = response?.data?.listCategories?.items;
 
-      setCategories(categorys);
+      setCategories(categories);
     } catch (e) {
       console.error(e);
     } finally {
@@ -94,7 +94,7 @@ function Categories() {
 
           <br />
 
-          <Typography variant="h5">Categorys List</Typography>
+          <Typography variant="h5">Categories List</Typography>
           <LoadingButton onClick={refresh} loading={isRefreshLoading}>
             Refresh
           </LoadingButton>

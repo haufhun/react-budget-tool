@@ -85,7 +85,7 @@ function CreateTransactionDialog({
           date,
           amount: parsedAmount,
           bankAccountTransactionsId: selectedAccount.id,
-          // categoryTransactionsId: "1234", // TODO: Update this to be correct
+          categoryTransactionsId: selectedCategory?.id,
         },
       };
       await API.graphql(graphqlOperation(createTransactionMutation, input));
