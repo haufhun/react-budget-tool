@@ -89,6 +89,84 @@ export const deleteBankAccount = /* GraphQL */ `
     }
   }
 `;
+export const createBudgetMonth = /* GraphQL */ `
+  mutation CreateBudgetMonth(
+    $input: CreateBudgetMonthInput!
+    $condition: ModelBudgetMonthConditionInput
+  ) {
+    createBudgetMonth(input: $input, condition: $condition) {
+      date
+      categories {
+        items {
+          id
+          name
+          plannedAmount
+          createdAt
+          updatedAt
+          budgetMonthCategoriesId
+          owner
+        }
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateBudgetMonth = /* GraphQL */ `
+  mutation UpdateBudgetMonth(
+    $input: UpdateBudgetMonthInput!
+    $condition: ModelBudgetMonthConditionInput
+  ) {
+    updateBudgetMonth(input: $input, condition: $condition) {
+      date
+      categories {
+        items {
+          id
+          name
+          plannedAmount
+          createdAt
+          updatedAt
+          budgetMonthCategoriesId
+          owner
+        }
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteBudgetMonth = /* GraphQL */ `
+  mutation DeleteBudgetMonth(
+    $input: DeleteBudgetMonthInput!
+    $condition: ModelBudgetMonthConditionInput
+  ) {
+    deleteBudgetMonth(input: $input, condition: $condition) {
+      date
+      categories {
+        items {
+          id
+          name
+          plannedAmount
+          createdAt
+          updatedAt
+          budgetMonthCategoriesId
+          owner
+        }
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const createCategory = /* GraphQL */ `
   mutation CreateCategory(
     $input: CreateCategoryInput!
@@ -97,6 +175,7 @@ export const createCategory = /* GraphQL */ `
     createCategory(input: $input, condition: $condition) {
       id
       name
+      plannedAmount
       transactions {
         items {
           id
@@ -114,6 +193,7 @@ export const createCategory = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      budgetMonthCategoriesId
       owner
     }
   }
@@ -126,6 +206,7 @@ export const updateCategory = /* GraphQL */ `
     updateCategory(input: $input, condition: $condition) {
       id
       name
+      plannedAmount
       transactions {
         items {
           id
@@ -143,6 +224,7 @@ export const updateCategory = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      budgetMonthCategoriesId
       owner
     }
   }
@@ -155,6 +237,7 @@ export const deleteCategory = /* GraphQL */ `
     deleteCategory(input: $input, condition: $condition) {
       id
       name
+      plannedAmount
       transactions {
         items {
           id
@@ -172,6 +255,7 @@ export const deleteCategory = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      budgetMonthCategoriesId
       owner
     }
   }
@@ -200,11 +284,13 @@ export const createTransaction = /* GraphQL */ `
       category {
         id
         name
+        plannedAmount
         transactions {
           nextToken
         }
         createdAt
         updatedAt
+        budgetMonthCategoriesId
         owner
       }
       createdAt
@@ -239,11 +325,13 @@ export const updateTransaction = /* GraphQL */ `
       category {
         id
         name
+        plannedAmount
         transactions {
           nextToken
         }
         createdAt
         updatedAt
+        budgetMonthCategoriesId
         owner
       }
       createdAt
@@ -278,11 +366,13 @@ export const deleteTransaction = /* GraphQL */ `
       category {
         id
         name
+        plannedAmount
         transactions {
           nextToken
         }
         createdAt
         updatedAt
+        budgetMonthCategoriesId
         owner
       }
       createdAt

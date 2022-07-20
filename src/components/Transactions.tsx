@@ -168,13 +168,13 @@ function Transactions() {
           {/* <TransactionsTable /> */}
           {/* <EnhancedTable /> */}
 
-          {/* <TransactionsCardTable
+          <TransactionsCardTable
             transactions={transactions}
             setSelectedTransaction={setSelectedTransaction}
             setIsUpdateDialogOpen={setIsUpdateDialogOpen}
             isDeleteLoading={isDeleteLoading}
             deleteAccount={deleteAccount}
-          /> */}
+          />
         </Stack>
       </Container>
     </>

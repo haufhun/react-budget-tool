@@ -49,11 +49,56 @@ export const listBankAccounts = /* GraphQL */ `
     }
   }
 `;
+export const getBudgetMonth = /* GraphQL */ `
+  query GetBudgetMonth($id: ID!) {
+    getBudgetMonth(id: $id) {
+      date
+      categories {
+        items {
+          id
+          name
+          plannedAmount
+          createdAt
+          updatedAt
+          budgetMonthCategoriesId
+          owner
+        }
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listBudgetMonths = /* GraphQL */ `
+  query ListBudgetMonths(
+    $filter: ModelBudgetMonthFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBudgetMonths(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        date
+        categories {
+          nextToken
+        }
+        id
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getCategory = /* GraphQL */ `
   query GetCategory($id: ID!) {
     getCategory(id: $id) {
       id
       name
+      plannedAmount
       transactions {
         items {
           id
@@ -71,6 +116,7 @@ export const getCategory = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      budgetMonthCategoriesId
       owner
     }
   }
@@ -85,11 +131,13 @@ export const listCategories = /* GraphQL */ `
       items {
         id
         name
+        plannedAmount
         transactions {
           nextToken
         }
         createdAt
         updatedAt
+        budgetMonthCategoriesId
         owner
       }
       nextToken
@@ -117,11 +165,13 @@ export const getTransaction = /* GraphQL */ `
       category {
         id
         name
+        plannedAmount
         transactions {
           nextToken
         }
         createdAt
         updatedAt
+        budgetMonthCategoriesId
         owner
       }
       createdAt
@@ -155,8 +205,10 @@ export const listTransactions = /* GraphQL */ `
         category {
           id
           name
+          plannedAmount
           createdAt
           updatedAt
+          budgetMonthCategoriesId
           owner
         }
         createdAt

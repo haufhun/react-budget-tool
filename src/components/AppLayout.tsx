@@ -27,7 +27,7 @@ function AppLayout() {
               </Link>
               <Link
                 component={RouterLink}
-                to="/"
+                to="/transactions"
                 color="inherit"
                 underline="none"
               >

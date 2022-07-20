@@ -4,9 +4,15 @@ type BankAccount @model @auth(rules: [{ allow: owner }]) {
   transactions: [Transaction!]! @hasMany
 }
 
+type BudgetMonth @model @auth(rules: [{ allow: owner }]) {
+  date: AWSDate!
+  categories: [Category] @hasMany
+}
+
 type Category @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   name: String!
+  plannedAmount: Float
   transactions: [Transaction] @hasMany
 }
 

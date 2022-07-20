@@ -29,7 +29,9 @@ import {
 } from "../API";
 import { listBankAccounts, listCategories } from "../graphql/queries";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
-import { Container } from "@mui/system";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { RootState } from "../app/store";
+import { fetchCategories } from "../app/appSlice";
 
 type CreateTransactionDialogProps = {
   refresh: () => Promise<void>;
@@ -42,6 +44,10 @@ function CreateTransactionDialog({
   open,
   handleClose,
 }: CreateTransactionDialogProps) {
+  const dispatch = useAppDispatch();
+  const categories = useAppSelector(
+    (state: RootState) => state.app.categories.items
+  );
   const [isGettingBankAccounts, setIsGettingBankAccounts] = useState(false);
   const [isCreateLoading, setIsCreateLoading] = useState(false);
   const [name, setName] = useState("");
@@ -50,7 +56,6 @@ function CreateTransactionDialog({
   const [amount, setAmount] = useState("0.0");
   const [selectedAccountName, setSelectedAccountName] = useState("");
   const [bankAccounts, setBankAccounts] = useState<any>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
   const [categoryName, setCategoryName] = useState("");
 
   const selectedAccount = bankAccounts.find(
@@ -111,18 +116,9 @@ function CreateTransactionDialog({
     setIsGettingBankAccounts(false);
   };
 
-  const getCategories = async () => {
-    const categoriesResponse = (await API.graphql(
-      graphqlOperation(listCategories)
-    )) as GraphQLResult<ListCategoriesQuery>;
-    const newCategories = categoriesResponse?.data?.listCategories?.items;
-
-    setCategories(newCategories as Category[]);
-  };
-
   useEffect(() => {
     getBankAccounts();
-    getCategories();
+    dispatch(fetchCategories());
   }, []);
   return (
     <>

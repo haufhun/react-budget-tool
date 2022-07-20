@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { API, graphqlOperation } from "aws-amplify";
@@ -9,14 +9,18 @@ import {
 import {
   CreateCategoryMutationVariables,
   DeleteCategoryMutationVariables,
-  ListCategoriesQuery,
 } from "../API";
-import { listCategories } from "../graphql/queries";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
+import { RootState } from "../app/store";
+import { fetchCategories } from "../app/appSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 function Categories() {
+  const dispatch = useAppDispatch();
+  const categories = useAppSelector(
+    (state: RootState) => state.app.categories.items
+  );
+
   const [categoryName, setCategoryName] = useState("");
-  const [categories, setCategories] = useState<any>([]);
   const [isRefreshLoading, setIsRefreshLoading] = useState(false);
   const [isCreateLoading, setIsCreateLoading] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
@@ -27,6 +31,7 @@ function Categories() {
       const input: CreateCategoryMutationVariables = {
         input: {
           name: categoryName,
+          plannedAmount: 0.0,
         },
       };
       await API.graphql(graphqlOperation(createCategoryMutation, input));
@@ -59,25 +64,13 @@ function Categories() {
     }
   };
 
-  const refresh = async () => {
-    setIsRefreshLoading(true);
-    try {
-      const response = (await API.graphql(
-        graphqlOperation(listCategories)
-      )) as GraphQLResult<ListCategoriesQuery>;
-      const categories = response?.data?.listCategories?.items;
-
-      setCategories(categories);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setIsRefreshLoading(false);
-    }
-  };
+  const refresh = useCallback(async () => {
+    dispatch(fetchCategories());
+  }, []);
 
   useEffect(() => {
     refresh();
-  }, []);
+  }, [refresh]);
 
   return (
     <>

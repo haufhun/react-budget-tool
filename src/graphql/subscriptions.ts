@@ -80,11 +80,81 @@ export const onDeleteBankAccount = /* GraphQL */ `
     }
   }
 `;
+export const onCreateBudgetMonth = /* GraphQL */ `
+  subscription OnCreateBudgetMonth($owner: String) {
+    onCreateBudgetMonth(owner: $owner) {
+      date
+      categories {
+        items {
+          id
+          name
+          plannedAmount
+          createdAt
+          updatedAt
+          budgetMonthCategoriesId
+          owner
+        }
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateBudgetMonth = /* GraphQL */ `
+  subscription OnUpdateBudgetMonth($owner: String) {
+    onUpdateBudgetMonth(owner: $owner) {
+      date
+      categories {
+        items {
+          id
+          name
+          plannedAmount
+          createdAt
+          updatedAt
+          budgetMonthCategoriesId
+          owner
+        }
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteBudgetMonth = /* GraphQL */ `
+  subscription OnDeleteBudgetMonth($owner: String) {
+    onDeleteBudgetMonth(owner: $owner) {
+      date
+      categories {
+        items {
+          id
+          name
+          plannedAmount
+          createdAt
+          updatedAt
+          budgetMonthCategoriesId
+          owner
+        }
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const onCreateCategory = /* GraphQL */ `
   subscription OnCreateCategory($owner: String) {
     onCreateCategory(owner: $owner) {
       id
       name
+      plannedAmount
       transactions {
         items {
           id
@@ -102,6 +172,7 @@ export const onCreateCategory = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      budgetMonthCategoriesId
       owner
     }
   }
@@ -111,6 +182,7 @@ export const onUpdateCategory = /* GraphQL */ `
     onUpdateCategory(owner: $owner) {
       id
       name
+      plannedAmount
       transactions {
         items {
           id
@@ -128,6 +200,7 @@ export const onUpdateCategory = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      budgetMonthCategoriesId
       owner
     }
   }
@@ -137,6 +210,7 @@ export const onDeleteCategory = /* GraphQL */ `
     onDeleteCategory(owner: $owner) {
       id
       name
+      plannedAmount
       transactions {
         items {
           id
@@ -154,6 +228,7 @@ export const onDeleteCategory = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      budgetMonthCategoriesId
       owner
     }
   }
@@ -179,11 +254,13 @@ export const onCreateTransaction = /* GraphQL */ `
       category {
         id
         name
+        plannedAmount
         transactions {
           nextToken
         }
         createdAt
         updatedAt
+        budgetMonthCategoriesId
         owner
       }
       createdAt
@@ -215,11 +292,13 @@ export const onUpdateTransaction = /* GraphQL */ `
       category {
         id
         name
+        plannedAmount
         transactions {
           nextToken
         }
         createdAt
         updatedAt
+        budgetMonthCategoriesId
         owner
       }
       createdAt
@@ -251,11 +330,13 @@ export const onDeleteTransaction = /* GraphQL */ `
       category {
         id
         name
+        plannedAmount
         transactions {
           nextToken
         }
         createdAt
         updatedAt
+        budgetMonthCategoriesId
         owner
       }
       createdAt

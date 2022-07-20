@@ -90,9 +90,11 @@ export type Category = {
   __typename: "Category",
   id: string,
   name: string,
+  plannedAmount?: number | null,
   transactions?: ModelTransactionConnection | null,
   createdAt: string,
   updatedAt: string,
+  budgetMonthCategoriesId?: string | null,
   owner?: string | null,
 };
 
@@ -105,47 +107,57 @@ export type DeleteBankAccountInput = {
   id: string,
 };
 
+export type CreateBudgetMonthInput = {
+  date: string,
+  id?: string | null,
+};
+
+export type ModelBudgetMonthConditionInput = {
+  date?: ModelStringInput | null,
+  and?: Array< ModelBudgetMonthConditionInput | null > | null,
+  or?: Array< ModelBudgetMonthConditionInput | null > | null,
+  not?: ModelBudgetMonthConditionInput | null,
+};
+
+export type BudgetMonth = {
+  __typename: "BudgetMonth",
+  date: string,
+  categories?: ModelCategoryConnection | null,
+  id: string,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type ModelCategoryConnection = {
+  __typename: "ModelCategoryConnection",
+  items:  Array<Category | null >,
+  nextToken?: string | null,
+};
+
+export type UpdateBudgetMonthInput = {
+  date?: string | null,
+  id: string,
+};
+
+export type DeleteBudgetMonthInput = {
+  id: string,
+};
+
 export type CreateCategoryInput = {
   id?: string | null,
   name: string,
+  plannedAmount?: number | null,
+  budgetMonthCategoriesId?: string | null,
 };
 
 export type ModelCategoryConditionInput = {
   name?: ModelStringInput | null,
+  plannedAmount?: ModelFloatInput | null,
   and?: Array< ModelCategoryConditionInput | null > | null,
   or?: Array< ModelCategoryConditionInput | null > | null,
   not?: ModelCategoryConditionInput | null,
-};
-
-export type UpdateCategoryInput = {
-  id: string,
-  name?: string | null,
-};
-
-export type DeleteCategoryInput = {
-  id: string,
-};
-
-export type CreateTransactionInput = {
-  id?: string | null,
-  name: string,
-  description: string,
-  date: string,
-  amount: number,
-  bankAccountTransactionsId: string,
-  categoryTransactionsId?: string | null,
-};
-
-export type ModelTransactionConditionInput = {
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  date?: ModelStringInput | null,
-  amount?: ModelFloatInput | null,
-  and?: Array< ModelTransactionConditionInput | null > | null,
-  or?: Array< ModelTransactionConditionInput | null > | null,
-  not?: ModelTransactionConditionInput | null,
-  bankAccountTransactionsId?: ModelIDInput | null,
-  categoryTransactionsId?: ModelIDInput | null,
+  budgetMonthCategoriesId?: ModelIDInput | null,
 };
 
 export type ModelFloatInput = {
@@ -176,6 +188,39 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
+export type UpdateCategoryInput = {
+  id: string,
+  name?: string | null,
+  plannedAmount?: number | null,
+  budgetMonthCategoriesId?: string | null,
+};
+
+export type DeleteCategoryInput = {
+  id: string,
+};
+
+export type CreateTransactionInput = {
+  id?: string | null,
+  name: string,
+  description: string,
+  date: string,
+  amount: number,
+  bankAccountTransactionsId: string,
+  categoryTransactionsId?: string | null,
+};
+
+export type ModelTransactionConditionInput = {
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  amount?: ModelFloatInput | null,
+  and?: Array< ModelTransactionConditionInput | null > | null,
+  or?: Array< ModelTransactionConditionInput | null > | null,
+  not?: ModelTransactionConditionInput | null,
+  bankAccountTransactionsId?: ModelIDInput | null,
+  categoryTransactionsId?: ModelIDInput | null,
+};
+
 export type UpdateTransactionInput = {
   id: string,
   name?: string | null,
@@ -204,18 +249,27 @@ export type ModelBankAccountConnection = {
   nextToken?: string | null,
 };
 
+export type ModelBudgetMonthFilterInput = {
+  date?: ModelStringInput | null,
+  and?: Array< ModelBudgetMonthFilterInput | null > | null,
+  or?: Array< ModelBudgetMonthFilterInput | null > | null,
+  not?: ModelBudgetMonthFilterInput | null,
+};
+
+export type ModelBudgetMonthConnection = {
+  __typename: "ModelBudgetMonthConnection",
+  items:  Array<BudgetMonth | null >,
+  nextToken?: string | null,
+};
+
 export type ModelCategoryFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
+  plannedAmount?: ModelFloatInput | null,
   and?: Array< ModelCategoryFilterInput | null > | null,
   or?: Array< ModelCategoryFilterInput | null > | null,
   not?: ModelCategoryFilterInput | null,
-};
-
-export type ModelCategoryConnection = {
-  __typename: "ModelCategoryConnection",
-  items:  Array<Category | null >,
-  nextToken?: string | null,
+  budgetMonthCategoriesId?: ModelIDInput | null,
 };
 
 export type ModelTransactionFilterInput = {
@@ -330,6 +384,96 @@ export type DeleteBankAccountMutation = {
   } | null,
 };
 
+export type CreateBudgetMonthMutationVariables = {
+  input: CreateBudgetMonthInput,
+  condition?: ModelBudgetMonthConditionInput | null,
+};
+
+export type CreateBudgetMonthMutation = {
+  createBudgetMonth?:  {
+    __typename: "BudgetMonth",
+    date: string,
+    categories?:  {
+      __typename: "ModelCategoryConnection",
+      items:  Array< {
+        __typename: "Category",
+        id: string,
+        name: string,
+        plannedAmount?: number | null,
+        createdAt: string,
+        updatedAt: string,
+        budgetMonthCategoriesId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateBudgetMonthMutationVariables = {
+  input: UpdateBudgetMonthInput,
+  condition?: ModelBudgetMonthConditionInput | null,
+};
+
+export type UpdateBudgetMonthMutation = {
+  updateBudgetMonth?:  {
+    __typename: "BudgetMonth",
+    date: string,
+    categories?:  {
+      __typename: "ModelCategoryConnection",
+      items:  Array< {
+        __typename: "Category",
+        id: string,
+        name: string,
+        plannedAmount?: number | null,
+        createdAt: string,
+        updatedAt: string,
+        budgetMonthCategoriesId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteBudgetMonthMutationVariables = {
+  input: DeleteBudgetMonthInput,
+  condition?: ModelBudgetMonthConditionInput | null,
+};
+
+export type DeleteBudgetMonthMutation = {
+  deleteBudgetMonth?:  {
+    __typename: "BudgetMonth",
+    date: string,
+    categories?:  {
+      __typename: "ModelCategoryConnection",
+      items:  Array< {
+        __typename: "Category",
+        id: string,
+        name: string,
+        plannedAmount?: number | null,
+        createdAt: string,
+        updatedAt: string,
+        budgetMonthCategoriesId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
 export type CreateCategoryMutationVariables = {
   input: CreateCategoryInput,
   condition?: ModelCategoryConditionInput | null,
@@ -340,6 +484,7 @@ export type CreateCategoryMutation = {
     __typename: "Category",
     id: string,
     name: string,
+    plannedAmount?: number | null,
     transactions?:  {
       __typename: "ModelTransactionConnection",
       items:  Array< {
@@ -359,6 +504,7 @@ export type CreateCategoryMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    budgetMonthCategoriesId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -373,6 +519,7 @@ export type UpdateCategoryMutation = {
     __typename: "Category",
     id: string,
     name: string,
+    plannedAmount?: number | null,
     transactions?:  {
       __typename: "ModelTransactionConnection",
       items:  Array< {
@@ -392,6 +539,7 @@ export type UpdateCategoryMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    budgetMonthCategoriesId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -406,6 +554,7 @@ export type DeleteCategoryMutation = {
     __typename: "Category",
     id: string,
     name: string,
+    plannedAmount?: number | null,
     transactions?:  {
       __typename: "ModelTransactionConnection",
       items:  Array< {
@@ -425,6 +574,7 @@ export type DeleteCategoryMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    budgetMonthCategoriesId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -458,12 +608,14 @@ export type CreateTransactionMutation = {
       __typename: "Category",
       id: string,
       name: string,
+      plannedAmount?: number | null,
       transactions?:  {
         __typename: "ModelTransactionConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      budgetMonthCategoriesId?: string | null,
       owner?: string | null,
     } | null,
     createdAt: string,
@@ -503,12 +655,14 @@ export type UpdateTransactionMutation = {
       __typename: "Category",
       id: string,
       name: string,
+      plannedAmount?: number | null,
       transactions?:  {
         __typename: "ModelTransactionConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      budgetMonthCategoriesId?: string | null,
       owner?: string | null,
     } | null,
     createdAt: string,
@@ -548,12 +702,14 @@ export type DeleteTransactionMutation = {
       __typename: "Category",
       id: string,
       name: string,
+      plannedAmount?: number | null,
       transactions?:  {
         __typename: "ModelTransactionConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      budgetMonthCategoriesId?: string | null,
       owner?: string | null,
     } | null,
     createdAt: string,
@@ -621,6 +777,60 @@ export type ListBankAccountsQuery = {
   } | null,
 };
 
+export type GetBudgetMonthQueryVariables = {
+  id: string,
+};
+
+export type GetBudgetMonthQuery = {
+  getBudgetMonth?:  {
+    __typename: "BudgetMonth",
+    date: string,
+    categories?:  {
+      __typename: "ModelCategoryConnection",
+      items:  Array< {
+        __typename: "Category",
+        id: string,
+        name: string,
+        plannedAmount?: number | null,
+        createdAt: string,
+        updatedAt: string,
+        budgetMonthCategoriesId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListBudgetMonthsQueryVariables = {
+  filter?: ModelBudgetMonthFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListBudgetMonthsQuery = {
+  listBudgetMonths?:  {
+    __typename: "ModelBudgetMonthConnection",
+    items:  Array< {
+      __typename: "BudgetMonth",
+      date: string,
+      categories?:  {
+        __typename: "ModelCategoryConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetCategoryQueryVariables = {
   id: string,
 };
@@ -630,6 +840,7 @@ export type GetCategoryQuery = {
     __typename: "Category",
     id: string,
     name: string,
+    plannedAmount?: number | null,
     transactions?:  {
       __typename: "ModelTransactionConnection",
       items:  Array< {
@@ -649,6 +860,7 @@ export type GetCategoryQuery = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    budgetMonthCategoriesId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -666,12 +878,14 @@ export type ListCategoriesQuery = {
       __typename: "Category",
       id: string,
       name: string,
+      plannedAmount?: number | null,
       transactions?:  {
         __typename: "ModelTransactionConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      budgetMonthCategoriesId?: string | null,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
@@ -706,12 +920,14 @@ export type GetTransactionQuery = {
       __typename: "Category",
       id: string,
       name: string,
+      plannedAmount?: number | null,
       transactions?:  {
         __typename: "ModelTransactionConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      budgetMonthCategoriesId?: string | null,
       owner?: string | null,
     } | null,
     createdAt: string,
@@ -750,8 +966,10 @@ export type ListTransactionsQuery = {
         __typename: "Category",
         id: string,
         name: string,
+        plannedAmount?: number | null,
         createdAt: string,
         updatedAt: string,
+        budgetMonthCategoriesId?: string | null,
         owner?: string | null,
       } | null,
       createdAt: string,
@@ -860,6 +1078,93 @@ export type OnDeleteBankAccountSubscription = {
   } | null,
 };
 
+export type OnCreateBudgetMonthSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateBudgetMonthSubscription = {
+  onCreateBudgetMonth?:  {
+    __typename: "BudgetMonth",
+    date: string,
+    categories?:  {
+      __typename: "ModelCategoryConnection",
+      items:  Array< {
+        __typename: "Category",
+        id: string,
+        name: string,
+        plannedAmount?: number | null,
+        createdAt: string,
+        updatedAt: string,
+        budgetMonthCategoriesId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateBudgetMonthSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateBudgetMonthSubscription = {
+  onUpdateBudgetMonth?:  {
+    __typename: "BudgetMonth",
+    date: string,
+    categories?:  {
+      __typename: "ModelCategoryConnection",
+      items:  Array< {
+        __typename: "Category",
+        id: string,
+        name: string,
+        plannedAmount?: number | null,
+        createdAt: string,
+        updatedAt: string,
+        budgetMonthCategoriesId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteBudgetMonthSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteBudgetMonthSubscription = {
+  onDeleteBudgetMonth?:  {
+    __typename: "BudgetMonth",
+    date: string,
+    categories?:  {
+      __typename: "ModelCategoryConnection",
+      items:  Array< {
+        __typename: "Category",
+        id: string,
+        name: string,
+        plannedAmount?: number | null,
+        createdAt: string,
+        updatedAt: string,
+        budgetMonthCategoriesId?: string | null,
+        owner?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
 export type OnCreateCategorySubscriptionVariables = {
   owner?: string | null,
 };
@@ -869,6 +1174,7 @@ export type OnCreateCategorySubscription = {
     __typename: "Category",
     id: string,
     name: string,
+    plannedAmount?: number | null,
     transactions?:  {
       __typename: "ModelTransactionConnection",
       items:  Array< {
@@ -888,6 +1194,7 @@ export type OnCreateCategorySubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    budgetMonthCategoriesId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -901,6 +1208,7 @@ export type OnUpdateCategorySubscription = {
     __typename: "Category",
     id: string,
     name: string,
+    plannedAmount?: number | null,
     transactions?:  {
       __typename: "ModelTransactionConnection",
       items:  Array< {
@@ -920,6 +1228,7 @@ export type OnUpdateCategorySubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    budgetMonthCategoriesId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -933,6 +1242,7 @@ export type OnDeleteCategorySubscription = {
     __typename: "Category",
     id: string,
     name: string,
+    plannedAmount?: number | null,
     transactions?:  {
       __typename: "ModelTransactionConnection",
       items:  Array< {
@@ -952,6 +1262,7 @@ export type OnDeleteCategorySubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    budgetMonthCategoriesId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -984,12 +1295,14 @@ export type OnCreateTransactionSubscription = {
       __typename: "Category",
       id: string,
       name: string,
+      plannedAmount?: number | null,
       transactions?:  {
         __typename: "ModelTransactionConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      budgetMonthCategoriesId?: string | null,
       owner?: string | null,
     } | null,
     createdAt: string,
@@ -1028,12 +1341,14 @@ export type OnUpdateTransactionSubscription = {
       __typename: "Category",
       id: string,
       name: string,
+      plannedAmount?: number | null,
       transactions?:  {
         __typename: "ModelTransactionConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      budgetMonthCategoriesId?: string | null,
       owner?: string | null,
     } | null,
     createdAt: string,
@@ -1072,12 +1387,14 @@ export type OnDeleteTransactionSubscription = {
       __typename: "Category",
       id: string,
       name: string,
+      plannedAmount?: number | null,
       transactions?:  {
         __typename: "ModelTransactionConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      budgetMonthCategoriesId?: string | null,
       owner?: string | null,
     } | null,
     createdAt: string,
