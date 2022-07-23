@@ -4,17 +4,14 @@ import { Container } from "@mui/system";
 import { useEffect, useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { deleteTransaction as deleteTransactionMutation } from "../graphql/mutations";
-import {
-  DeleteTransactionMutationVariables,
-  ListTransactionsQuery,
-  Transaction,
-} from "../API";
-import { listTransactions } from "../graphql/queries";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
+import { DeleteTransactionMutationVariables, Transaction } from "../API";
 import CreateTransactionDialog from "./CreateTransactionDialog";
 import TransactionsTable from "./TransactionsTable";
 import UpdateTransactionDialog from "./UpdateTransactionDialog";
 import EnhancedTable from "./EnhancedTable";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { RootState } from "../app/store";
+import { fetchTransactions } from "../app/appSlice";
 
 const TransactionsCardTable = ({
   transactions,
@@ -64,7 +61,7 @@ const TransactionsCardTable = ({
           <Typography>{transaction.name}</Typography>
           <Typography>{transaction.date}</Typography>
           <Typography>{transaction.account.name}</Typography>
-          <Typography>{transaction.category?.name ?? "null"}</Typography>
+          {/* <Typography>{transaction.category?.name ?? "null"}</Typography> */}
           <Typography>${transaction.amount.toFixed(2)}</Typography>
 
           <LoadingButton
@@ -82,15 +79,24 @@ const TransactionsCardTable = ({
 };
 
 function Transactions() {
+  const dispatch = useAppDispatch();
+  const transactionRefreshLoading = useAppSelector(
+    (state: RootState) => state.app.transactions.fetchLoading
+  );
+  const transactions = useAppSelector(
+    (state: RootState) => state.app.transactions.items
+  );
+
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false);
 
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [isRefreshLoading, setIsRefreshLoading] = useState(false);
 
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [selectedTransaction, setSelectedTransaction] =
     useState<Transaction | null>(null);
+
+  const refresh = () => dispatch(fetchTransactions());
 
   const deleteAccount = async (id: string) => {
     setIsDeleteLoading(true);
@@ -102,27 +108,11 @@ function Transactions() {
       };
       await API.graphql(graphqlOperation(deleteTransactionMutation, input));
 
-      await refresh();
+      refresh();
     } catch (e) {
       console.error(e);
     } finally {
       setIsDeleteLoading(false);
-    }
-  };
-
-  const refresh = async () => {
-    setIsRefreshLoading(true);
-    try {
-      const response = (await API.graphql(
-        graphqlOperation(listTransactions)
-      )) as GraphQLResult<ListTransactionsQuery>;
-      const transactions = (response?.data?.listTransactions?.items ??
-        []) as Transaction[];
-      setTransactions(transactions);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setIsRefreshLoading(false);
     }
   };
 
@@ -133,14 +123,12 @@ function Transactions() {
   return (
     <>
       <CreateTransactionDialog
-        refresh={refresh}
         open={isCreateDialogOpen}
         handleClose={() => setIsCreateDialogOpen(false)}
       />
       {selectedTransaction && (
         <UpdateTransactionDialog
           transaction={selectedTransaction}
-          refresh={refresh}
           open={isUpdateDialogOpen}
           handleClose={() => {
             setIsUpdateDialogOpen(false);
@@ -157,7 +145,10 @@ function Transactions() {
             alignItems="center"
           >
             <Typography variant="h5">Transactions</Typography>
-            <LoadingButton onClick={refresh} loading={isRefreshLoading}>
+            <LoadingButton
+              onClick={refresh}
+              loading={transactionRefreshLoading}
+            >
               Refresh
             </LoadingButton>
             <Button onClick={() => setIsCreateDialogOpen(true)}>Create</Button>

@@ -1,52 +1,84 @@
-import { GraphQLResult } from "@aws-amplify/api-graphql";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import API, { GraphQLResult, graphqlOperation } from "@aws-amplify/api";
 import {
-  createAsyncThunk,
-  createEntityAdapter,
-  createSlice,
-} from "@reduxjs/toolkit";
-import { API, graphqlOperation } from "aws-amplify";
-import {
-  Category,
-  ListCategoriesQuery,
-  ListCategoriesQueryVariables,
+  BankAccount,
+  ListBankAccountsQuery,
+  ListBankAccountsQueryVariables,
+  ListTransactionsQuery,
+  ListTransactionsQueryVariables,
+  Transaction,
 } from "../API";
 import * as queries from "../graphql/queries";
-import * as mutations from "../graphql/mutations";
-import { RootState } from "./store";
 
 const initialState = {
-  categories: {
+  transactions: {
     fetchLoading: false,
     fetchError: null as any,
-    items: [] as Category[],
+    items: [] as Transaction[],
+  },
+  bankAccounts: {
+    fetchLoading: false,
+    fetchError: null as any,
+    items: [] as BankAccount[],
   },
 };
 
-export const fetchCategories = createAsyncThunk("audios/fetchAll", async () => {
-  const vars: ListCategoriesQueryVariables = { limit: 1000 };
+export const fetchBankAccounts = createAsyncThunk(
+  "bankAccounts/fetchAll",
+  async () => {
+    const vars: ListBankAccountsQueryVariables = { limit: 1000 };
 
-  const response = (await API.graphql(
-    graphqlOperation(queries.listCategories, vars)
-  )) as GraphQLResult<ListCategoriesQuery>;
-  if (response.errors) {
-    throw new Error(JSON.stringify(response.errors[0]));
+    const response = (await API.graphql(
+      graphqlOperation(queries.listBankAccounts, vars)
+    )) as GraphQLResult<ListBankAccountsQuery>;
+    if (response.errors) {
+      console.log("Error fetching transactions");
+      console.error(response.errors);
+      throw new Error(JSON.stringify(response.errors));
+    }
+    return response?.data?.listBankAccounts?.items as BankAccount[];
   }
-  return response?.data?.listCategories?.items as Category[];
-});
+);
+
+export const fetchTransactions = createAsyncThunk(
+  "transactions/fetchAll",
+  async () => {
+    const vars: ListTransactionsQueryVariables = { limit: 1000 };
+
+    const response = (await API.graphql(
+      graphqlOperation(queries.listTransactions, vars)
+    )) as GraphQLResult<ListTransactionsQuery>;
+    if (response.errors) {
+      console.log("Error fetching transactions");
+      console.error(response.errors);
+      throw new Error(JSON.stringify(response.errors));
+    }
+    return response?.data?.listTransactions?.items as Transaction[];
+  }
+);
 
 export const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchCategories.pending, (state) => {
-      state.categories.fetchLoading = true;
+    builder.addCase(fetchTransactions.pending, (state) => {
+      state.transactions.fetchLoading = true;
     });
-    builder.addCase(fetchCategories.rejected, (state, action) => {
-      state.categories.fetchError = action.payload ?? "Unknown Error";
+    builder.addCase(fetchTransactions.rejected, (state, action) => {
+      state.transactions.fetchError = action.payload ?? "Unknown Error";
     });
-    builder.addCase(fetchCategories.fulfilled, (state, action) => {
-      state.categories.items = action.payload;
+    builder.addCase(fetchTransactions.fulfilled, (state, action) => {
+      state.transactions.items = action.payload;
+    });
+    builder.addCase(fetchBankAccounts.pending, (state) => {
+      state.bankAccounts.fetchLoading = true;
+    });
+    builder.addCase(fetchBankAccounts.rejected, (state, action) => {
+      state.bankAccounts.fetchError = action.payload ?? "Unknown Error";
+    });
+    builder.addCase(fetchBankAccounts.fulfilled, (state, action) => {
+      state.bankAccounts.items = action.payload;
     });
   },
 });

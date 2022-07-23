@@ -2,6 +2,357 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateBudgetMonth = /* GraphQL */ `
+  subscription OnCreateBudgetMonth($owner: String) {
+    onCreateBudgetMonth(owner: $owner) {
+      id
+      date
+      budgetGroups {
+        items {
+          id
+          name
+          type
+          createdAt
+          updatedAt
+          budgetMonthBudgetGroupsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateBudgetMonth = /* GraphQL */ `
+  subscription OnUpdateBudgetMonth($owner: String) {
+    onUpdateBudgetMonth(owner: $owner) {
+      id
+      date
+      budgetGroups {
+        items {
+          id
+          name
+          type
+          createdAt
+          updatedAt
+          budgetMonthBudgetGroupsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteBudgetMonth = /* GraphQL */ `
+  subscription OnDeleteBudgetMonth($owner: String) {
+    onDeleteBudgetMonth(owner: $owner) {
+      id
+      date
+      budgetGroups {
+        items {
+          id
+          name
+          type
+          createdAt
+          updatedAt
+          budgetMonthBudgetGroupsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateBudgetGroup = /* GraphQL */ `
+  subscription OnCreateBudgetGroup($owner: String) {
+    onCreateBudgetGroup(owner: $owner) {
+      id
+      name
+      type
+      budgetGroupItems {
+        items {
+          id
+          name
+          type
+          amountBudgeted
+          createdAt
+          updatedAt
+          budgetGroupBudgetGroupItemsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetMonthBudgetGroupsId
+      owner
+    }
+  }
+`;
+export const onUpdateBudgetGroup = /* GraphQL */ `
+  subscription OnUpdateBudgetGroup($owner: String) {
+    onUpdateBudgetGroup(owner: $owner) {
+      id
+      name
+      type
+      budgetGroupItems {
+        items {
+          id
+          name
+          type
+          amountBudgeted
+          createdAt
+          updatedAt
+          budgetGroupBudgetGroupItemsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetMonthBudgetGroupsId
+      owner
+    }
+  }
+`;
+export const onDeleteBudgetGroup = /* GraphQL */ `
+  subscription OnDeleteBudgetGroup($owner: String) {
+    onDeleteBudgetGroup(owner: $owner) {
+      id
+      name
+      type
+      budgetGroupItems {
+        items {
+          id
+          name
+          type
+          amountBudgeted
+          createdAt
+          updatedAt
+          budgetGroupBudgetGroupItemsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetMonthBudgetGroupsId
+      owner
+    }
+  }
+`;
+export const onCreateBudgetGroupItem = /* GraphQL */ `
+  subscription OnCreateBudgetGroupItem($owner: String) {
+    onCreateBudgetGroupItem(owner: $owner) {
+      id
+      name
+      type
+      amountBudgeted
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          budgetGroupItemTransactionsId
+          bankAccountTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetGroupBudgetGroupItemsId
+      owner
+    }
+  }
+`;
+export const onUpdateBudgetGroupItem = /* GraphQL */ `
+  subscription OnUpdateBudgetGroupItem($owner: String) {
+    onUpdateBudgetGroupItem(owner: $owner) {
+      id
+      name
+      type
+      amountBudgeted
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          budgetGroupItemTransactionsId
+          bankAccountTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetGroupBudgetGroupItemsId
+      owner
+    }
+  }
+`;
+export const onDeleteBudgetGroupItem = /* GraphQL */ `
+  subscription OnDeleteBudgetGroupItem($owner: String) {
+    onDeleteBudgetGroupItem(owner: $owner) {
+      id
+      name
+      type
+      amountBudgeted
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          budgetGroupItemTransactionsId
+          bankAccountTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetGroupBudgetGroupItemsId
+      owner
+    }
+  }
+`;
+export const onCreateTransaction = /* GraphQL */ `
+  subscription OnCreateTransaction($owner: String) {
+    onCreateTransaction(owner: $owner) {
+      id
+      name
+      description
+      date
+      amount
+      account {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      budgetGroupItem {
+        id
+        name
+        type
+        amountBudgeted
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        budgetGroupBudgetGroupItemsId
+        owner
+      }
+      createdAt
+      updatedAt
+      budgetGroupItemTransactionsId
+      bankAccountTransactionsId
+      owner
+    }
+  }
+`;
+export const onUpdateTransaction = /* GraphQL */ `
+  subscription OnUpdateTransaction($owner: String) {
+    onUpdateTransaction(owner: $owner) {
+      id
+      name
+      description
+      date
+      amount
+      account {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      budgetGroupItem {
+        id
+        name
+        type
+        amountBudgeted
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        budgetGroupBudgetGroupItemsId
+        owner
+      }
+      createdAt
+      updatedAt
+      budgetGroupItemTransactionsId
+      bankAccountTransactionsId
+      owner
+    }
+  }
+`;
+export const onDeleteTransaction = /* GraphQL */ `
+  subscription OnDeleteTransaction($owner: String) {
+    onDeleteTransaction(owner: $owner) {
+      id
+      name
+      description
+      date
+      amount
+      account {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      budgetGroupItem {
+        id
+        name
+        type
+        amountBudgeted
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        budgetGroupBudgetGroupItemsId
+        owner
+      }
+      createdAt
+      updatedAt
+      budgetGroupItemTransactionsId
+      bankAccountTransactionsId
+      owner
+    }
+  }
+`;
 export const onCreateBankAccount = /* GraphQL */ `
   subscription OnCreateBankAccount($owner: String) {
     onCreateBankAccount(owner: $owner) {
@@ -16,8 +367,8 @@ export const onCreateBankAccount = /* GraphQL */ `
           amount
           createdAt
           updatedAt
+          budgetGroupItemTransactionsId
           bankAccountTransactionsId
-          categoryTransactionsId
           owner
         }
         nextToken
@@ -42,8 +393,8 @@ export const onUpdateBankAccount = /* GraphQL */ `
           amount
           createdAt
           updatedAt
+          budgetGroupItemTransactionsId
           bankAccountTransactionsId
-          categoryTransactionsId
           owner
         }
         nextToken
@@ -68,281 +419,14 @@ export const onDeleteBankAccount = /* GraphQL */ `
           amount
           createdAt
           updatedAt
+          budgetGroupItemTransactionsId
           bankAccountTransactionsId
-          categoryTransactionsId
           owner
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
-    }
-  }
-`;
-export const onCreateBudgetMonth = /* GraphQL */ `
-  subscription OnCreateBudgetMonth($owner: String) {
-    onCreateBudgetMonth(owner: $owner) {
-      date
-      categories {
-        items {
-          id
-          name
-          plannedAmount
-          createdAt
-          updatedAt
-          budgetMonthCategoriesId
-          owner
-        }
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateBudgetMonth = /* GraphQL */ `
-  subscription OnUpdateBudgetMonth($owner: String) {
-    onUpdateBudgetMonth(owner: $owner) {
-      date
-      categories {
-        items {
-          id
-          name
-          plannedAmount
-          createdAt
-          updatedAt
-          budgetMonthCategoriesId
-          owner
-        }
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteBudgetMonth = /* GraphQL */ `
-  subscription OnDeleteBudgetMonth($owner: String) {
-    onDeleteBudgetMonth(owner: $owner) {
-      date
-      categories {
-        items {
-          id
-          name
-          plannedAmount
-          createdAt
-          updatedAt
-          budgetMonthCategoriesId
-          owner
-        }
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onCreateCategory = /* GraphQL */ `
-  subscription OnCreateCategory($owner: String) {
-    onCreateCategory(owner: $owner) {
-      id
-      name
-      plannedAmount
-      transactions {
-        items {
-          id
-          name
-          description
-          date
-          amount
-          createdAt
-          updatedAt
-          bankAccountTransactionsId
-          categoryTransactionsId
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      budgetMonthCategoriesId
-      owner
-    }
-  }
-`;
-export const onUpdateCategory = /* GraphQL */ `
-  subscription OnUpdateCategory($owner: String) {
-    onUpdateCategory(owner: $owner) {
-      id
-      name
-      plannedAmount
-      transactions {
-        items {
-          id
-          name
-          description
-          date
-          amount
-          createdAt
-          updatedAt
-          bankAccountTransactionsId
-          categoryTransactionsId
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      budgetMonthCategoriesId
-      owner
-    }
-  }
-`;
-export const onDeleteCategory = /* GraphQL */ `
-  subscription OnDeleteCategory($owner: String) {
-    onDeleteCategory(owner: $owner) {
-      id
-      name
-      plannedAmount
-      transactions {
-        items {
-          id
-          name
-          description
-          date
-          amount
-          createdAt
-          updatedAt
-          bankAccountTransactionsId
-          categoryTransactionsId
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      budgetMonthCategoriesId
-      owner
-    }
-  }
-`;
-export const onCreateTransaction = /* GraphQL */ `
-  subscription OnCreateTransaction($owner: String) {
-    onCreateTransaction(owner: $owner) {
-      id
-      name
-      description
-      date
-      amount
-      account {
-        id
-        name
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      category {
-        id
-        name
-        plannedAmount
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        budgetMonthCategoriesId
-        owner
-      }
-      createdAt
-      updatedAt
-      bankAccountTransactionsId
-      categoryTransactionsId
-      owner
-    }
-  }
-`;
-export const onUpdateTransaction = /* GraphQL */ `
-  subscription OnUpdateTransaction($owner: String) {
-    onUpdateTransaction(owner: $owner) {
-      id
-      name
-      description
-      date
-      amount
-      account {
-        id
-        name
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      category {
-        id
-        name
-        plannedAmount
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        budgetMonthCategoriesId
-        owner
-      }
-      createdAt
-      updatedAt
-      bankAccountTransactionsId
-      categoryTransactionsId
-      owner
-    }
-  }
-`;
-export const onDeleteTransaction = /* GraphQL */ `
-  subscription OnDeleteTransaction($owner: String) {
-    onDeleteTransaction(owner: $owner) {
-      id
-      name
-      description
-      date
-      amount
-      account {
-        id
-        name
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      category {
-        id
-        name
-        plannedAmount
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        budgetMonthCategoriesId
-        owner
-      }
-      createdAt
-      updatedAt
-      bankAccountTransactionsId
-      categoryTransactionsId
       owner
     }
   }

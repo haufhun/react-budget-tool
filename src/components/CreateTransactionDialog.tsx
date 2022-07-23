@@ -3,10 +3,8 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
-  Input,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -22,32 +20,26 @@ import { API, graphqlOperation } from "aws-amplify";
 import { createTransaction as createTransactionMutation } from "../graphql/mutations";
 import {
   BankAccount,
-  Category,
   CreateTransactionMutationVariables,
   ListBankAccountsQuery,
-  ListCategoriesQuery,
 } from "../API";
-import { listBankAccounts, listCategories } from "../graphql/queries";
+import { listBankAccounts } from "../graphql/queries";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
-import { fetchCategories } from "../app/appSlice";
+import { fetchTransactions } from "../app/appSlice";
 
 type CreateTransactionDialogProps = {
-  refresh: () => Promise<void>;
   open: boolean;
   handleClose: () => void;
 };
 
 function CreateTransactionDialog({
-  refresh,
   open,
   handleClose,
 }: CreateTransactionDialogProps) {
   const dispatch = useAppDispatch();
-  const categories = useAppSelector(
-    (state: RootState) => state.app.categories.items
-  );
+
   const [isGettingBankAccounts, setIsGettingBankAccounts] = useState(false);
   const [isCreateLoading, setIsCreateLoading] = useState(false);
   const [name, setName] = useState("");
@@ -56,15 +48,15 @@ function CreateTransactionDialog({
   const [amount, setAmount] = useState("0.0");
   const [selectedAccountName, setSelectedAccountName] = useState("");
   const [bankAccounts, setBankAccounts] = useState<any>([]);
-  const [categoryName, setCategoryName] = useState("");
+  // const [categoryName, setCategoryName] = useState("");
 
   const selectedAccount = bankAccounts.find(
     (a: BankAccount) => a.name === selectedAccountName
   );
 
-  const selectedCategory: Category | undefined = categories.find(
-    (c: Category) => c.name === categoryName
-  );
+  // const selectedCategory: Category | undefined = categories.find(
+  //   (c: Category) => c.name === categoryName
+  // );
 
   const closeDialog = () => {
     clearForm();
@@ -79,6 +71,10 @@ function CreateTransactionDialog({
     setSelectedAccountName("");
   };
 
+  const refresh = () => {
+    dispatch(fetchTransactions());
+  };
+
   const createTransaction = async () => {
     setIsCreateLoading(true);
     const parsedAmount = parseFloat(amount);
@@ -90,12 +86,12 @@ function CreateTransactionDialog({
           date,
           amount: parsedAmount,
           bankAccountTransactionsId: selectedAccount.id,
-          categoryTransactionsId: selectedCategory?.id,
+          budgetGroupItemTransactionsId: "", // TODO: Update this
         },
       };
       await API.graphql(graphqlOperation(createTransactionMutation, input));
 
-      await refresh();
+      refresh();
       clearForm();
     } catch (e) {
       console.error(e);
@@ -118,8 +114,9 @@ function CreateTransactionDialog({
 
   useEffect(() => {
     getBankAccounts();
-    dispatch(fetchCategories());
+    // dispatch(fetchCategories());
   }, []);
+
   return (
     <>
       <Dialog disableEscapeKeyDown open={open} onClose={closeDialog}>
@@ -168,7 +165,7 @@ function CreateTransactionDialog({
             </Select>
           </FormControl>
 
-          <FormControl fullWidth>
+          {/* <FormControl fullWidth>
             <InputLabel>Category</InputLabel>
             <Select
               label="Category"
@@ -181,7 +178,7 @@ function CreateTransactionDialog({
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>
+          </FormControl> */}
 
           <TextField
             fullWidth

@@ -2,6 +2,393 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createBudgetMonth = /* GraphQL */ `
+  mutation CreateBudgetMonth(
+    $input: CreateBudgetMonthInput!
+    $condition: ModelBudgetMonthConditionInput
+  ) {
+    createBudgetMonth(input: $input, condition: $condition) {
+      id
+      date
+      budgetGroups {
+        items {
+          id
+          name
+          type
+          createdAt
+          updatedAt
+          budgetMonthBudgetGroupsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateBudgetMonth = /* GraphQL */ `
+  mutation UpdateBudgetMonth(
+    $input: UpdateBudgetMonthInput!
+    $condition: ModelBudgetMonthConditionInput
+  ) {
+    updateBudgetMonth(input: $input, condition: $condition) {
+      id
+      date
+      budgetGroups {
+        items {
+          id
+          name
+          type
+          createdAt
+          updatedAt
+          budgetMonthBudgetGroupsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteBudgetMonth = /* GraphQL */ `
+  mutation DeleteBudgetMonth(
+    $input: DeleteBudgetMonthInput!
+    $condition: ModelBudgetMonthConditionInput
+  ) {
+    deleteBudgetMonth(input: $input, condition: $condition) {
+      id
+      date
+      budgetGroups {
+        items {
+          id
+          name
+          type
+          createdAt
+          updatedAt
+          budgetMonthBudgetGroupsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createBudgetGroup = /* GraphQL */ `
+  mutation CreateBudgetGroup(
+    $input: CreateBudgetGroupInput!
+    $condition: ModelBudgetGroupConditionInput
+  ) {
+    createBudgetGroup(input: $input, condition: $condition) {
+      id
+      name
+      type
+      budgetGroupItems {
+        items {
+          id
+          name
+          type
+          amountBudgeted
+          createdAt
+          updatedAt
+          budgetGroupBudgetGroupItemsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetMonthBudgetGroupsId
+      owner
+    }
+  }
+`;
+export const updateBudgetGroup = /* GraphQL */ `
+  mutation UpdateBudgetGroup(
+    $input: UpdateBudgetGroupInput!
+    $condition: ModelBudgetGroupConditionInput
+  ) {
+    updateBudgetGroup(input: $input, condition: $condition) {
+      id
+      name
+      type
+      budgetGroupItems {
+        items {
+          id
+          name
+          type
+          amountBudgeted
+          createdAt
+          updatedAt
+          budgetGroupBudgetGroupItemsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetMonthBudgetGroupsId
+      owner
+    }
+  }
+`;
+export const deleteBudgetGroup = /* GraphQL */ `
+  mutation DeleteBudgetGroup(
+    $input: DeleteBudgetGroupInput!
+    $condition: ModelBudgetGroupConditionInput
+  ) {
+    deleteBudgetGroup(input: $input, condition: $condition) {
+      id
+      name
+      type
+      budgetGroupItems {
+        items {
+          id
+          name
+          type
+          amountBudgeted
+          createdAt
+          updatedAt
+          budgetGroupBudgetGroupItemsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetMonthBudgetGroupsId
+      owner
+    }
+  }
+`;
+export const createBudgetGroupItem = /* GraphQL */ `
+  mutation CreateBudgetGroupItem(
+    $input: CreateBudgetGroupItemInput!
+    $condition: ModelBudgetGroupItemConditionInput
+  ) {
+    createBudgetGroupItem(input: $input, condition: $condition) {
+      id
+      name
+      type
+      amountBudgeted
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          budgetGroupItemTransactionsId
+          bankAccountTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetGroupBudgetGroupItemsId
+      owner
+    }
+  }
+`;
+export const updateBudgetGroupItem = /* GraphQL */ `
+  mutation UpdateBudgetGroupItem(
+    $input: UpdateBudgetGroupItemInput!
+    $condition: ModelBudgetGroupItemConditionInput
+  ) {
+    updateBudgetGroupItem(input: $input, condition: $condition) {
+      id
+      name
+      type
+      amountBudgeted
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          budgetGroupItemTransactionsId
+          bankAccountTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetGroupBudgetGroupItemsId
+      owner
+    }
+  }
+`;
+export const deleteBudgetGroupItem = /* GraphQL */ `
+  mutation DeleteBudgetGroupItem(
+    $input: DeleteBudgetGroupItemInput!
+    $condition: ModelBudgetGroupItemConditionInput
+  ) {
+    deleteBudgetGroupItem(input: $input, condition: $condition) {
+      id
+      name
+      type
+      amountBudgeted
+      transactions {
+        items {
+          id
+          name
+          description
+          date
+          amount
+          createdAt
+          updatedAt
+          budgetGroupItemTransactionsId
+          bankAccountTransactionsId
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      budgetGroupBudgetGroupItemsId
+      owner
+    }
+  }
+`;
+export const createTransaction = /* GraphQL */ `
+  mutation CreateTransaction(
+    $input: CreateTransactionInput!
+    $condition: ModelTransactionConditionInput
+  ) {
+    createTransaction(input: $input, condition: $condition) {
+      id
+      name
+      description
+      date
+      amount
+      account {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      budgetGroupItem {
+        id
+        name
+        type
+        amountBudgeted
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        budgetGroupBudgetGroupItemsId
+        owner
+      }
+      createdAt
+      updatedAt
+      budgetGroupItemTransactionsId
+      bankAccountTransactionsId
+      owner
+    }
+  }
+`;
+export const updateTransaction = /* GraphQL */ `
+  mutation UpdateTransaction(
+    $input: UpdateTransactionInput!
+    $condition: ModelTransactionConditionInput
+  ) {
+    updateTransaction(input: $input, condition: $condition) {
+      id
+      name
+      description
+      date
+      amount
+      account {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      budgetGroupItem {
+        id
+        name
+        type
+        amountBudgeted
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        budgetGroupBudgetGroupItemsId
+        owner
+      }
+      createdAt
+      updatedAt
+      budgetGroupItemTransactionsId
+      bankAccountTransactionsId
+      owner
+    }
+  }
+`;
+export const deleteTransaction = /* GraphQL */ `
+  mutation DeleteTransaction(
+    $input: DeleteTransactionInput!
+    $condition: ModelTransactionConditionInput
+  ) {
+    deleteTransaction(input: $input, condition: $condition) {
+      id
+      name
+      description
+      date
+      amount
+      account {
+        id
+        name
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      budgetGroupItem {
+        id
+        name
+        type
+        amountBudgeted
+        transactions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        budgetGroupBudgetGroupItemsId
+        owner
+      }
+      createdAt
+      updatedAt
+      budgetGroupItemTransactionsId
+      bankAccountTransactionsId
+      owner
+    }
+  }
+`;
 export const createBankAccount = /* GraphQL */ `
   mutation CreateBankAccount(
     $input: CreateBankAccountInput!
@@ -19,8 +406,8 @@ export const createBankAccount = /* GraphQL */ `
           amount
           createdAt
           updatedAt
+          budgetGroupItemTransactionsId
           bankAccountTransactionsId
-          categoryTransactionsId
           owner
         }
         nextToken
@@ -48,8 +435,8 @@ export const updateBankAccount = /* GraphQL */ `
           amount
           createdAt
           updatedAt
+          budgetGroupItemTransactionsId
           bankAccountTransactionsId
-          categoryTransactionsId
           owner
         }
         nextToken
@@ -77,308 +464,14 @@ export const deleteBankAccount = /* GraphQL */ `
           amount
           createdAt
           updatedAt
+          budgetGroupItemTransactionsId
           bankAccountTransactionsId
-          categoryTransactionsId
           owner
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
-    }
-  }
-`;
-export const createBudgetMonth = /* GraphQL */ `
-  mutation CreateBudgetMonth(
-    $input: CreateBudgetMonthInput!
-    $condition: ModelBudgetMonthConditionInput
-  ) {
-    createBudgetMonth(input: $input, condition: $condition) {
-      date
-      categories {
-        items {
-          id
-          name
-          plannedAmount
-          createdAt
-          updatedAt
-          budgetMonthCategoriesId
-          owner
-        }
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateBudgetMonth = /* GraphQL */ `
-  mutation UpdateBudgetMonth(
-    $input: UpdateBudgetMonthInput!
-    $condition: ModelBudgetMonthConditionInput
-  ) {
-    updateBudgetMonth(input: $input, condition: $condition) {
-      date
-      categories {
-        items {
-          id
-          name
-          plannedAmount
-          createdAt
-          updatedAt
-          budgetMonthCategoriesId
-          owner
-        }
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteBudgetMonth = /* GraphQL */ `
-  mutation DeleteBudgetMonth(
-    $input: DeleteBudgetMonthInput!
-    $condition: ModelBudgetMonthConditionInput
-  ) {
-    deleteBudgetMonth(input: $input, condition: $condition) {
-      date
-      categories {
-        items {
-          id
-          name
-          plannedAmount
-          createdAt
-          updatedAt
-          budgetMonthCategoriesId
-          owner
-        }
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const createCategory = /* GraphQL */ `
-  mutation CreateCategory(
-    $input: CreateCategoryInput!
-    $condition: ModelCategoryConditionInput
-  ) {
-    createCategory(input: $input, condition: $condition) {
-      id
-      name
-      plannedAmount
-      transactions {
-        items {
-          id
-          name
-          description
-          date
-          amount
-          createdAt
-          updatedAt
-          bankAccountTransactionsId
-          categoryTransactionsId
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      budgetMonthCategoriesId
-      owner
-    }
-  }
-`;
-export const updateCategory = /* GraphQL */ `
-  mutation UpdateCategory(
-    $input: UpdateCategoryInput!
-    $condition: ModelCategoryConditionInput
-  ) {
-    updateCategory(input: $input, condition: $condition) {
-      id
-      name
-      plannedAmount
-      transactions {
-        items {
-          id
-          name
-          description
-          date
-          amount
-          createdAt
-          updatedAt
-          bankAccountTransactionsId
-          categoryTransactionsId
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      budgetMonthCategoriesId
-      owner
-    }
-  }
-`;
-export const deleteCategory = /* GraphQL */ `
-  mutation DeleteCategory(
-    $input: DeleteCategoryInput!
-    $condition: ModelCategoryConditionInput
-  ) {
-    deleteCategory(input: $input, condition: $condition) {
-      id
-      name
-      plannedAmount
-      transactions {
-        items {
-          id
-          name
-          description
-          date
-          amount
-          createdAt
-          updatedAt
-          bankAccountTransactionsId
-          categoryTransactionsId
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      budgetMonthCategoriesId
-      owner
-    }
-  }
-`;
-export const createTransaction = /* GraphQL */ `
-  mutation CreateTransaction(
-    $input: CreateTransactionInput!
-    $condition: ModelTransactionConditionInput
-  ) {
-    createTransaction(input: $input, condition: $condition) {
-      id
-      name
-      description
-      date
-      amount
-      account {
-        id
-        name
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      category {
-        id
-        name
-        plannedAmount
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        budgetMonthCategoriesId
-        owner
-      }
-      createdAt
-      updatedAt
-      bankAccountTransactionsId
-      categoryTransactionsId
-      owner
-    }
-  }
-`;
-export const updateTransaction = /* GraphQL */ `
-  mutation UpdateTransaction(
-    $input: UpdateTransactionInput!
-    $condition: ModelTransactionConditionInput
-  ) {
-    updateTransaction(input: $input, condition: $condition) {
-      id
-      name
-      description
-      date
-      amount
-      account {
-        id
-        name
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      category {
-        id
-        name
-        plannedAmount
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        budgetMonthCategoriesId
-        owner
-      }
-      createdAt
-      updatedAt
-      bankAccountTransactionsId
-      categoryTransactionsId
-      owner
-    }
-  }
-`;
-export const deleteTransaction = /* GraphQL */ `
-  mutation DeleteTransaction(
-    $input: DeleteTransactionInput!
-    $condition: ModelTransactionConditionInput
-  ) {
-    deleteTransaction(input: $input, condition: $condition) {
-      id
-      name
-      description
-      date
-      amount
-      account {
-        id
-        name
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      category {
-        id
-        name
-        plannedAmount
-        transactions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        budgetMonthCategoriesId
-        owner
-      }
-      createdAt
-      updatedAt
-      bankAccountTransactionsId
-      categoryTransactionsId
       owner
     }
   }

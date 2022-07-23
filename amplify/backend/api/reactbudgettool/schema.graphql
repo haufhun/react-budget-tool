@@ -1,19 +1,22 @@
-type BankAccount @model @auth(rules: [{ allow: owner }]) {
-  id: ID!
-  name: String!
-  transactions: [Transaction!]! @hasMany
-}
-
 type BudgetMonth @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
   date: AWSDate!
-  categories: [Category] @hasMany
+  budgetGroups: [BudgetGroup!]! @hasMany
 }
 
-type Category @model @auth(rules: [{ allow: owner }]) {
+type BudgetGroup @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   name: String!
-  plannedAmount: Float
-  transactions: [Transaction] @hasMany
+  type: String!
+  budgetGroupItems: [BudgetGroupItem!]! @hasMany
+}
+
+type BudgetGroupItem @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  type: String!
+  amountBudgeted: Float!
+  transactions: [Transaction!]! @hasMany
 }
 
 type Transaction @model @auth(rules: [{ allow: owner }]) {
@@ -23,5 +26,11 @@ type Transaction @model @auth(rules: [{ allow: owner }]) {
   date: AWSDate!
   amount: Float!
   account: BankAccount! @belongsTo
-  category: Category @belongsTo
+  budgetGroupItem: BudgetGroupItem @belongsTo
+}
+
+type BankAccount @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  transactions: [Transaction!]! @hasMany
 }

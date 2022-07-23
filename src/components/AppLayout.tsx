@@ -53,10 +53,7 @@ function AppLayout() {
 
             <Box sx={{ flexGrow: 1 }} />
 
-            <Typography>
-              Welcome, {user.attributes?.email}, to Budget Plaid Tool, an HTS
-              Product
-            </Typography>
+            <Typography>{user.attributes?.email}</Typography>
           </Toolbar>
         </AppBar>
       </Box>
