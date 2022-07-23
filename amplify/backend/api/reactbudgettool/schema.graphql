@@ -1,14 +1,15 @@
 type BudgetMonth @model @auth(rules: [{ allow: owner }]) {
   id: ID!
-  date: AWSDate!
-  budgetGroups: [BudgetGroup!]! @hasMany
+  monthId: ID! @index(name: "byMonthId", queryField: "budgetByMonthId")
+  budgetGroups: [BudgetGroup]! @hasMany
 }
 
 type BudgetGroup @model @auth(rules: [{ allow: owner }]) {
-  id: ID!
+  id: ID! @primaryKey(sortKeyFields: ["sortId"])
+  sortId: ID!
   name: String!
   type: String!
-  budgetGroupItems: [BudgetGroupItem!]! @hasMany
+  budgetGroupItems: [BudgetGroupItem]! @hasMany
 }
 
 type BudgetGroupItem @model @auth(rules: [{ allow: owner }]) {
@@ -16,7 +17,7 @@ type BudgetGroupItem @model @auth(rules: [{ allow: owner }]) {
   name: String!
   type: String!
   amountBudgeted: Float!
-  transactions: [Transaction!]! @hasMany
+  transactions: [Transaction] @hasMany
 }
 
 type Transaction @model @auth(rules: [{ allow: owner }]) {
@@ -32,5 +33,5 @@ type Transaction @model @auth(rules: [{ allow: owner }]) {
 type BankAccount @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   name: String!
-  transactions: [Transaction!]! @hasMany
+  transactions: [Transaction]! @hasMany
 }

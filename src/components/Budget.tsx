@@ -1,122 +1,50 @@
 import { useEffect, useState } from "react";
-import { API, graphqlOperation, GraphQLResult } from "@aws-amplify/api";
 import {
   Box,
   Container,
-  Paper,
   Stack,
   Typography,
   Divider,
-  Button,
   CircularProgress,
+  Button,
 } from "@mui/material";
-import {
-  BudgetMonth,
-  CreateBudgetGroupMutationVariables,
-  CreateBudgetMonthMutation,
-  CreateBudgetMonthMutationVariables,
-  GetBudgetMonthQuery,
-  GetBudgetMonthQueryVariables,
-  Transaction,
-} from "../API";
-import { fetchTransactions } from "../app/appSlice";
+import { BudgetMonth } from "../API";
+import { getCurrentBudget } from "../app/appSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { RootState } from "../app/store";
-import {
-  createBudgetMonth as createBudgetMonthMutation,
-  createBudgetGroup as createBudgetGroupMutation,
-} from "../graphql/mutations";
-import BudgetGroupItemRow from "./BudgetGroupItemRow";
-import TransactionCard from "./TransactionCard";
 import { LoadingButton } from "@mui/lab";
-import { getBudgetMonth } from "../graphql/queries";
-
-const CondensedTransactionsCardTable = () => {
-  const dispatch = useAppDispatch();
-  const transactions = useAppSelector(
-    (state: RootState) => state.app.transactions.items
-  );
-
-  useEffect(() => {
-    dispatch(fetchTransactions());
-  }, []);
-
-  return (
-    <Paper elevation={3} sx={{ width: "464px", height: "100vh" }}>
-      <Stack>
-        <Typography variant="h5" padding={2}>
-          Transactions
-        </Typography>
-
-        <Divider />
-
-        {transactions.map((transaction: Transaction) => (
-          <TransactionCard key={transaction.id} transaction={transaction} />
-        ))}
-      </Stack>
-    </Paper>
-  );
-};
+import BudgetGroupCard from "./BudgetGroupCard";
+import BudgetMonthService from "../utils/BudgetMonthService";
+import BudgetGroupService from "../utils/BudgetGroupService";
+import moment from "moment";
+import CondensedTransactionsCardTable from "./CondensedTransactionsCardTable";
 
 function Budget() {
   const dispatch = useAppDispatch();
+  const budget = useAppSelector((state) => state.app.currentBudget.budgetMonth);
+  const isLoadingBudget = useAppSelector(
+    (state) => state.app.currentBudget.fetchLoading
+  );
+
   const [isCreateBudgetLoading, setIsCreateBudgetLoading] = useState(false);
-  const [isFetchBudgetLoading, setIsFetchBudgetLoading] = useState(false);
 
-  const [budget, setBudget] = useState<BudgetMonth | null>(null);
+  const monthId = moment().format("YYYY-MM");
 
-  const refresh = async () => {
-    setIsFetchBudgetLoading(true);
-
-    const vars: GetBudgetMonthQueryVariables = {
-      id: "2022-07-01",
-    };
-    const budgetMonthResponse = (await API.graphql(
-      graphqlOperation(getBudgetMonth, vars)
-    )) as GraphQLResult<GetBudgetMonthQuery>;
-    setBudget(budgetMonthResponse.data?.getBudgetMonth as BudgetMonth);
-
-    setIsFetchBudgetLoading(false);
+  const refresh = () => {
+    dispatch(getCurrentBudget(monthId));
   };
 
   useEffect(() => {
     refresh();
-    dispatch(fetchTransactions());
   }, []);
 
   const createNewBudget = async () => {
     setIsCreateBudgetLoading(true);
-
-    const budgetVars: CreateBudgetMonthMutationVariables = {
-      input: {
-        id: "2022-07-01",
-        date: "2022-07-01",
-        // budgetGroups: {
-
-        // }
-      },
-    };
-    const budgetMonthResponse = (await API.graphql(
-      graphqlOperation(createBudgetMonthMutation, budgetVars)
-    )) as GraphQLResult<CreateBudgetMonthMutation>;
-
-    const budgetMonthId = budgetMonthResponse.data?.createBudgetMonth?.id!;
-
-    const budgetGroupIncomeVars: CreateBudgetGroupMutationVariables = {
-      input: {
-        name: "Income",
-        type: "income",
-        budgetMonthBudgetGroupsId: budgetMonthId,
-      },
-    };
-    await API.graphql(
-      graphqlOperation(createBudgetGroupMutation, budgetGroupIncomeVars)
-    );
-
+    await BudgetMonthService.createNewBudget(monthId);
     setIsCreateBudgetLoading(false);
+    refresh();
   };
 
-  if (isFetchBudgetLoading) return <CircularProgress />;
+  if (isLoadingBudget) return <CircularProgress />;
 
   if (!!!budget) {
     return (
@@ -142,6 +70,11 @@ function Budget() {
     );
   }
 
+  const resetBudget = async () => {
+    await BudgetMonthService.resetBudget(budget.id, budget.monthId);
+    refresh();
+  };
+
   return (
     <Stack direction="row" height="100vh" bgcolor="#f5f7f8">
       <Stack
@@ -158,43 +91,22 @@ function Budget() {
 
         <Stack spacing={2} sx={{ width: "720px", margin: "0 auto" }}>
           {budget.budgetGroups?.items.map((budgetGroup) => (
-            <>
-              <Paper elevation={3}>
-                {!budgetGroup && (
-                  <Typography>Error With This Budget Group</Typography>
-                )}
-
-                {!!budgetGroup && (
-                  <Stack>
-                    <Stack
-                      direction="row"
-                      sx={{
-                        paddingX: 2,
-                        paddingY: 2,
-                      }}
-                    >
-                      <Typography flex={7} textAlign="left">
-                        {budgetGroup.name}
-                      </Typography>
-                      <Typography flex={2} textAlign="right">
-                        Planned
-                      </Typography>
-                    </Stack>
-
-                    {budgetGroup?.budgetGroupItems?.items.map(
-                      (budgetGroupItem) => (
-                        <BudgetGroupItemRow
-                          budgetGroupItem={budgetGroupItem!}
-                        />
-                      )
-                    )}
-                    <Button>Add Item</Button>
-                  </Stack>
-                )}
-              </Paper>
-            </>
+            <BudgetGroupCard budgetGroup={budgetGroup!} />
           ))}
+
+          <Button
+            onClick={() => {
+              BudgetGroupService.createBlankExpenseGroup(budget.id);
+              refresh();
+            }}
+          >
+            Add Group
+          </Button>
         </Stack>
+
+        <Button onClick={resetBudget} color="error">
+          Reset Budget
+        </Button>
       </Stack>
 
       <Box sx={{ width: "40%", height: "100vh" }}>

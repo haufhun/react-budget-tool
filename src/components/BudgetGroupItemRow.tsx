@@ -4,7 +4,7 @@ import {
   BudgetGroupItem,
   UpdateTransactionMutationVariables,
 } from "../API";
-import { Stack, Typography } from "@mui/material";
+import { Stack, TextField, Typography } from "@mui/material";
 
 import { API, graphqlOperation } from "aws-amplify";
 import { updateTransaction as updateTransactionMutation } from "../graphql/mutations";
@@ -54,6 +54,9 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
       key={budgetGroupItem.id}
       ref={drop}
       direction="row"
+      onClick={() =>
+        console.log("Selected budeget group item:", budgetGroupItem)
+      }
       sx={{
         backgroundColor: isOver ? "#ebf4fa" : "#3f6c8a",
         paddingX: 2,
@@ -61,9 +64,11 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
         borderRadius: 2,
       }}
     >
-      <Typography flex={7} textAlign="left">
+      <TextField sx={{ flex: 7 }} fullWidth label="fullWidth" id="fullWidth" />
+
+      {/* <Typography flex={7} textAlign="left">
         {budgetGroupItem.name}
-      </Typography>
+      </Typography> */}
       <Typography flex={2} textAlign="right">
         {budgetGroupItem.amountBudgeted ?? "null"}
       </Typography>

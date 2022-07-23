@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import API, { GraphQLResult, graphqlOperation } from "@aws-amplify/api";
 import {
   BankAccount,
+  BudgetGroupItem,
+  BudgetMonth,
   ListBankAccountsQuery,
   ListBankAccountsQueryVariables,
   ListTransactionsQuery,
@@ -9,8 +11,16 @@ import {
   Transaction,
 } from "../API";
 import * as queries from "../graphql/queries";
+import BudgetMonthService from "../utils/BudgetMonthService";
+import { RootState } from "./store";
 
 const initialState = {
+  currentBudget: {
+    fetchLoading: false,
+    fetchError: null as any,
+    budgetMonth: null as BudgetMonth | null,
+    selectedBudgetGroupItem: null as BudgetGroupItem | null,
+  },
   transactions: {
     fetchLoading: false,
     fetchError: null as any,
@@ -22,6 +32,11 @@ const initialState = {
     items: [] as BankAccount[],
   },
 };
+
+export const getCurrentBudget = createAsyncThunk(
+  "budgetMonth/getCurrent",
+  (monthId: string) => BudgetMonthService.get(monthId)
+);
 
 export const fetchBankAccounts = createAsyncThunk(
   "bankAccounts/fetchAll",
@@ -60,28 +75,54 @@ export const fetchTransactions = createAsyncThunk(
 export const appSlice = createSlice({
   name: "app",
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedBudgetGroupItem: (state, action) => {
+      state.currentBudget.selectedBudgetGroupItem = action.payload;
+    },
+  },
   extraReducers: (builder) => {
+    builder.addCase(getCurrentBudget.pending, (state) => {
+      state.currentBudget.fetchLoading = true;
+    });
+    builder.addCase(getCurrentBudget.rejected, (state, action) => {
+      state.currentBudget.fetchLoading = false;
+      state.currentBudget.fetchError = action.payload ?? "Unknown Error";
+    });
+    builder.addCase(getCurrentBudget.fulfilled, (state, action) => {
+      state.currentBudget.fetchLoading = false;
+      state.currentBudget.budgetMonth = action.payload;
+    });
+
     builder.addCase(fetchTransactions.pending, (state) => {
       state.transactions.fetchLoading = true;
     });
     builder.addCase(fetchTransactions.rejected, (state, action) => {
+      state.transactions.fetchLoading = false;
       state.transactions.fetchError = action.payload ?? "Unknown Error";
     });
     builder.addCase(fetchTransactions.fulfilled, (state, action) => {
+      state.transactions.fetchLoading = false;
       state.transactions.items = action.payload;
     });
+
     builder.addCase(fetchBankAccounts.pending, (state) => {
       state.bankAccounts.fetchLoading = true;
     });
     builder.addCase(fetchBankAccounts.rejected, (state, action) => {
+      state.bankAccounts.fetchLoading = false;
       state.bankAccounts.fetchError = action.payload ?? "Unknown Error";
     });
     builder.addCase(fetchBankAccounts.fulfilled, (state, action) => {
+      state.bankAccounts.fetchLoading = false;
       state.bankAccounts.items = action.payload;
     });
   },
 });
+
+export const { setSelectedBudgetGroupItem } = appSlice.actions;
+
+// export const selectTotalBudgetGroups = (state: RootState) =>
+//   state.app.currentBudget.budgetMonth?.budgetGroups?.items.map((bg) => ({id, sortId}))
 
 const appReducer = appSlice.reducer;
 export default appReducer;
