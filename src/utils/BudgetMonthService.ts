@@ -9,8 +9,7 @@ import {
   CreateBudgetMonthMutationVariables,
   DeleteBudgetMonthMutation,
   DeleteBudgetMonthMutationVariables,
-  GetBudgetMonthQuery,
-  GetBudgetMonthQueryVariables,
+  ModelSortDirection,
 } from "../API";
 import moment from "moment";
 import BudgetGroupService from "./BudgetGroupService";
@@ -29,11 +28,13 @@ class BudgetMonthService {
 
   async createNewBudget(monthId: string): Promise<void> {
     const budgetMonth = await this.create(monthId);
-    await BudgetGroupService.create(budgetMonth.id, "Income", "income");
+    await BudgetGroupService.create("Income", "income", "1", budgetMonth.id);
   }
 
   async resetBudget(budgetId: string, monthId: string): Promise<void> {
     this.validateMonthId(monthId);
+
+    // TODO: Delete all BudgetGroupItems and BudgetGroups within this
 
     await this.delete(budgetId);
     await this.createNewBudget(monthId);
@@ -83,7 +84,13 @@ class BudgetMonthService {
       throw new Error(message);
     }
 
-    return fetchedBudgetItems[0] as BudgetMonth;
+    const fetchBudgetItem = fetchedBudgetItems[0];
+
+    fetchBudgetItem.budgetGroups?.items.sort(
+      (a, b) => parseInt(a?.sortId ?? "0") - parseInt(b?.sortId ?? "0")
+    );
+
+    return fetchBudgetItem as BudgetMonth;
   }
 
   async delete(id: string): Promise<BudgetMonth> {

@@ -64,11 +64,9 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
         borderRadius: 2,
       }}
     >
-      <TextField sx={{ flex: 7 }} fullWidth label="fullWidth" id="fullWidth" />
-
-      {/* <Typography flex={7} textAlign="left">
+      <Typography flex={7} textAlign="left">
         {budgetGroupItem.name}
-      </Typography> */}
+      </Typography>
       <Typography flex={2} textAlign="right">
         {budgetGroupItem.amountBudgeted ?? "null"}
       </Typography>

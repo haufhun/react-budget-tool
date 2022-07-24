@@ -1,4 +1,4 @@
-import { Paper, Typography, Button, Stack } from "@mui/material";
+import { Paper, Typography, Button, Stack, TextField } from "@mui/material";
 import { BudgetGroup } from "../API";
 import BudgetGroupItemRow from "./BudgetGroupItemRow";
 import BudgetGroupItemService from "../utils/BudgetGroupItemService";
@@ -18,6 +18,8 @@ function BudgetGroupCard({ budgetGroup }: BudgetGroupCardProps) {
     dispatch(getCurrentBudget(moment().format("YYYY-MM")));
   };
 
+  const isIncome = budgetGroup.type === "income";
+
   return (
     <>
       <Paper elevation={3} sx={{ paddingBottom: 2 }}>
@@ -28,14 +30,22 @@ function BudgetGroupCard({ budgetGroup }: BudgetGroupCardProps) {
             <Stack
               direction="row"
               sx={{
+                alignItems: "center",
                 paddingX: 2,
                 paddingY: 2,
               }}
             >
-              <Typography flex={7} textAlign="left">
+              <TextField
+                sx={{ flex: 8 }}
+                value={budgetGroup.name}
+                disabled={isIncome}
+                variant="filled"
+              />
+
+              {/* <Typography flex={7} textAlign="left">
                 {budgetGroup.name}
-              </Typography>
-              <Typography flex={2} textAlign="right">
+              </Typography> */}
+              <Typography flex={4} textAlign="right">
                 Planned
               </Typography>
             </Stack>
@@ -52,14 +62,18 @@ function BudgetGroupCard({ budgetGroup }: BudgetGroupCardProps) {
             >
               Add Item
             </Button>
-            <Button
-              onClick={async () => {
-                await BudgetGroupService.delete(budgetGroup.id);
-                refresh();
-              }}
-            >
-              Delete
-            </Button>
+
+            {!isIncome && (
+              <Button
+                color="error"
+                onClick={async () => {
+                  await BudgetGroupService.delete(budgetGroup.id);
+                  refresh();
+                }}
+              >
+                Delete
+              </Button>
+            )}
           </Stack>
         )}
       </Paper>

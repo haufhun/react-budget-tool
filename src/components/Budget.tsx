@@ -8,7 +8,6 @@ import {
   CircularProgress,
   Button,
 } from "@mui/material";
-import { BudgetMonth } from "../API";
 import { getCurrentBudget } from "../app/appSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { LoadingButton } from "@mui/lab";
@@ -81,6 +80,7 @@ function Budget() {
         sx={{
           width: "60%",
           paddingX: 2,
+          paddingBottom: 4,
         }}
       >
         <Stack paddingLeft={5} paddingBottom={3}>
@@ -89,20 +89,25 @@ function Budget() {
           <Divider sx={{ borderBottomWidth: 2, marginY: 1 }} />
         </Stack>
 
-        <Stack spacing={2} sx={{ width: "720px", margin: "0 auto" }}>
+        <Stack
+          spacing={2}
+          sx={{ width: "720px", margin: "0 auto", overflow: "auto" }}
+        >
           {budget.budgetGroups?.items.map((budgetGroup) => (
             <BudgetGroupCard budgetGroup={budgetGroup!} />
           ))}
 
           <Button
-            onClick={() => {
-              BudgetGroupService.createBlankExpenseGroup(budget.id);
+            onClick={async () => {
+              await BudgetGroupService.createBlankExpenseGroup(budget.id);
               refresh();
             }}
           >
             Add Group
           </Button>
         </Stack>
+
+        <Box sx={{ flexGrow: 1 }} />
 
         <Button onClick={resetBudget} color="error">
           Reset Budget

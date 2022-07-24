@@ -13,6 +13,7 @@ export const createBudgetMonth = /* GraphQL */ `
       budgetGroups {
         items {
           id
+          sortId
           name
           type
           budgetGroupItems {
@@ -55,6 +56,7 @@ export const updateBudgetMonth = /* GraphQL */ `
       budgetGroups {
         items {
           id
+          sortId
           name
           type
           budgetGroupItems {
@@ -97,6 +99,7 @@ export const deleteBudgetMonth = /* GraphQL */ `
       budgetGroups {
         items {
           id
+          sortId
           name
           type
           budgetGroupItems {
@@ -135,6 +138,7 @@ export const createBudgetGroup = /* GraphQL */ `
   ) {
     createBudgetGroup(input: $input, condition: $condition) {
       id
+      sortId
       name
       type
       budgetGroupItems {
@@ -196,6 +200,7 @@ export const updateBudgetGroup = /* GraphQL */ `
   ) {
     updateBudgetGroup(input: $input, condition: $condition) {
       id
+      sortId
       name
       type
       budgetGroupItems {
@@ -257,6 +262,7 @@ export const deleteBudgetGroup = /* GraphQL */ `
   ) {
     deleteBudgetGroup(input: $input, condition: $condition) {
       id
+      sortId
       name
       type
       budgetGroupItems {

@@ -5,7 +5,7 @@ type BudgetMonth @model @auth(rules: [{ allow: owner }]) {
 }
 
 type BudgetGroup @model @auth(rules: [{ allow: owner }]) {
-  id: ID! @primaryKey(sortKeyFields: ["sortId"])
+  id: ID!
   sortId: ID!
   name: String!
   type: String!

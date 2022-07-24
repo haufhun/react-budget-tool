@@ -12,7 +12,6 @@ import {
 } from "../API";
 import * as queries from "../graphql/queries";
 import BudgetMonthService from "../utils/BudgetMonthService";
-import { RootState } from "./store";
 
 const initialState = {
   currentBudget: {

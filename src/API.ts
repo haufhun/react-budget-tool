@@ -73,6 +73,7 @@ export type ModelBudgetGroupConnection = {
 export type BudgetGroup = {
   __typename: "BudgetGroup",
   id: string,
+  sortId: string,
   name: string,
   type: string,
   budgetGroupItems?: ModelBudgetGroupItemConnection | null,
@@ -144,12 +145,14 @@ export type DeleteBudgetMonthInput = {
 
 export type CreateBudgetGroupInput = {
   id?: string | null,
+  sortId: string,
   name: string,
   type: string,
   budgetMonthBudgetGroupsId: string,
 };
 
 export type ModelBudgetGroupConditionInput = {
+  sortId?: ModelIDInput | null,
   name?: ModelStringInput | null,
   type?: ModelStringInput | null,
   and?: Array< ModelBudgetGroupConditionInput | null > | null,
@@ -176,6 +179,7 @@ export type ModelStringInput = {
 
 export type UpdateBudgetGroupInput = {
   id: string,
+  sortId?: string | null,
   name?: string | null,
   type?: string | null,
   budgetMonthBudgetGroupsId?: string | null,
@@ -300,6 +304,7 @@ export type ModelBudgetMonthConnection = {
 
 export type ModelBudgetGroupFilterInput = {
   id?: ModelIDInput | null,
+  sortId?: ModelIDInput | null,
   name?: ModelStringInput | null,
   type?: ModelStringInput | null,
   and?: Array< ModelBudgetGroupFilterInput | null > | null,
@@ -367,6 +372,7 @@ export type CreateBudgetMonthMutation = {
       items:  Array< {
         __typename: "BudgetGroup",
         id: string,
+        sortId: string,
         name: string,
         type: string,
         budgetGroupItems?:  {
@@ -416,6 +422,7 @@ export type UpdateBudgetMonthMutation = {
       items:  Array< {
         __typename: "BudgetGroup",
         id: string,
+        sortId: string,
         name: string,
         type: string,
         budgetGroupItems?:  {
@@ -465,6 +472,7 @@ export type DeleteBudgetMonthMutation = {
       items:  Array< {
         __typename: "BudgetGroup",
         id: string,
+        sortId: string,
         name: string,
         type: string,
         budgetGroupItems?:  {
@@ -508,6 +516,7 @@ export type CreateBudgetGroupMutation = {
   createBudgetGroup?:  {
     __typename: "BudgetGroup",
     id: string,
+    sortId: string,
     name: string,
     type: string,
     budgetGroupItems?:  {
@@ -577,6 +586,7 @@ export type UpdateBudgetGroupMutation = {
   updateBudgetGroup?:  {
     __typename: "BudgetGroup",
     id: string,
+    sortId: string,
     name: string,
     type: string,
     budgetGroupItems?:  {
@@ -646,6 +656,7 @@ export type DeleteBudgetGroupMutation = {
   deleteBudgetGroup?:  {
     __typename: "BudgetGroup",
     id: string,
+    sortId: string,
     name: string,
     type: string,
     budgetGroupItems?:  {
@@ -1629,6 +1640,7 @@ export type GetBudgetMonthQuery = {
       items:  Array< {
         __typename: "BudgetGroup",
         id: string,
+        sortId: string,
         name: string,
         type: string,
         budgetGroupItems?:  {
@@ -1681,6 +1693,7 @@ export type ListBudgetMonthsQuery = {
         items:  Array< {
           __typename: "BudgetGroup",
           id: string,
+          sortId: string,
           name: string,
           type: string,
           budgetGroupItems?:  {
@@ -1721,6 +1734,7 @@ export type GetBudgetGroupQuery = {
   getBudgetGroup?:  {
     __typename: "BudgetGroup",
     id: string,
+    sortId: string,
     name: string,
     type: string,
     budgetGroupItems?:  {
@@ -1793,6 +1807,7 @@ export type ListBudgetGroupsQuery = {
     items:  Array< {
       __typename: "BudgetGroup",
       id: string,
+      sortId: string,
       name: string,
       type: string,
       budgetGroupItems?:  {
@@ -2406,6 +2421,7 @@ export type BudgetByMonthIdQuery = {
         items:  Array< {
           __typename: "BudgetGroup",
           id: string,
+          sortId: string,
           name: string,
           type: string,
           budgetGroupItems?:  {
@@ -2452,6 +2468,7 @@ export type OnCreateBudgetMonthSubscription = {
       items:  Array< {
         __typename: "BudgetGroup",
         id: string,
+        sortId: string,
         name: string,
         type: string,
         budgetGroupItems?:  {
@@ -2500,6 +2517,7 @@ export type OnUpdateBudgetMonthSubscription = {
       items:  Array< {
         __typename: "BudgetGroup",
         id: string,
+        sortId: string,
         name: string,
         type: string,
         budgetGroupItems?:  {
@@ -2548,6 +2566,7 @@ export type OnDeleteBudgetMonthSubscription = {
       items:  Array< {
         __typename: "BudgetGroup",
         id: string,
+        sortId: string,
         name: string,
         type: string,
         budgetGroupItems?:  {
@@ -2590,6 +2609,7 @@ export type OnCreateBudgetGroupSubscription = {
   onCreateBudgetGroup?:  {
     __typename: "BudgetGroup",
     id: string,
+    sortId: string,
     name: string,
     type: string,
     budgetGroupItems?:  {
@@ -2658,6 +2678,7 @@ export type OnUpdateBudgetGroupSubscription = {
   onUpdateBudgetGroup?:  {
     __typename: "BudgetGroup",
     id: string,
+    sortId: string,
     name: string,
     type: string,
     budgetGroupItems?:  {
@@ -2726,6 +2747,7 @@ export type OnDeleteBudgetGroupSubscription = {
   onDeleteBudgetGroup?:  {
     __typename: "BudgetGroup",
     id: string,
+    sortId: string,
     name: string,
     type: string,
     budgetGroupItems?:  {

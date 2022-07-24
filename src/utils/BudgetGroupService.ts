@@ -6,22 +6,38 @@ import {
   DeleteBudgetGroupMutationVariables,
   DeleteBudgetGroupMutation,
 } from "../API";
+import { store } from "../app/store";
 import * as mutations from "../graphql/mutations";
 
 class BudgetGroupService {
-  async createBlankExpenseGroup(budgetMonthId) {
-    this.create(budgetMonthId, "Untitled", "expense");
+  constructor() {}
+
+  async createBlankExpenseGroup(budgetMonthId): Promise<BudgetGroup> {
+    const state = store.getState();
+    const budgetGroupsLength =
+      state.app.currentBudget.budgetMonth?.budgetGroups?.items.length ?? -1000;
+
+    const nextSortId = budgetGroupsLength + 1;
+
+    return await this.create(
+      "Untitled",
+      "expense",
+      nextSortId.toString(),
+      budgetMonthId
+    );
   }
 
   async create(
-    budgetMonthId: string,
     name: string,
-    type: string
+    type: string,
+    sortId: string,
+    budgetMonthId: string
   ): Promise<BudgetGroup> {
     const budgetGroupIncomeVars: CreateBudgetGroupMutationVariables = {
       input: {
-        name: name,
-        type: type,
+        name,
+        type,
+        sortId,
         budgetMonthBudgetGroupsId: budgetMonthId,
       },
     };

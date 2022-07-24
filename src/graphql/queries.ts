@@ -10,6 +10,7 @@ export const getBudgetMonth = /* GraphQL */ `
       budgetGroups {
         items {
           id
+          sortId
           name
           type
           budgetGroupItems {
@@ -54,6 +55,7 @@ export const listBudgetMonths = /* GraphQL */ `
         budgetGroups {
           items {
             id
+            sortId
             name
             type
             budgetGroupItems {
@@ -88,6 +90,7 @@ export const getBudgetGroup = /* GraphQL */ `
   query GetBudgetGroup($id: ID!) {
     getBudgetGroup(id: $id) {
       id
+      sortId
       name
       type
       budgetGroupItems {
@@ -151,6 +154,7 @@ export const listBudgetGroups = /* GraphQL */ `
     listBudgetGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        sortId
         name
         type
         budgetGroupItems {
@@ -692,6 +696,7 @@ export const budgetByMonthId = /* GraphQL */ `
         budgetGroups {
           items {
             id
+            sortId
             name
             type
             budgetGroupItems {

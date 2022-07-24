@@ -10,6 +10,7 @@ export const onCreateBudgetMonth = /* GraphQL */ `
       budgetGroups {
         items {
           id
+          sortId
           name
           type
           budgetGroupItems {
@@ -49,6 +50,7 @@ export const onUpdateBudgetMonth = /* GraphQL */ `
       budgetGroups {
         items {
           id
+          sortId
           name
           type
           budgetGroupItems {
@@ -88,6 +90,7 @@ export const onDeleteBudgetMonth = /* GraphQL */ `
       budgetGroups {
         items {
           id
+          sortId
           name
           type
           budgetGroupItems {
@@ -123,6 +126,7 @@ export const onCreateBudgetGroup = /* GraphQL */ `
   subscription OnCreateBudgetGroup($owner: String) {
     onCreateBudgetGroup(owner: $owner) {
       id
+      sortId
       name
       type
       budgetGroupItems {
@@ -181,6 +185,7 @@ export const onUpdateBudgetGroup = /* GraphQL */ `
   subscription OnUpdateBudgetGroup($owner: String) {
     onUpdateBudgetGroup(owner: $owner) {
       id
+      sortId
       name
       type
       budgetGroupItems {
@@ -239,6 +244,7 @@ export const onDeleteBudgetGroup = /* GraphQL */ `
   subscription OnDeleteBudgetGroup($owner: String) {
     onDeleteBudgetGroup(owner: $owner) {
       id
+      sortId
       name
       type
       budgetGroupItems {
