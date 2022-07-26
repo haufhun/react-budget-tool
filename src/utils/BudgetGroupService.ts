@@ -5,6 +5,9 @@ import {
   CreateBudgetGroupMutationVariables,
   DeleteBudgetGroupMutationVariables,
   DeleteBudgetGroupMutation,
+  UpdateBudgetGroupInput,
+  UpdateBankAccountMutationVariables,
+  UpdateBudgetGroupMutation,
 } from "../API";
 import { store } from "../app/store";
 import * as mutations from "../graphql/mutations";
@@ -51,6 +54,21 @@ class BudgetGroupService {
     }
 
     return response.data?.createBudgetGroup!;
+  }
+
+  async update(input: UpdateBudgetGroupInput): Promise<BudgetGroup> {
+    const vars: UpdateBankAccountMutationVariables = { input };
+
+    const response = (await API.graphql(
+      graphqlOperation(mutations.updateBudgetGroup, vars)
+    )) as GraphQLResult<UpdateBudgetGroupMutation>;
+
+    if (response.errors) {
+      console.error(response.errors);
+      throw new Error(JSON.stringify(response.errors));
+    }
+
+    return response.data?.updateBudgetGroup!;
   }
 
   async delete(id: string): Promise<BudgetGroup> {

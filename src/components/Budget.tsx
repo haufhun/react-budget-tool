@@ -43,7 +43,7 @@ function Budget() {
     refresh();
   };
 
-  if (isLoadingBudget) return <CircularProgress />;
+  if (isLoadingBudget && !!!budget) return <CircularProgress />;
 
   if (!!!budget) {
     return (
@@ -75,7 +75,7 @@ function Budget() {
   };
 
   return (
-    <Stack direction="row" height="100vh" bgcolor="#f5f7f8">
+    <Stack direction="row" bgcolor="#f5f7f8">
       <Stack
         sx={{
           width: "60%",
@@ -84,17 +84,23 @@ function Budget() {
         }}
       >
         <Stack paddingLeft={5} paddingBottom={3}>
-          <Typography variant="h4">July 2022</Typography>
-          <Typography>Budget Good?</Typography>
+          <Stack direction="row" justifyContent="space-between">
+            <Stack>
+              <Typography variant="h4">July 2022</Typography>
+              <Typography>Budget Good?</Typography>
+            </Stack>
+
+            <Stack justifyContent="center">
+              {isLoadingBudget && !!budget && <CircularProgress />}
+            </Stack>
+          </Stack>
+
           <Divider sx={{ borderBottomWidth: 2, marginY: 1 }} />
         </Stack>
 
-        <Stack
-          spacing={2}
-          sx={{ width: "720px", margin: "0 auto", overflow: "auto" }}
-        >
+        <Stack spacing={2} sx={{ width: "720px", margin: "0 auto" }}>
           {budget.budgetGroups?.items.map((budgetGroup) => (
-            <BudgetGroupCard budgetGroup={budgetGroup!} />
+            <BudgetGroupCard key={budgetGroup?.id} budgetGroup={budgetGroup!} />
           ))}
 
           <Button
