@@ -10,23 +10,14 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
-  Stack,
   TextField,
-  Typography,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { createTransaction as createTransactionMutation } from "../graphql/mutations";
-import {
-  BankAccount,
-  CreateTransactionMutationVariables,
-  ListBankAccountsQuery,
-} from "../API";
-import { listBankAccounts } from "../graphql/queries";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
+import { BankAccount, CreateTransactionMutationVariables } from "../API";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { RootState } from "../app/store";
 import { fetchTransactions } from "../app/appSlice";
 
 type CreateTransactionDialogProps = {
@@ -39,21 +30,19 @@ function CreateTransactionDialog({
   handleClose,
 }: CreateTransactionDialogProps) {
   const dispatch = useAppDispatch();
+  const bankAccounts = useAppSelector((state) => state.app.bankAccounts.items);
 
-  const [isGettingBankAccounts, setIsGettingBankAccounts] = useState(false);
   const [isCreateLoading, setIsCreateLoading] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("2022-07-18");
   const [amount, setAmount] = useState("0.0");
   const [selectedAccountName, setSelectedAccountName] = useState("");
-  const [bankAccounts, setBankAccounts] = useState<any>([]);
   // const [categoryName, setCategoryName] = useState("");
 
   const selectedAccount = bankAccounts.find(
     (a: BankAccount) => a.name === selectedAccountName
-  );
-
+  )!;
   // const selectedCategory: Category | undefined = categories.find(
   //   (c: Category) => c.name === categoryName
   // );
@@ -99,23 +88,6 @@ function CreateTransactionDialog({
       setIsCreateLoading(false);
     }
   };
-
-  const getBankAccounts = async () => {
-    setIsGettingBankAccounts(true);
-
-    const accountsResponse = (await API.graphql(
-      graphqlOperation(listBankAccounts)
-    )) as GraphQLResult<ListBankAccountsQuery>;
-    const accounts = accountsResponse?.data?.listBankAccounts?.items;
-    setBankAccounts(accounts);
-
-    setIsGettingBankAccounts(false);
-  };
-
-  useEffect(() => {
-    getBankAccounts();
-    // dispatch(fetchCategories());
-  }, []);
 
   return (
     <>

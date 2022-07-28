@@ -1,25 +1,25 @@
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { Button, Stack, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Container } from "@mui/system";
-import { useEffect, useState } from "react";
-import { API, graphqlOperation } from "aws-amplify";
-import { deleteTransaction as deleteTransactionMutation } from "../graphql/mutations";
-import { DeleteTransactionMutationVariables, Transaction } from "../API";
+import { Transaction } from "../API";
 import CreateTransactionDialog from "./CreateTransactionDialog";
-import TransactionsTable from "./TransactionsTable";
 import UpdateTransactionDialog from "./UpdateTransactionDialog";
+import TransactionsTable from "./TransactionsTable";
 import EnhancedTable from "./EnhancedTable";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
 import { fetchTransactions } from "../app/appSlice";
+import TransactionService from "../utils/TransactionService";
 
 const TransactionsCardTable = ({
-  transactions,
   setSelectedTransaction,
   setIsUpdateDialogOpen,
-  isDeleteLoading,
-  deleteAccount,
 }) => {
+  const dispatch = useAppDispatch();
+  const transactions = useAppSelector((state) => state.app.transactions.items);
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+
   return (
     <Stack spacing={2}>
       <Stack
@@ -54,8 +54,10 @@ const TransactionsCardTable = ({
             borderRadius: 2,
           }}
           onClick={() => {
+            setIsDeleteLoading(true);
             setSelectedTransaction(transaction);
             setIsUpdateDialogOpen(true);
+            setIsDeleteLoading(false);
           }}
         >
           <Typography>{transaction.name}</Typography>
@@ -68,7 +70,10 @@ const TransactionsCardTable = ({
             color="error"
             variant="contained"
             loading={isDeleteLoading}
-            onClick={() => deleteAccount(transaction.id)}
+            onClick={async () => {
+              await TransactionService.delete(transaction.id);
+              dispatch(fetchTransactions());
+            }}
           >
             Delete
           </LoadingButton>
@@ -83,42 +88,12 @@ function Transactions() {
   const transactionRefreshLoading = useAppSelector(
     (state: RootState) => state.app.transactions.fetchLoading
   );
-  const transactions = useAppSelector(
-    (state: RootState) => state.app.transactions.items
-  );
 
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false);
 
-  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
-  const [isRefreshLoading, setIsRefreshLoading] = useState(false);
-
   const [selectedTransaction, setSelectedTransaction] =
     useState<Transaction | null>(null);
-
-  const refresh = () => dispatch(fetchTransactions());
-
-  const deleteAccount = async (id: string) => {
-    setIsDeleteLoading(true);
-    try {
-      const input: DeleteTransactionMutationVariables = {
-        input: {
-          id: id,
-        },
-      };
-      await API.graphql(graphqlOperation(deleteTransactionMutation, input));
-
-      refresh();
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setIsDeleteLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    refresh();
-  }, []);
 
   return (
     <>
@@ -146,7 +121,7 @@ function Transactions() {
           >
             <Typography variant="h5">Transactions</Typography>
             <LoadingButton
-              onClick={refresh}
+              onClick={() => dispatch(fetchTransactions())}
               loading={transactionRefreshLoading}
             >
               Refresh
@@ -160,11 +135,8 @@ function Transactions() {
           {/* <EnhancedTable /> */}
 
           <TransactionsCardTable
-            transactions={transactions}
             setSelectedTransaction={setSelectedTransaction}
             setIsUpdateDialogOpen={setIsUpdateDialogOpen}
-            isDeleteLoading={isDeleteLoading}
-            deleteAccount={deleteAccount}
           />
         </Stack>
       </Container>

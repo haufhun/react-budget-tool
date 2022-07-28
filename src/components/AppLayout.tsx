@@ -1,9 +1,20 @@
 import { useAuthenticator, withAuthenticator } from "@aws-amplify/ui-react";
 import { AppBar, Box, Link, Stack, Toolbar, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { Outlet, Link as RouterLink } from "react-router-dom";
+import { fetchBankAccounts, fetchTransactions } from "../app/appSlice";
+import { useAppDispatch } from "../app/hooks";
 
 function AppLayout() {
-  const { user, signOut } = useAuthenticator((context) => [context.user]);
+  const { user } = useAuthenticator((context) => [context.user]);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!user) return;
+
+    dispatch(fetchTransactions());
+    dispatch(fetchBankAccounts());
+  }, [dispatch, user]);
 
   return (
     <>
