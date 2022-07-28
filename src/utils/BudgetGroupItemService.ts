@@ -13,6 +13,10 @@ class BudgetGroupItemItemService {
     return this.create(budgetGroupId, "Paycheck", "income", 0.0);
   }
 
+  async createBlankExpense(budgetGroupId: string): Promise<BudgetGroupItem> {
+    return this.create(budgetGroupId, "Label", "expense", 0.0);
+  }
+
   async create(
     budgetGroupId: string,
     name: string,
