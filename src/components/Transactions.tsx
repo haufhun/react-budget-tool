@@ -26,6 +26,7 @@ const TransactionsCardTable = ({
         direction="row"
         justifyContent="space-between"
         alignItems="center"
+        spacing={2}
         sx={{
           paddingX: 2,
           paddingY: 2,
@@ -63,7 +64,7 @@ const TransactionsCardTable = ({
           <Typography>{transaction.name}</Typography>
           <Typography>{transaction.date}</Typography>
           <Typography>{transaction.account.name}</Typography>
-          {/* <Typography>{transaction.category?.name ?? "null"}</Typography> */}
+          <Typography>{transaction.budgetGroupItem?.name ?? "null"}</Typography>
           <Typography>${transaction.amount.toFixed(2)}</Typography>
 
           <LoadingButton
@@ -129,7 +130,7 @@ function Transactions() {
             <Button onClick={() => setIsCreateDialogOpen(true)}>Create</Button>
           </Stack>
 
-          {/* // TODO: Pick our which way to display transactions */}
+          {/* // TODO: Pick out which way to display transactions */}
 
           {/* <TransactionsTable /> */}
           {/* <EnhancedTable /> */}

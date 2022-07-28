@@ -75,7 +75,6 @@ function CreateTransactionDialog({
           date,
           amount: parsedAmount,
           bankAccountTransactionsId: selectedAccount.id,
-          budgetGroupItemTransactionsId: "", // TODO: Update this
         },
       };
       await API.graphql(graphqlOperation(createTransactionMutation, input));
