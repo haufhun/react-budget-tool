@@ -9,7 +9,6 @@ import {
   CreateBudgetMonthMutationVariables,
   DeleteBudgetMonthMutation,
   DeleteBudgetMonthMutationVariables,
-  ModelSortDirection,
 } from "../API";
 import moment from "moment";
 import BudgetGroupService from "./BudgetGroupService";

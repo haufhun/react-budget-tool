@@ -3,12 +3,14 @@ import {
   BudgetGroupItem,
   CreateBudgetGroupItemMutation,
   CreateBudgetGroupItemMutationVariables,
+  DeleteBudgetGroupItemMutation,
+  DeleteBudgetGroupItemMutationVariables,
 } from "../API";
 import * as mutations from "../graphql/mutations";
 
 class BudgetGroupItemItemService {
   async createBlankIncome(budgetGroupId: string): Promise<BudgetGroupItem> {
-    return await this.create(budgetGroupId, "Paycheck", "income", 0.0);
+    return this.create(budgetGroupId, "Paycheck", "income", 0.0);
   }
 
   async create(
@@ -38,6 +40,22 @@ class BudgetGroupItemItemService {
     }
 
     return response.data?.createBudgetGroupItem! as BudgetGroupItem;
+  }
+
+  async delete(id: string): Promise<BudgetGroupItem> {
+    const vars: DeleteBudgetGroupItemMutationVariables = {
+      input: { id },
+    };
+    const response = (await API.graphql(
+      graphqlOperation(mutations.deleteBudgetGroupItem, vars)
+    )) as GraphQLResult<DeleteBudgetGroupItemMutation>;
+
+    if (response.errors) {
+      console.error(response.errors);
+      throw new Error(JSON.stringify(response.errors));
+    }
+
+    return response.data?.deleteBudgetGroupItem! as BudgetGroupItem;
   }
 }
 

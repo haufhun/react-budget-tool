@@ -74,7 +74,7 @@ function BudgetGroupCard({ budgetGroup }: BudgetGroupCardProps) {
       }}
     >
       <Typography
-        flex={8}
+        flex={6}
         onClick={() => {
           setShouldShowEditRow(true);
         }}
@@ -83,8 +83,11 @@ function BudgetGroupCard({ budgetGroup }: BudgetGroupCardProps) {
         {budgetGroup.name}
       </Typography>
 
-      <Typography flex={4} textAlign="right">
+      <Typography flex={3} textAlign="right">
         Planned
+      </Typography>
+      <Typography flex={3} textAlign="right">
+        Remaining
       </Typography>
     </Stack>
   );
@@ -130,7 +133,10 @@ function BudgetGroupCard({ budgetGroup }: BudgetGroupCardProps) {
           {showEditRow ? editRow() : viewRow()}
 
           {budgetGroup.budgetGroupItems?.items.map((budgetGroupItem) => (
-            <BudgetGroupItemRow budgetGroupItem={budgetGroupItem!} />
+            <BudgetGroupItemRow
+              key={budgetGroupItem?.id}
+              budgetGroupItem={budgetGroupItem!}
+            />
           ))}
 
           <Button

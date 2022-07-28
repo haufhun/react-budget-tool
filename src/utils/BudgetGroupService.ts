@@ -13,8 +13,6 @@ import { store } from "../app/store";
 import * as mutations from "../graphql/mutations";
 
 class BudgetGroupService {
-  constructor() {}
-
   async createBlankExpenseGroup(budgetMonthId): Promise<BudgetGroup> {
     const state = store.getState();
     const budgetGroupsLength =
@@ -22,7 +20,7 @@ class BudgetGroupService {
 
     const nextSortId = budgetGroupsLength + 1;
 
-    return await this.create(
+    return this.create(
       "Untitled",
       "expense",
       nextSortId.toString(),

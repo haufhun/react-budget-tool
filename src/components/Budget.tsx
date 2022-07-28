@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Box,
   Container,
@@ -28,13 +28,13 @@ function Budget() {
 
   const monthId = moment().format("YYYY-MM");
 
-  const refresh = () => {
+  const refresh = useCallback(() => {
     dispatch(getCurrentBudget(monthId));
-  };
+  }, [dispatch, monthId]);
 
   useEffect(() => {
     refresh();
-  }, []);
+  }, [refresh]);
 
   const createNewBudget = async () => {
     setIsCreateBudgetLoading(true);

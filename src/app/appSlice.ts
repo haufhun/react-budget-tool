@@ -120,8 +120,5 @@ export const appSlice = createSlice({
 
 export const { setSelectedBudgetGroupItem } = appSlice.actions;
 
-// export const selectTotalBudgetGroups = (state: RootState) =>
-//   state.app.currentBudget.budgetMonth?.budgetGroups?.items.map((bg) => ({id, sortId}))
-
 const appReducer = appSlice.reducer;
 export default appReducer;
