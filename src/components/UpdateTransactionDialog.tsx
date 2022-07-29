@@ -5,25 +5,29 @@ import {
   DialogContent,
   DialogTitle,
   FormControl,
+  IconButton,
   InputAdornment,
   InputLabel,
   MenuItem,
   OutlinedInput,
   Select,
+  Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useEffect, useState } from "react";
-import { API, graphqlOperation } from "aws-amplify";
-import { updateTransaction as updateTransactionMutation } from "../graphql/mutations";
-import {
-  BankAccount,
-  Transaction,
-  UpdateTransactionMutationVariables,
-} from "../API";
+import { BankAccount, Transaction, UpdateTransactionInput } from "../API";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
-import { fetchBankAccounts, fetchTransactions } from "../app/appSlice";
+import {
+  fetchBankAccounts,
+  fetchTransactions,
+  getCurrentBudget,
+} from "../app/appSlice";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import TransactionService from "../utils/TransactionService";
+import moment from "moment";
 
 type UpdateTransactionDialogProps = {
   transaction: Transaction;
@@ -47,15 +51,13 @@ function UpdateTransactionDialog({
   const [date, setDate] = useState(transaction.date);
   const [amount, setAmount] = useState(transaction.amount.toString());
   const [accountName, setAccountName] = useState(transaction.account.name);
-  // const [categoryName, setCategoryName] = useState(transaction.account.name);
+  const [budgetGroupItemName, setBudgetGroupItemName] = useState(
+    transaction.budgetGroupItem?.name
+  );
 
   const selectedAccount: BankAccount | undefined = bankAccounts.find(
     (a) => a.name === accountName
   );
-
-  // const selectedCategory: Category | undefined = categories.find(
-  //   (c: Category) => c.name === categoryName
-  // );
 
   const closeDialog = () => {
     clearForm();
@@ -73,31 +75,29 @@ function UpdateTransactionDialog({
   const updateTransaction = async () => {
     setIsUpdateLoading(true);
     const parsedAmount = parseFloat(amount);
-    try {
-      const input: UpdateTransactionMutationVariables = {
-        input: {
-          id: transaction.id,
-          name,
-          description,
-          date,
-          amount: parsedAmount,
-          bankAccountTransactionsId: selectedAccount?.id,
-        },
-      };
-      await API.graphql(graphqlOperation(updateTransactionMutation, input));
 
-      dispatch(fetchTransactions());
-      clearForm();
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setIsUpdateLoading(false);
-    }
+    const input: UpdateTransactionInput = {
+      id: transaction.id,
+      name,
+      description,
+      date,
+      amount: parsedAmount,
+      bankAccountTransactionsId: selectedAccount?.id,
+    };
+    if (!budgetGroupItemName) input.budgetGroupItemTransactionsId = null;
+
+    await TransactionService.update(input);
+
+    dispatch(fetchTransactions());
+    dispatch(getCurrentBudget(moment().format("YYYY-MM")));
+    clearForm();
+
+    setIsUpdateLoading(false);
   };
 
   useEffect(() => {
     dispatch(fetchBankAccounts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -109,6 +109,7 @@ function UpdateTransactionDialog({
             label="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            sx={{ marginY: 1 }}
           />
 
           <TextField
@@ -116,6 +117,7 @@ function UpdateTransactionDialog({
             label="Date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
+            sx={{ marginY: 1 }}
           />
 
           <FormControl fullWidth sx={{ marginY: 1 }}>
@@ -130,7 +132,7 @@ function UpdateTransactionDialog({
             />
           </FormControl>
 
-          <FormControl fullWidth>
+          <FormControl fullWidth sx={{ marginY: 1 }}>
             <InputLabel>Account</InputLabel>
             <Select
               label="Account"
@@ -145,20 +147,23 @@ function UpdateTransactionDialog({
             </Select>
           </FormControl>
 
-          {/* <FormControl fullWidth>
-            <InputLabel>Category</InputLabel>
-            <Select
-              label="Category"
-              value={categoryName}
-              onChange={(e) => setCategoryName(e.target.value)}
+          {budgetGroupItemName && (
+            <Stack
+              direction="row"
+              spacing={2}
+              alignItems="center"
+              sx={{ m: 1 }}
             >
-              {categories.map((category: any) => (
-                <MenuItem key={category.id} value={category.name}>
-                  {category.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl> */}
+              <IconButton
+                color="error"
+                onClick={() => setBudgetGroupItemName(undefined)}
+              >
+                <RemoveCircleIcon />
+              </IconButton>
+
+              <Typography>{transaction.budgetGroupItem?.name}</Typography>
+            </Stack>
+          )}
 
           <TextField
             fullWidth
@@ -167,6 +172,7 @@ function UpdateTransactionDialog({
             label="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            sx={{ marginY: 1 }}
           />
 
           <DialogActions>

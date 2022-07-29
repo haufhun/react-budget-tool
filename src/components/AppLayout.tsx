@@ -1,8 +1,13 @@
 import { useAuthenticator, withAuthenticator } from "@aws-amplify/ui-react";
 import { AppBar, Box, Link, Stack, Toolbar, Typography } from "@mui/material";
+import moment from "moment";
 import { useEffect } from "react";
 import { Outlet, Link as RouterLink } from "react-router-dom";
-import { fetchBankAccounts, fetchTransactions } from "../app/appSlice";
+import {
+  fetchBankAccounts,
+  fetchTransactions,
+  getCurrentBudget,
+} from "../app/appSlice";
 import { useAppDispatch } from "../app/hooks";
 
 function AppLayout() {
@@ -14,7 +19,8 @@ function AppLayout() {
 
     dispatch(fetchTransactions());
     dispatch(fetchBankAccounts());
-  }, [dispatch, user]);
+    dispatch(getCurrentBudget(moment().format("YYYY-MM")));
+  }, [user]);
 
   return (
     <>

@@ -6,8 +6,7 @@ import { Container } from "@mui/system";
 import { Transaction } from "../API";
 import CreateTransactionDialog from "./CreateTransactionDialog";
 import UpdateTransactionDialog from "./UpdateTransactionDialog";
-import TransactionsTable from "./TransactionsTable";
-import EnhancedTable from "./EnhancedTable";
+
 import { RootState } from "../app/store";
 import { fetchTransactions } from "../app/appSlice";
 import TransactionService from "../utils/TransactionService";
@@ -36,7 +35,7 @@ const TransactionsCardTable = ({
         <Typography>Name</Typography>
         <Typography>Date</Typography>
         <Typography>Account Name</Typography>
-        <Typography>Category</Typography>
+        <Typography>BudgetItem</Typography>
         <Typography>Amount</Typography>
         <Typography>Action</Typography>
       </Stack>
@@ -53,6 +52,7 @@ const TransactionsCardTable = ({
             paddingX: 2,
             paddingY: 2,
             borderRadius: 2,
+            cursor: "pointer",
           }}
           onClick={() => {
             setIsDeleteLoading(true);
@@ -129,11 +129,6 @@ function Transactions() {
             </LoadingButton>
             <Button onClick={() => setIsCreateDialogOpen(true)}>Create</Button>
           </Stack>
-
-          {/* // TODO: Pick out which way to display transactions */}
-
-          {/* <TransactionsTable /> */}
-          {/* <EnhancedTable /> */}
 
           <TransactionsCardTable
             setSelectedTransaction={setSelectedTransaction}

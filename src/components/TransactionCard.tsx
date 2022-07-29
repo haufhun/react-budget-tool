@@ -1,13 +1,18 @@
-import { Stack, Typography, Divider, Box } from "@mui/material";
+import { Stack, Typography, Divider } from "@mui/material";
 import { Transaction } from "../API";
 import moment from "moment";
 import { useDrag } from "react-dnd";
+import UpdateTransactionDialog from "./UpdateTransactionDialog";
+import { useState } from "react";
 
 type TransactionCardProps = {
   transaction: Transaction;
 };
 
 function TransactionCard({ transaction }: TransactionCardProps) {
+  const [showUpdateTransactionDialog, setShowUpdateTransactionDialog] =
+    useState(false);
+
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "Transaction",
     item: transaction,
@@ -18,27 +23,46 @@ function TransactionCard({ transaction }: TransactionCardProps) {
 
   return (
     <>
+      <UpdateTransactionDialog
+        transaction={transaction}
+        open={showUpdateTransactionDialog}
+        handleClose={() => setShowUpdateTransactionDialog(false)}
+      />
+
       <Stack
         ref={drag}
+        onClick={() => setShowUpdateTransactionDialog(true)}
         direction="row"
         justifyContent="space-between"
         alignItems="center"
         spacing={2}
         sx={{
+          cursor: "pointer",
           backgroundColor: isDragging ? "#ebf4fa" : "white",
           paddingX: 2,
           paddingY: 2,
           borderRadius: 2,
+          "&:hover": {
+            // color: 'red',
+            backgroundColor: "#ebf4fa",
+          },
         }}
       >
-        <Stack flex={2}>
+        <Stack flex={1}>
           <Typography>{moment(transaction.date).format("MMM")}</Typography>
           <Typography>{moment(transaction.date).format("DD")}</Typography>
         </Stack>
 
-        <Typography flex={5}>{transaction.name}</Typography>
-        {/* <Typography flex={3}>{transaction.category?.name ?? "null"}</Typography> */}
-        <Typography flex={3}>${transaction.amount.toFixed(2)}</Typography>
+        <Stack flex={10}>
+          <Typography>{transaction.name}</Typography>
+          {transaction.budgetGroupItem?.name && (
+            <Typography color="#54a0ea">
+              {transaction.budgetGroupItem.name}
+            </Typography>
+          )}
+        </Stack>
+
+        <Typography flex={1}>${transaction.amount.toFixed(2)}</Typography>
       </Stack>
 
       <Divider />

@@ -62,6 +62,7 @@ const EditRow = ({
   );
 
   const refresh = () => {
+    dispatch(fetchTransactions());
     dispatch(getCurrentBudget(moment().format("YYYY-MM")));
   };
 
@@ -130,6 +131,7 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
   );
 
   const refresh = () => {
+    dispatch(fetchTransactions());
     dispatch(getCurrentBudget(moment().format("YYYY-MM")));
   };
 
@@ -150,7 +152,6 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
       id: transactionId,
       budgetGroupItemTransactionsId: budgetGroupItemId,
     });
-    dispatch(fetchTransactions());
     refresh();
   };
 

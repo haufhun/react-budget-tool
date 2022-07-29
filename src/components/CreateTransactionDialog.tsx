@@ -19,6 +19,7 @@ import { createTransaction as createTransactionMutation } from "../graphql/mutat
 import { BankAccount, CreateTransactionMutationVariables } from "../API";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { fetchTransactions } from "../app/appSlice";
+import moment from "moment";
 
 type CreateTransactionDialogProps = {
   open: boolean;
@@ -31,21 +32,18 @@ function CreateTransactionDialog({
 }: CreateTransactionDialogProps) {
   const dispatch = useAppDispatch();
   const bankAccounts = useAppSelector((state) => state.app.bankAccounts.items);
+  const today = moment().format("YYYY-MM-DD");
 
   const [isCreateLoading, setIsCreateLoading] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("2022-07-18");
+  const [date, setDate] = useState(today);
   const [amount, setAmount] = useState("0.0");
   const [selectedAccountName, setSelectedAccountName] = useState("");
-  // const [categoryName, setCategoryName] = useState("");
 
   const selectedAccount = bankAccounts.find(
     (a: BankAccount) => a.name === selectedAccountName
   )!;
-  // const selectedCategory: Category | undefined = categories.find(
-  //   (c: Category) => c.name === categoryName
-  // );
 
   const closeDialog = () => {
     clearForm();
@@ -55,7 +53,7 @@ function CreateTransactionDialog({
   const clearForm = () => {
     setName("");
     setDescription("");
-    setDate("2022-07-18");
+    setDate(today);
     setAmount("0.0");
     setSelectedAccountName("");
   };
@@ -100,6 +98,7 @@ function CreateTransactionDialog({
             label="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            sx={{ marginY: 1 }}
           />
 
           <TextField
@@ -107,6 +106,7 @@ function CreateTransactionDialog({
             label="Date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
+            sx={{ marginY: 1 }}
           />
 
           <FormControl fullWidth sx={{ marginY: 1 }}>
@@ -121,7 +121,7 @@ function CreateTransactionDialog({
             />
           </FormControl>
 
-          <FormControl fullWidth>
+          <FormControl fullWidth sx={{ marginY: 1 }}>
             <InputLabel>Account</InputLabel>
             <Select
               label="Account"
@@ -136,21 +136,6 @@ function CreateTransactionDialog({
             </Select>
           </FormControl>
 
-          {/* <FormControl fullWidth>
-            <InputLabel>Category</InputLabel>
-            <Select
-              label="Category"
-              value={categoryName}
-              onChange={(e) => setCategoryName(e.target.value)}
-            >
-              {categories.map((category: any) => (
-                <MenuItem key={category.id} value={category.name}>
-                  {category.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl> */}
-
           <TextField
             fullWidth
             multiline={true}
@@ -158,6 +143,7 @@ function CreateTransactionDialog({
             label="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            sx={{ marginY: 1 }}
           />
 
           <DialogActions>
