@@ -20,6 +20,65 @@ export const onCreateBudgetMonth = /* GraphQL */ `
               type
               amountBudgeted
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -60,6 +119,65 @@ export const onUpdateBudgetMonth = /* GraphQL */ `
               type
               amountBudgeted
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -100,6 +218,65 @@ export const onDeleteBudgetMonth = /* GraphQL */ `
               type
               amountBudgeted
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -145,6 +322,44 @@ export const onCreateBudgetGroup = /* GraphQL */ `
               account {
                 id
                 name
+                transactions {
+                  items {
+                    id
+                    name
+                    description
+                    date
+                    amount
+                    account {
+                      id
+                      name
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      owner
+                    }
+                    budgetGroupItem {
+                      id
+                      name
+                      type
+                      amountBudgeted
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupBudgetGroupItemsId
+                      owner
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupItemTransactionsId
+                    bankAccountTransactionsId
+                    owner
+                  }
+                  nextToken
+                }
                 createdAt
                 updatedAt
                 owner
@@ -154,6 +369,44 @@ export const onCreateBudgetGroup = /* GraphQL */ `
                 name
                 type
                 amountBudgeted
+                transactions {
+                  items {
+                    id
+                    name
+                    description
+                    date
+                    amount
+                    account {
+                      id
+                      name
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      owner
+                    }
+                    budgetGroupItem {
+                      id
+                      name
+                      type
+                      amountBudgeted
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupBudgetGroupItemsId
+                      owner
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupItemTransactionsId
+                    bankAccountTransactionsId
+                    owner
+                  }
+                  nextToken
+                }
                 createdAt
                 updatedAt
                 budgetGroupBudgetGroupItemsId
@@ -204,6 +457,44 @@ export const onUpdateBudgetGroup = /* GraphQL */ `
               account {
                 id
                 name
+                transactions {
+                  items {
+                    id
+                    name
+                    description
+                    date
+                    amount
+                    account {
+                      id
+                      name
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      owner
+                    }
+                    budgetGroupItem {
+                      id
+                      name
+                      type
+                      amountBudgeted
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupBudgetGroupItemsId
+                      owner
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupItemTransactionsId
+                    bankAccountTransactionsId
+                    owner
+                  }
+                  nextToken
+                }
                 createdAt
                 updatedAt
                 owner
@@ -213,6 +504,44 @@ export const onUpdateBudgetGroup = /* GraphQL */ `
                 name
                 type
                 amountBudgeted
+                transactions {
+                  items {
+                    id
+                    name
+                    description
+                    date
+                    amount
+                    account {
+                      id
+                      name
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      owner
+                    }
+                    budgetGroupItem {
+                      id
+                      name
+                      type
+                      amountBudgeted
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupBudgetGroupItemsId
+                      owner
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupItemTransactionsId
+                    bankAccountTransactionsId
+                    owner
+                  }
+                  nextToken
+                }
                 createdAt
                 updatedAt
                 budgetGroupBudgetGroupItemsId
@@ -263,6 +592,44 @@ export const onDeleteBudgetGroup = /* GraphQL */ `
               account {
                 id
                 name
+                transactions {
+                  items {
+                    id
+                    name
+                    description
+                    date
+                    amount
+                    account {
+                      id
+                      name
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      owner
+                    }
+                    budgetGroupItem {
+                      id
+                      name
+                      type
+                      amountBudgeted
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupBudgetGroupItemsId
+                      owner
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupItemTransactionsId
+                    bankAccountTransactionsId
+                    owner
+                  }
+                  nextToken
+                }
                 createdAt
                 updatedAt
                 owner
@@ -272,6 +639,44 @@ export const onDeleteBudgetGroup = /* GraphQL */ `
                 name
                 type
                 amountBudgeted
+                transactions {
+                  items {
+                    id
+                    name
+                    description
+                    date
+                    amount
+                    account {
+                      id
+                      name
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      owner
+                    }
+                    budgetGroupItem {
+                      id
+                      name
+                      type
+                      amountBudgeted
+                      transactions {
+                        nextToken
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupBudgetGroupItemsId
+                      owner
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupItemTransactionsId
+                    bankAccountTransactionsId
+                    owner
+                  }
+                  nextToken
+                }
                 createdAt
                 updatedAt
                 budgetGroupBudgetGroupItemsId
@@ -323,6 +728,87 @@ export const onCreateBudgetGroupItem = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId
@@ -347,6 +833,87 @@ export const onCreateBudgetGroupItem = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId
@@ -399,6 +966,87 @@ export const onUpdateBudgetGroupItem = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId
@@ -423,6 +1071,87 @@ export const onUpdateBudgetGroupItem = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId
@@ -475,6 +1204,87 @@ export const onDeleteBudgetGroupItem = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId
@@ -499,6 +1309,87 @@ export const onDeleteBudgetGroupItem = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId
@@ -549,6 +1440,65 @@ export const onCreateTransaction = /* GraphQL */ `
               id
               name
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -561,6 +1511,65 @@ export const onCreateTransaction = /* GraphQL */ `
               type
               amountBudgeted
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -596,6 +1605,65 @@ export const onCreateTransaction = /* GraphQL */ `
               id
               name
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -608,6 +1676,65 @@ export const onCreateTransaction = /* GraphQL */ `
               type
               amountBudgeted
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -658,6 +1785,65 @@ export const onUpdateTransaction = /* GraphQL */ `
               id
               name
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -670,6 +1856,65 @@ export const onUpdateTransaction = /* GraphQL */ `
               type
               amountBudgeted
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -705,6 +1950,65 @@ export const onUpdateTransaction = /* GraphQL */ `
               id
               name
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -717,6 +2021,65 @@ export const onUpdateTransaction = /* GraphQL */ `
               type
               amountBudgeted
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -767,6 +2130,65 @@ export const onDeleteTransaction = /* GraphQL */ `
               id
               name
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -779,6 +2201,65 @@ export const onDeleteTransaction = /* GraphQL */ `
               type
               amountBudgeted
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -814,6 +2295,65 @@ export const onDeleteTransaction = /* GraphQL */ `
               id
               name
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -826,6 +2366,65 @@ export const onDeleteTransaction = /* GraphQL */ `
               type
               amountBudgeted
               transactions {
+                items {
+                  id
+                  name
+                  description
+                  date
+                  amount
+                  account {
+                    id
+                    name
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    owner
+                  }
+                  budgetGroupItem {
+                    id
+                    name
+                    type
+                    amountBudgeted
+                    transactions {
+                      items {
+                        id
+                        name
+                        description
+                        date
+                        amount
+                        createdAt
+                        updatedAt
+                        budgetGroupItemTransactionsId
+                        bankAccountTransactionsId
+                        owner
+                      }
+                      nextToken
+                    }
+                    createdAt
+                    updatedAt
+                    budgetGroupBudgetGroupItemsId
+                    owner
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupItemTransactionsId
+                  bankAccountTransactionsId
+                  owner
+                }
                 nextToken
               }
               createdAt
@@ -876,6 +2475,87 @@ export const onCreateBankAccount = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId
@@ -900,6 +2580,87 @@ export const onCreateBankAccount = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId
@@ -949,6 +2710,87 @@ export const onUpdateBankAccount = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId
@@ -973,6 +2815,87 @@ export const onUpdateBankAccount = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId
@@ -1022,6 +2945,87 @@ export const onDeleteBankAccount = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId
@@ -1046,6 +3050,87 @@ export const onDeleteBankAccount = /* GraphQL */ `
                 description
                 date
                 amount
+                account {
+                  id
+                  name
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  owner
+                }
+                budgetGroupItem {
+                  id
+                  name
+                  type
+                  amountBudgeted
+                  transactions {
+                    items {
+                      id
+                      name
+                      description
+                      date
+                      amount
+                      account {
+                        id
+                        name
+                        createdAt
+                        updatedAt
+                        owner
+                      }
+                      budgetGroupItem {
+                        id
+                        name
+                        type
+                        amountBudgeted
+                        createdAt
+                        updatedAt
+                        budgetGroupBudgetGroupItemsId
+                        owner
+                      }
+                      createdAt
+                      updatedAt
+                      budgetGroupItemTransactionsId
+                      bankAccountTransactionsId
+                      owner
+                    }
+                    nextToken
+                  }
+                  createdAt
+                  updatedAt
+                  budgetGroupBudgetGroupItemsId
+                  owner
+                }
                 createdAt
                 updatedAt
                 budgetGroupItemTransactionsId

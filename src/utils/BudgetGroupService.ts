@@ -81,7 +81,7 @@ class BudgetGroupService {
       throw new Error(JSON.stringify(response.errors));
     }
 
-    return response.data?.deleteBudgetGroup!;
+    return response.data?.deleteBudgetGroup! as BudgetGroup;
   }
 }
 

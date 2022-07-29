@@ -24,7 +24,7 @@ type ExpenseBudgetGroupCardProps = {
 function ExpenseBudgetGroupCard({ budgetGroup }: ExpenseBudgetGroupCardProps) {
   const dispatch = useAppDispatch();
   const [name, setName] = useState(budgetGroup.name);
-  const [shouldShowEditRow, setShouldShowEditRow] = useState(true);
+  const [shouldShowEditRow, setShouldShowEditRow] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const refresh = () => {

@@ -37,7 +37,11 @@ const EditRow = ({
     if (amountBudgeted !== budgetGroupItem.amountBudgeted)
       possibleVars.amountBudgeted = amountBudgeted;
 
-    if (possibleVars) {
+    const needsUpdates =
+      name !== budgetGroupItem.name ||
+      amountBudgeted !== budgetGroupItem.amountBudgeted;
+
+    if (needsUpdates) {
       const updateVars: UpdateBudgetGroupItemInput = {
         id: budgetGroupItem.id,
         ...possibleVars,
@@ -45,6 +49,8 @@ const EditRow = ({
 
       await BudgetGroupItemService.update(updateVars);
       refresh();
+    } else {
+      console.log("Nothing to update in budgetItemRow");
     }
 
     dispatch(setSelectedBudgetGroupItem(null));
@@ -127,6 +133,15 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
     dispatch(getCurrentBudget(moment().format("YYYY-MM")));
   };
 
+  const totalSpent =
+    budgetGroupItem.transactions?.items.reduce((count, transaction) => {
+      if (transaction) return transaction.amount + count;
+
+      return count;
+    }, 0) ?? 0;
+
+  const remaining = budgetGroupItem.amountBudgeted - totalSpent;
+
   const handleDrop = async (
     transactionId: string,
     budgetGroupItemId: string
@@ -157,7 +172,7 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
         {budgetGroupItem.amountBudgeted ?? "null"}
       </Typography>
       <Typography flex={3} textAlign="right">
-        {budgetGroupItem.amountBudgeted ?? "null"}
+        {remaining}
       </Typography>
     </Stack>
   );
