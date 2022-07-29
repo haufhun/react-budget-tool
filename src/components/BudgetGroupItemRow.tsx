@@ -2,13 +2,11 @@ import { useDrop } from "react-dnd";
 import {
   Transaction,
   BudgetGroupItem,
-  UpdateTransactionMutationVariables,
+  UpdateBudgetGroupItemInput,
 } from "../API";
 import { Box, IconButton, Stack, TextField, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRef, useState } from "react";
-import { API, graphqlOperation } from "aws-amplify";
-import { updateTransaction as updateTransactionMutation } from "../graphql/mutations";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import {
   fetchTransactions,
@@ -18,16 +16,97 @@ import {
 import BudgetGroupItemService from "../utils/BudgetGroupItemService";
 import moment from "moment";
 import useOutsideAlerter from "../hooks/useOutsideAlerter";
+import TransactionService from "../utils/TransactionService";
 
 type BudgetGroupItemProps = {
   budgetGroupItem: BudgetGroupItem;
 };
 
-function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
+const EditRow = ({
+  budgetGroupItem,
+  setIsDeleting,
+}: {
+  budgetGroupItem: BudgetGroupItem;
+  setIsDeleting: any;
+}) => {
   const wrapperRef = useRef(null);
-  useOutsideAlerter(wrapperRef, () => {
+  const dispatch = useAppDispatch();
+  useOutsideAlerter(wrapperRef, async () => {
+    const possibleVars: any = {};
+    if (name !== budgetGroupItem.name) possibleVars.name = name;
+    if (amountBudgeted !== budgetGroupItem.amountBudgeted)
+      possibleVars.amountBudgeted = amountBudgeted;
+
+    if (possibleVars) {
+      const updateVars: UpdateBudgetGroupItemInput = {
+        id: budgetGroupItem.id,
+        ...possibleVars,
+      };
+
+      await BudgetGroupItemService.update(updateVars);
+      refresh();
+    }
+
     dispatch(setSelectedBudgetGroupItem(null));
   });
+
+  const [name, setName] = useState(budgetGroupItem.name);
+  const [amountBudgeted, setAmountBudgeted] = useState(
+    budgetGroupItem.amountBudgeted
+  );
+
+  const refresh = () => {
+    dispatch(getCurrentBudget(moment().format("YYYY-MM")));
+  };
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+
+    await BudgetGroupItemService.delete(budgetGroupItem.id);
+    setIsDeleting(false);
+    refresh();
+  };
+
+  return (
+    <Stack
+      ref={wrapperRef}
+      direction="row"
+      spacing={4}
+      alignItems="center"
+      sx={{
+        backgroundColor: "#3f6c8a",
+        paddingX: 2,
+        paddingY: 2,
+        borderRadius: 2,
+        marginX: -5,
+      }}
+    >
+      <IconButton color="error" onClick={handleDelete}>
+        <DeleteIcon />
+      </IconButton>
+
+      <TextField
+        sx={{ flex: 6, textAlign: "right" }}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        size="small"
+        autoFocus
+      />
+      <TextField
+        sx={{ flex: 3, textAlign: "right" }}
+        value={amountBudgeted}
+        onChange={(e) => setAmountBudgeted(parseInt(e.target.value))}
+        size="small"
+      />
+
+      <Typography flex={3} textAlign="right">
+        {budgetGroupItem.amountBudgeted ?? "null"}
+      </Typography>
+    </Stack>
+  );
+};
+
+function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
   const dispatch = useAppDispatch();
   const selectedBudgetGroupItem = useAppSelector(
     (state) => state.app.currentBudget.selectedBudgetGroupItem
@@ -48,32 +127,16 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
     dispatch(getCurrentBudget(moment().format("YYYY-MM")));
   };
 
-  const handleDrop = async (transactionId, budgetGroupItemId) => {
-    await updateTransaction(transactionId, budgetGroupItemId);
-  };
-
-  const handleDelete = async () => {
-    setIsDeleting(true);
-
-    await BudgetGroupItemService.delete(budgetGroupItem.id);
-    setIsDeleting(false);
+  const handleDrop = async (
+    transactionId: string,
+    budgetGroupItemId: string
+  ) => {
+    await TransactionService.update({
+      id: transactionId,
+      budgetGroupItemTransactionsId: budgetGroupItemId,
+    });
+    dispatch(fetchTransactions());
     refresh();
-  };
-
-  const updateTransaction = async (transactionId, budgetGroupItemId) => {
-    try {
-      const input: UpdateTransactionMutationVariables = {
-        input: {
-          id: transactionId,
-          budgetGroupItemTransactionsId: budgetGroupItemId,
-        },
-      };
-      await API.graphql(graphqlOperation(updateTransactionMutation, input));
-
-      dispatch(fetchTransactions());
-    } catch (e) {
-      console.error(e);
-    }
   };
 
   const viewRow = () => (
@@ -99,46 +162,21 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
     </Stack>
   );
 
-  const editRow = () => (
-    <Stack
-      ref={wrapperRef}
-      direction="row"
-      spacing={4}
-      alignItems="center"
-      sx={{
-        backgroundColor: isOver ? "#ebf4fa" : "#3f6c8a",
-        paddingX: 2,
-        paddingY: 2,
-        borderRadius: 2,
-        marginX: -5,
-      }}
-    >
-      <IconButton color="error" onClick={handleDelete}>
-        <DeleteIcon />
-      </IconButton>
-
-      <TextField
-        sx={{ flex: 6, textAlign: "right" }}
-        value={budgetGroupItem.name}
-        size="small"
-        autoFocus
-      />
-      <TextField
-        sx={{ flex: 3, textAlign: "right" }}
-        value={budgetGroupItem.amountBudgeted ?? null}
-        size="small"
-      />
-
-      <Typography flex={3} textAlign="right">
-        {budgetGroupItem.amountBudgeted ?? "null"}
-      </Typography>
-    </Stack>
-  );
-
   const showEditRow =
     selectedBudgetGroupItem?.id === budgetGroupItem.id || isDeleting;
 
-  return <Box ref={drop}>{showEditRow ? editRow() : viewRow()}</Box>;
+  return (
+    <Box ref={drop}>
+      {showEditRow ? (
+        <EditRow
+          budgetGroupItem={budgetGroupItem}
+          setIsDeleting={setIsDeleting}
+        />
+      ) : (
+        viewRow()
+      )}
+    </Box>
+  );
 }
 
 export default BudgetGroupItemRow;
