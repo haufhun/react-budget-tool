@@ -50,7 +50,7 @@ function Budget() {
       <>
         <Stack paddingLeft={5}>
           <Stack paddingBottom={3}>
-            <Typography variant="h4">July 2022</Typography>
+            <Typography variant="h4">{moment().format("MMMM YYYY")}</Typography>
 
             <Divider sx={{ borderBottomWidth: 2, marginY: 1 }} />
           </Stack>

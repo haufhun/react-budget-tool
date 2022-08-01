@@ -28,6 +28,7 @@ import {
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import TransactionService from "../utils/TransactionService";
 import moment from "moment";
+import CurrencyInput from "react-currency-input-field";
 
 type UpdateTransactionDialogProps = {
   transaction: Transaction;
@@ -49,7 +50,7 @@ function UpdateTransactionDialog({
   const [name, setName] = useState(transaction.name);
   const [description, setDescription] = useState(transaction.description);
   const [date, setDate] = useState(transaction.date);
-  const [amount, setAmount] = useState(transaction.amount.toString());
+  const [amount, setAmount] = useState(transaction.amount);
   const [accountName, setAccountName] = useState(transaction.account.name);
   const [budgetGroupItemName, setBudgetGroupItemName] = useState(
     transaction.budgetGroupItem?.name
@@ -68,20 +69,19 @@ function UpdateTransactionDialog({
     setName("");
     setDescription("");
     setDate("2022-07-18");
-    setAmount("0.0");
+    setAmount(0);
     setAccountName("");
   };
 
   const updateTransaction = async () => {
     setIsUpdateLoading(true);
-    const parsedAmount = parseFloat(amount);
 
     const input: UpdateTransactionInput = {
       id: transaction.id,
       name,
       description,
       date,
-      amount: parsedAmount,
+      amount: amount,
       bankAccountTransactionsId: selectedAccount?.id,
     };
     if (!budgetGroupItemName) input.budgetGroupItemTransactionsId = null;
@@ -120,15 +120,14 @@ function UpdateTransactionDialog({
             sx={{ marginY: 1 }}
           />
 
-          <FormControl fullWidth sx={{ marginY: 1 }}>
-            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-amount"
+          <FormControl fullWidth sx={{ marginTop: 1, marginBottom: 2 }}>
+            <CurrencyInput
+              prefix="$"
+              decimalScale={2}
+              defaultValue={0.0}
+              decimalsLimit={2}
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              startAdornment={
-                <InputAdornment position="start">$</InputAdornment>
-              }
+              onValueChange={(value) => value && setAmount(parseFloat(value))}
             />
           </FormControl>
 

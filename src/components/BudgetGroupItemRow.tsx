@@ -17,6 +17,8 @@ import BudgetGroupItemService from "../utils/BudgetGroupItemService";
 import moment from "moment";
 import useOutsideAlerter from "../hooks/useOutsideAlerter";
 import TransactionService from "../utils/TransactionService";
+import CurrencyInput from "react-currency-input-field";
+import { currency } from "../utils/utils";
 
 type BudgetGroupItemProps = {
   budgetGroupItem: BudgetGroupItem;
@@ -25,9 +27,11 @@ type BudgetGroupItemProps = {
 const EditRow = ({
   budgetGroupItem,
   setIsDeleting,
+  remaining,
 }: {
   budgetGroupItem: BudgetGroupItem;
   setIsDeleting: any;
+  remaining: number;
 }) => {
   const wrapperRef = useRef(null);
   const dispatch = useAppDispatch();
@@ -91,7 +95,6 @@ const EditRow = ({
       <IconButton color="error" onClick={handleDelete}>
         <DeleteIcon />
       </IconButton>
-
       <TextField
         sx={{ flex: 6, textAlign: "right" }}
         value={name}
@@ -99,15 +102,21 @@ const EditRow = ({
         size="small"
         autoFocus
       />
-      <TextField
-        sx={{ flex: 3, textAlign: "right" }}
+      <CurrencyInput
+        style={{
+          flex: 3,
+          textAlign: "right",
+        }}
+        prefix="$"
+        decimalScale={2}
+        defaultValue={0.0}
+        decimalsLimit={2}
         value={amountBudgeted}
-        onChange={(e) => setAmountBudgeted(parseInt(e.target.value))}
-        size="small"
+        onValueChange={(value) => value && setAmountBudgeted(parseFloat(value))}
       />
 
       <Typography flex={3} textAlign="right">
-        {budgetGroupItem.amountBudgeted ?? "null"}
+        {currency(remaining)}
       </Typography>
     </Stack>
   );
@@ -170,10 +179,10 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
         {budgetGroupItem.name}
       </Typography>
       <Typography flex={3} textAlign="right">
-        {budgetGroupItem.amountBudgeted ?? "null"}
+        {currency(budgetGroupItem.amountBudgeted)}
       </Typography>
       <Typography flex={3} textAlign="right">
-        {remaining}
+        {currency(remaining)}
       </Typography>
     </Stack>
   );
@@ -187,6 +196,7 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
         <EditRow
           budgetGroupItem={budgetGroupItem}
           setIsDeleting={setIsDeleting}
+          remaining={remaining}
         />
       ) : (
         viewRow()

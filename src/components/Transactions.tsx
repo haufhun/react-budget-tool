@@ -10,6 +10,7 @@ import UpdateTransactionDialog from "./UpdateTransactionDialog";
 import { RootState } from "../app/store";
 import { fetchTransactions } from "../app/appSlice";
 import TransactionService from "../utils/TransactionService";
+import { currency } from "../utils/utils";
 
 const TransactionsCardTable = ({
   setSelectedTransaction,
@@ -65,7 +66,7 @@ const TransactionsCardTable = ({
           <Typography>{transaction.date}</Typography>
           <Typography>{transaction.account.name}</Typography>
           <Typography>{transaction.budgetGroupItem?.name ?? "null"}</Typography>
-          <Typography>${transaction.amount.toFixed(2)}</Typography>
+          <Typography>{currency(transaction.amount)}</Typography>
 
           <LoadingButton
             color="error"

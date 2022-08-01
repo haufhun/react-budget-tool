@@ -5,10 +5,8 @@ import {
   DialogContent,
   DialogTitle,
   FormControl,
-  InputAdornment,
   InputLabel,
   MenuItem,
-  OutlinedInput,
   Select,
   TextField,
 } from "@mui/material";
@@ -20,6 +18,7 @@ import { BankAccount, CreateTransactionMutationVariables } from "../API";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { fetchTransactions } from "../app/appSlice";
 import moment from "moment";
+import CurrencyInput from "react-currency-input-field";
 
 type CreateTransactionDialogProps = {
   open: boolean;
@@ -38,7 +37,7 @@ function CreateTransactionDialog({
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(today);
-  const [amount, setAmount] = useState("0.0");
+  const [amount, setAmount] = useState(0);
   const [selectedAccountName, setSelectedAccountName] = useState("");
 
   const selectedAccount = bankAccounts.find(
@@ -54,7 +53,7 @@ function CreateTransactionDialog({
     setName("");
     setDescription("");
     setDate(today);
-    setAmount("0.0");
+    setAmount(0);
     setSelectedAccountName("");
   };
 
@@ -64,14 +63,13 @@ function CreateTransactionDialog({
 
   const createTransaction = async () => {
     setIsCreateLoading(true);
-    const parsedAmount = parseFloat(amount);
     try {
       const input: CreateTransactionMutationVariables = {
         input: {
           name,
           description,
           date,
-          amount: parsedAmount,
+          amount: amount,
           bankAccountTransactionsId: selectedAccount.id,
         },
       };
@@ -95,29 +93,28 @@ function CreateTransactionDialog({
         <DialogContent sx={{ paddingY: 3 }}>
           <TextField
             fullWidth
+            sx={{ marginY: 1 }}
             label="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            sx={{ marginY: 1 }}
           />
 
           <TextField
             fullWidth
+            sx={{ marginY: 1 }}
             label="Date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            sx={{ marginY: 1 }}
           />
 
-          <FormControl fullWidth sx={{ marginY: 1 }}>
-            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-amount"
+          <FormControl fullWidth sx={{ marginTop: 1, marginBottom: 2 }}>
+            <CurrencyInput
+              prefix="$"
+              decimalScale={2}
+              defaultValue={0.0}
+              decimalsLimit={2}
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              startAdornment={
-                <InputAdornment position="start">$</InputAdornment>
-              }
+              onValueChange={(value) => value && setAmount(parseFloat(value))}
             />
           </FormControl>
 
@@ -138,12 +135,12 @@ function CreateTransactionDialog({
 
           <TextField
             fullWidth
+            sx={{ marginY: 1 }}
             multiline={true}
             minRows={3}
             label="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            sx={{ marginY: 1 }}
           />
 
           <DialogActions>
