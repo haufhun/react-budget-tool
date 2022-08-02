@@ -67,7 +67,17 @@ export const fetchTransactions = createAsyncThunk(
       console.error(response.errors);
       throw new Error(JSON.stringify(response.errors));
     }
-    return response?.data?.listTransactions?.items as Transaction[];
+
+    const newTransactions = response?.data?.listTransactions
+      ?.items as Transaction[];
+
+    newTransactions.sort((a, b) => {
+      if (!a || !b) return 0;
+
+      return b.date.localeCompare(a.date);
+    });
+
+    return newTransactions;
   }
 );
 

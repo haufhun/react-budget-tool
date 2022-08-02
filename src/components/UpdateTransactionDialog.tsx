@@ -160,7 +160,7 @@ function UpdateTransactionDialog({
                 <RemoveCircleIcon />
               </IconButton>
 
-              <Typography>{transaction.budgetGroupItem?.name}</Typography>
+              <Typography>{budgetGroupItemName}</Typography>
             </Stack>
           )}
 

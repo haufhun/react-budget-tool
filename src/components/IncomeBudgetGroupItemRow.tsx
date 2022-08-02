@@ -164,7 +164,6 @@ function IncomeBudgetGroupItemRow({
     totalIncomeReceived > budgetGroupItem.amountBudgeted
       ? 100
       : (totalIncomeReceived / budgetGroupItem.amountBudgeted) * 100;
-  console.log(incomePercentage);
 
   const handleDrop = async (
     transactionId: string,

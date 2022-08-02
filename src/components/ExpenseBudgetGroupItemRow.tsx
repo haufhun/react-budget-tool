@@ -153,16 +153,19 @@ function ExpenseBudgetGroupItemRow({
     dispatch(getCurrentBudget(moment().format("YYYY-MM")));
   };
 
-  const totalSpent =
+  const totalSpent = Math.abs(
     budgetGroupItem.transactions?.items.reduce((count, transaction) => {
       if (transaction) return transaction.amount + count;
 
       return count;
-    }, 0) ?? 0;
+    }, 0) ?? 0
+  );
 
   const remaining = budgetGroupItem.amountBudgeted - totalSpent;
   const remainingPercentage =
-    (budgetGroupItem.amountBudgeted / totalSpent) * 100;
+    (remaining / budgetGroupItem.amountBudgeted) * 100;
+
+  console.log(remainingPercentage);
 
   const handleDrop = async (
     transactionId: string,
