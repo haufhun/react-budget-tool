@@ -37,14 +37,15 @@ const EditRow = ({
   const wrapperRef = useRef(null);
   const dispatch = useAppDispatch();
   useOutsideAlerter(wrapperRef, async () => {
+    const parsedAmount = parseFloat(amountBudgeted);
     const possibleVars: any = {};
     if (name !== budgetGroupItem.name) possibleVars.name = name;
-    if (amountBudgeted !== budgetGroupItem.amountBudgeted)
-      possibleVars.amountBudgeted = amountBudgeted;
+    if (parsedAmount !== budgetGroupItem.amountBudgeted)
+      possibleVars.amountBudgeted = parsedAmount;
 
     const needsUpdates =
       name !== budgetGroupItem.name ||
-      amountBudgeted !== budgetGroupItem.amountBudgeted;
+      parsedAmount !== budgetGroupItem.amountBudgeted;
 
     if (needsUpdates) {
       const updateVars: UpdateBudgetGroupItemInput = {
@@ -63,7 +64,7 @@ const EditRow = ({
 
   const [name, setName] = useState(budgetGroupItem.name);
   const [amountBudgeted, setAmountBudgeted] = useState(
-    budgetGroupItem.amountBudgeted
+    budgetGroupItem.amountBudgeted.toString()
   );
 
   const refresh = () => {
@@ -110,10 +111,8 @@ const EditRow = ({
         }}
         prefix="$"
         decimalScale={2}
-        defaultValue={0.0}
-        decimalsLimit={2}
         value={amountBudgeted}
-        onValueChange={(value) => value && setAmountBudgeted(parseFloat(value))}
+        onValueChange={(value) => value && setAmountBudgeted(value)}
       />
 
       <Typography flex={3} textAlign="right" color={remainingBlue}>

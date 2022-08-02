@@ -50,7 +50,7 @@ function UpdateTransactionDialog({
   const [name, setName] = useState(transaction.name);
   const [description, setDescription] = useState(transaction.description);
   const [date, setDate] = useState(transaction.date);
-  const [amount, setAmount] = useState(transaction.amount);
+  const [amount, setAmount] = useState(transaction.amount.toString());
   const [accountName, setAccountName] = useState(transaction.account.name);
   const [budgetGroupItemName, setBudgetGroupItemName] = useState(
     transaction.budgetGroupItem?.name
@@ -69,7 +69,7 @@ function UpdateTransactionDialog({
     setName("");
     setDescription("");
     setDate("2022-07-18");
-    setAmount(0);
+    setAmount("0");
     setAccountName("");
   };
 
@@ -81,7 +81,7 @@ function UpdateTransactionDialog({
       name,
       description,
       date,
-      amount: amount,
+      amount: parseFloat(amount),
       bankAccountTransactionsId: selectedAccount?.id,
     };
     if (!budgetGroupItemName) input.budgetGroupItemTransactionsId = null;
@@ -127,7 +127,7 @@ function UpdateTransactionDialog({
               defaultValue={0.0}
               decimalsLimit={2}
               value={amount}
-              onValueChange={(value) => value && setAmount(parseFloat(value))}
+              onValueChange={(value) => value && setAmount(value)}
             />
           </FormControl>
 

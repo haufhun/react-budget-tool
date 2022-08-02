@@ -37,7 +37,7 @@ function CreateTransactionDialog({
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(today);
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("0");
   const [selectedAccountName, setSelectedAccountName] = useState("");
 
   const selectedAccount = bankAccounts.find(
@@ -53,7 +53,7 @@ function CreateTransactionDialog({
     setName("");
     setDescription("");
     setDate(today);
-    setAmount(0);
+    setAmount("0");
     setSelectedAccountName("");
   };
 
@@ -69,7 +69,7 @@ function CreateTransactionDialog({
           name,
           description,
           date,
-          amount: amount,
+          amount: parseFloat(amount),
           bankAccountTransactionsId: selectedAccount.id,
         },
       };
@@ -114,7 +114,7 @@ function CreateTransactionDialog({
               defaultValue={0.0}
               decimalsLimit={2}
               value={amount}
-              onValueChange={(value) => value && setAmount(parseFloat(value))}
+              onValueChange={(value) => value && setAmount(value)}
             />
           </FormControl>
 
