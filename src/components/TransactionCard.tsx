@@ -4,7 +4,8 @@ import moment from "moment";
 import { useDrag } from "react-dnd";
 import UpdateTransactionDialog from "./UpdateTransactionDialog";
 import { useState } from "react";
-import { hoverColor } from "../common/theme";
+import { hoverColor, positiveTransaction } from "../common/theme";
+import { currency } from "../utils/utils";
 
 type TransactionCardProps = {
   transaction: Transaction;
@@ -21,6 +22,8 @@ function TransactionCard({ transaction }: TransactionCardProps) {
       isDragging: !!monitor.isDragging(),
     }),
   }));
+
+  const isPositive = transaction.amount > 0;
 
   return (
     <>
@@ -56,13 +59,16 @@ function TransactionCard({ transaction }: TransactionCardProps) {
         <Stack flex={10}>
           <Typography>{transaction.name}</Typography>
           {transaction.budgetGroupItem?.name && (
-            <Typography color="#54a0ea">
+            <Typography color="#54a0ea" variant="body2">
               {transaction.budgetGroupItem.name}
             </Typography>
           )}
         </Stack>
 
-        <Typography flex={1}>${transaction.amount.toFixed(2)}</Typography>
+        <Typography flex={1} color={isPositive ? positiveTransaction : "black"}>
+          {isPositive && "+"}
+          {currency(transaction.amount)}
+        </Typography>
       </Stack>
 
       <Divider />

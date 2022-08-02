@@ -16,6 +16,7 @@ import BudgetGroupService from "../utils/BudgetGroupService";
 import { useState } from "react";
 import { debounceAsync } from "../utils/utils";
 import { LoadingButton } from "@mui/lab";
+import { subHeadingGray } from "../common/theme";
 
 type ExpenseBudgetGroupCardProps = {
   budgetGroup: BudgetGroup;
@@ -77,14 +78,26 @@ function ExpenseBudgetGroupCard({ budgetGroup }: ExpenseBudgetGroupCardProps) {
           setShouldShowEditRow(true);
         }}
         sx={{ cursor: "pointer" }}
+        color={subHeadingGray}
+        fontWeight="bold"
       >
         {budgetGroup.name}
       </Typography>
 
-      <Typography flex={3} textAlign="right">
+      <Typography
+        flex={3}
+        textAlign="right"
+        color={subHeadingGray}
+        variant="body2"
+      >
         Planned
       </Typography>
-      <Typography flex={3} textAlign="right">
+      <Typography
+        flex={3}
+        textAlign="right"
+        color={subHeadingGray}
+        variant="body2"
+      >
         Remaining
       </Typography>
     </Stack>

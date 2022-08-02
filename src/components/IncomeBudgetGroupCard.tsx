@@ -5,6 +5,7 @@ import BudgetGroupItemService from "../utils/BudgetGroupItemService";
 import { useAppDispatch } from "../app/hooks";
 import { getCurrentBudget } from "../app/appSlice";
 import moment from "moment";
+import { subHeadingGray } from "../common/theme";
 
 type IncomeBudgetGroupCardProps = {
   budgetGroup: BudgetGroup;
@@ -29,12 +30,24 @@ function IncomeBudgetGroupCard({ budgetGroup }: IncomeBudgetGroupCardProps) {
               paddingY: 2,
             }}
           >
-            <Typography flex={6}>{budgetGroup.name}</Typography>
+            <Typography flex={6} color={subHeadingGray} fontWeight="bold">
+              {budgetGroup.name}
+            </Typography>
 
-            <Typography flex={3} textAlign="right">
+            <Typography
+              flex={3}
+              textAlign="right"
+              color={subHeadingGray}
+              variant="body2"
+            >
               Planned
             </Typography>
-            <Typography flex={3} textAlign="right">
+            <Typography
+              flex={3}
+              textAlign="right"
+              color={subHeadingGray}
+              variant="body2"
+            >
               Received
             </Typography>
           </Stack>
@@ -53,7 +66,7 @@ function IncomeBudgetGroupCard({ budgetGroup }: IncomeBudgetGroupCardProps) {
                 refresh();
               }}
             >
-              Add Item
+              Add Income
             </Button>
           </Box>
         </Stack>
