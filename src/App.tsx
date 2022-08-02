@@ -8,7 +8,6 @@ import Accounts from "./components/Accounts";
 import Transactions from "./components/Transactions";
 
 import "@aws-amplify/ui-react/styles.css";
-import Categories from "./components/Categories";
 import Budget from "./components/Budget";
 const theme = createTheme({
   palette: {
@@ -37,7 +36,6 @@ function App() {
               <Route path="/" element={<Budget />} />
               <Route path="/transactions" element={<Transactions />} />
               <Route path="/accounts" element={<Accounts />} />
-              <Route path="/categories" element={<Categories />} />
             </Route>
           </Routes>
         </ThemeProvider>

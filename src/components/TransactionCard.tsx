@@ -4,6 +4,7 @@ import moment from "moment";
 import { useDrag } from "react-dnd";
 import UpdateTransactionDialog from "./UpdateTransactionDialog";
 import { useState } from "react";
+import { hoverColor } from "../common/theme";
 
 type TransactionCardProps = {
   transaction: Transaction;
@@ -38,13 +39,12 @@ function TransactionCard({ transaction }: TransactionCardProps) {
         spacing={2}
         sx={{
           cursor: "pointer",
-          backgroundColor: isDragging ? "#ebf4fa" : "white",
+          backgroundColor: isDragging ? hoverColor : "white",
           paddingX: 2,
           paddingY: 2,
           borderRadius: 2,
           "&:hover": {
-            // color: 'red',
-            backgroundColor: "#ebf4fa",
+            backgroundColor: hoverColor,
           },
         }}
       >

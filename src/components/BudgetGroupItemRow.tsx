@@ -19,6 +19,7 @@ import useOutsideAlerter from "../hooks/useOutsideAlerter";
 import TransactionService from "../utils/TransactionService";
 import CurrencyInput from "react-currency-input-field";
 import { currency } from "../utils/utils";
+import { hoverColor, remainingBlue } from "../common/theme";
 
 type BudgetGroupItemProps = {
   budgetGroupItem: BudgetGroupItem;
@@ -85,7 +86,7 @@ const EditRow = ({
       spacing={4}
       alignItems="center"
       sx={{
-        backgroundColor: "#3f6c8a",
+        backgroundColor: "white",
         paddingX: 2,
         paddingY: 2,
         borderRadius: 2,
@@ -115,7 +116,7 @@ const EditRow = ({
         onValueChange={(value) => value && setAmountBudgeted(parseFloat(value))}
       />
 
-      <Typography flex={3} textAlign="right">
+      <Typography flex={3} textAlign="right" color={remainingBlue}>
         {currency(remaining)}
       </Typography>
     </Stack>
@@ -169,7 +170,7 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
       direction="row"
       onClick={() => dispatch(setSelectedBudgetGroupItem(budgetGroupItem))}
       sx={{
-        backgroundColor: isOver ? "#ebf4fa" : "#3f6c8a",
+        backgroundColor: isOver ? hoverColor : "white",
         paddingX: 2,
         paddingY: 2,
         borderRadius: 2,
@@ -181,7 +182,7 @@ function BudgetGroupItemRow({ budgetGroupItem }: BudgetGroupItemProps) {
       <Typography flex={3} textAlign="right">
         {currency(budgetGroupItem.amountBudgeted)}
       </Typography>
-      <Typography flex={3} textAlign="right">
+      <Typography flex={3} textAlign="right" color={remainingBlue}>
         {currency(remaining)}
       </Typography>
     </Stack>
