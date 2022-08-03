@@ -22,6 +22,12 @@
           "deploymentBucketName": "amplify-reactbudgettool-dev-122333-deployment",
           "s3Key": "amplify-builds/reactbudgettool4e8ad8b54e8ad8b5PreSignup-355a4e4b672b582b2f37-build.zip"
         }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3b9342c6w0ra9",
+          "type": "manual"
+        }
       }
     }
   }
