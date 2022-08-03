@@ -165,8 +165,6 @@ function ExpenseBudgetGroupItemRow({
   const remainingPercentage =
     (remaining / budgetGroupItem.amountBudgeted) * 100;
 
-  console.log(remainingPercentage);
-
   const handleDrop = async (
     transactionId: string,
     budgetGroupItemId: string

@@ -72,7 +72,7 @@ function Budget() {
   }
 
   const resetBudget = async () => {
-    await BudgetMonthService.resetBudget(budget.id, budget.monthId);
+    await BudgetMonthService.resetBudget(budget);
     refresh();
   };
 

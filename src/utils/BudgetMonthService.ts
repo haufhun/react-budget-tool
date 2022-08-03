@@ -12,6 +12,7 @@ import {
 } from "../API";
 import moment from "moment";
 import BudgetGroupService from "./BudgetGroupService";
+import BudgetGroupItemService from "./BudgetGroupItemService";
 
 class BudgetMonthService {
   private validateMonthId(monthId: string) {
@@ -30,13 +31,39 @@ class BudgetMonthService {
     await BudgetGroupService.create("Income", "income", "1", budgetMonth.id);
   }
 
-  async resetBudget(budgetId: string, monthId: string): Promise<void> {
-    this.validateMonthId(monthId);
+  async resetBudget(budgetMonth: BudgetMonth): Promise<void> {
+    const budgetGroups = budgetMonth.budgetGroups?.items ?? [];
+    const budgetGroupPromises: unknown[] = [];
+    const budgetGroupItemPromises: unknown[] = [];
 
-    // TODO: Delete all BudgetGroupItems and BudgetGroups within this
+    console.log("budget month:", budgetMonth.id);
 
-    await this.delete(budgetId);
-    await this.createNewBudget(monthId);
+    for (let bg of budgetGroups) {
+      if (!bg) continue;
+
+      const bgId = bg.id;
+      console.log("budget group:", bgId, bg.name);
+
+      budgetGroupPromises.push(() => BudgetGroupService.delete(bgId));
+
+      const budgetGroupItems = bg.budgetGroupItems?.items ?? [];
+      for (let bgi of budgetGroupItems) {
+        if (!bgi) continue;
+
+        const bgiId = bgi.id;
+        console.log("budget group item:", bgiId, bgi.name, bg.name);
+
+        budgetGroupItemPromises.push(() =>
+          BudgetGroupItemService.delete(bgiId)
+        );
+      }
+    }
+
+    await Promise.all(budgetGroupItemPromises);
+    await Promise.all(budgetGroupPromises);
+
+    await this.delete(budgetMonth.id);
+    await this.createNewBudget(budgetMonth.monthId);
   }
 
   private async create(monthId: string): Promise<BudgetMonth> {
