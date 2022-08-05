@@ -1,5 +1,13 @@
 import { useAuthenticator, withAuthenticator } from "@aws-amplify/ui-react";
-import { AppBar, Box, Link, Stack, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  Link,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import moment from "moment";
 import { useEffect } from "react";
 import { Outlet, Link as RouterLink } from "react-router-dom";
@@ -11,7 +19,7 @@ import {
 import { useAppDispatch } from "../app/hooks";
 
 function AppLayout() {
-  const { user } = useAuthenticator((context) => [context.user]);
+  const { user, signOut } = useAuthenticator((context) => [context.user]);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -71,11 +79,22 @@ function AppLayout() {
             <Box sx={{ flexGrow: 1 }} />
 
             <Typography>{user.attributes?.email}</Typography>
+            <Button color="secondary" onClick={signOut}>
+              Sign Out
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
 
       <Outlet />
+
+      <a
+        href="https://www.flaticon.com/free-icons/business-and-finance"
+        title="business-and-finance icons"
+        style={{ display: "none" }}
+      >
+        Business-and-finance icons created by Freepik - Flaticon
+      </a>
     </>
   );
 }
