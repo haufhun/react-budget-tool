@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Button, Container, Stack, TextField, Typography } from "@mui/material";
+import { useState } from "react";
+import { Container, Stack, TextField, Typography } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { API, graphqlOperation } from "aws-amplify";
 import {
@@ -9,15 +9,17 @@ import {
 import {
   CreateBankAccountMutationVariables,
   DeleteBankAccountMutationVariables,
-  ListBankAccountsQuery,
 } from "../API";
-import { listBankAccounts } from "../graphql/queries";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { fetchBankAccounts } from "../app/appSlice";
 
 function Accounts() {
+  const dispatch = useAppDispatch();
+  const bankAccounts = useAppSelector((state) => state.app.bankAccounts.items);
+  const isRefreshLoading = useAppSelector(
+    (state) => state.app.bankAccounts.fetchLoading
+  );
   const [accountName, setAccountName] = useState("");
-  const [bankAccounts, setBankAccounts] = useState<any>([]);
-  const [isRefreshLoading, setIsRefreshLoading] = useState(false);
   const [isCreateLoading, setIsCreateLoading] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
@@ -33,7 +35,7 @@ function Accounts() {
 
       setAccountName("");
 
-      await refresh();
+      refresh();
     } catch (e) {
       console.error(e);
     } finally {
@@ -51,7 +53,7 @@ function Accounts() {
       };
       await API.graphql(graphqlOperation(deleteBankAccountMutation, input));
 
-      await refresh();
+      refresh();
     } catch (e) {
       console.error(e);
     } finally {
@@ -59,25 +61,9 @@ function Accounts() {
     }
   };
 
-  const refresh = async () => {
-    setIsRefreshLoading(true);
-    try {
-      const response = (await API.graphql(
-        graphqlOperation(listBankAccounts)
-      )) as GraphQLResult<ListBankAccountsQuery>;
-      const accounts = response?.data?.listBankAccounts?.items;
-
-      setBankAccounts(accounts);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setIsRefreshLoading(false);
-    }
+  const refresh = () => {
+    dispatch(fetchBankAccounts());
   };
-
-  useEffect(() => {
-    refresh();
-  }, []);
 
   return (
     <>

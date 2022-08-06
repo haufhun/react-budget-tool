@@ -66,14 +66,6 @@ function AppLayout() {
               >
                 Accounts
               </Link>
-              <Link
-                component={RouterLink}
-                to="/categories"
-                color="inherit"
-                underline="none"
-              >
-                Categories
-              </Link>
             </Stack>
 
             <Box sx={{ flexGrow: 1 }} />

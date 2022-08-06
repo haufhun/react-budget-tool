@@ -162,8 +162,12 @@ function ExpenseBudgetGroupItemRow({
   );
 
   const remaining = budgetGroupItem.amountBudgeted - totalSpent;
-  const remainingPercentage =
-    (remaining / budgetGroupItem.amountBudgeted) * 100;
+
+  const getRemainingPercentage = () => {
+    if (budgetGroupItem.amountBudgeted === 0 && totalSpent === 0) return 0;
+
+    return (remaining / budgetGroupItem.amountBudgeted) * 100;
+  };
 
   const handleDrop = async (
     transactionId: string,
@@ -203,7 +207,7 @@ function ExpenseBudgetGroupItemRow({
 
       <LinearProgress
         variant="determinate"
-        value={remainingPercentage}
+        value={getRemainingPercentage()}
         sx={{
           backgroundColor: "#d5d9db",
           "& .MuiLinearProgress-bar": {

@@ -160,10 +160,13 @@ function IncomeBudgetGroupItemRow({
       return count;
     }, 0) ?? 0;
 
-  const incomePercentage =
-    totalIncomeReceived > budgetGroupItem.amountBudgeted
-      ? 100
-      : (totalIncomeReceived / budgetGroupItem.amountBudgeted) * 100;
+  const getIncomePercentage = () => {
+    if (totalIncomeReceived > budgetGroupItem.amountBudgeted) return 100;
+    if (budgetGroupItem.amountBudgeted === 0 && totalIncomeReceived === 0)
+      return 0;
+
+    return (totalIncomeReceived / budgetGroupItem.amountBudgeted) * 100;
+  };
 
   const handleDrop = async (
     transactionId: string,
@@ -203,7 +206,7 @@ function IncomeBudgetGroupItemRow({
 
       <LinearProgress
         variant="determinate"
-        value={incomePercentage}
+        value={getIncomePercentage()}
         sx={{
           backgroundColor: "#d5d9db",
           "& .MuiLinearProgress-bar": {
