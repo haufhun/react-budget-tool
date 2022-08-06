@@ -70,9 +70,11 @@ function CreateTransactionDialog({
           description,
           date,
           amount: parseFloat(amount),
-          bankAccountTransactionsId: selectedAccount.id,
         },
       };
+      if (selectedAccount)
+        input.input.bankAccountTransactionsId = selectedAccount.id;
+
       await API.graphql(graphqlOperation(createTransactionMutation, input));
 
       refresh();

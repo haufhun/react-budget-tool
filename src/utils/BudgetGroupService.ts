@@ -66,7 +66,7 @@ class BudgetGroupService {
       throw new Error(JSON.stringify(response.errors));
     }
 
-    return response.data?.updateBudgetGroup!;
+    return response.data?.updateBudgetGroup! as BudgetGroup;
   }
 
   async delete(id: string): Promise<BudgetGroup> {

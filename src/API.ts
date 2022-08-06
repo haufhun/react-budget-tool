@@ -115,12 +115,12 @@ export type Transaction = {
   description: string,
   date: string,
   amount: number,
-  account: BankAccount,
+  account?: BankAccount | null,
   budgetGroupItem?: BudgetGroupItem | null,
   createdAt: string,
   updatedAt: string,
   budgetGroupItemTransactionsId?: string | null,
-  bankAccountTransactionsId: string,
+  bankAccountTransactionsId?: string | null,
   owner?: string | null,
 };
 
@@ -238,7 +238,7 @@ export type CreateTransactionInput = {
   date: string,
   amount: number,
   budgetGroupItemTransactionsId?: string | null,
-  bankAccountTransactionsId: string,
+  bankAccountTransactionsId?: string | null,
 };
 
 export type ModelTransactionConditionInput = {
@@ -392,7 +392,7 @@ export type CreateBudgetMonthMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -408,7 +408,7 @@ export type CreateBudgetMonthMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -416,7 +416,7 @@ export type CreateBudgetMonthMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -435,7 +435,7 @@ export type CreateBudgetMonthMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -448,7 +448,7 @@ export type CreateBudgetMonthMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -508,7 +508,7 @@ export type UpdateBudgetMonthMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -524,7 +524,7 @@ export type UpdateBudgetMonthMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -532,7 +532,7 @@ export type UpdateBudgetMonthMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -551,7 +551,7 @@ export type UpdateBudgetMonthMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -564,7 +564,7 @@ export type UpdateBudgetMonthMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -624,7 +624,7 @@ export type DeleteBudgetMonthMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -640,7 +640,7 @@ export type DeleteBudgetMonthMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -648,7 +648,7 @@ export type DeleteBudgetMonthMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -667,7 +667,7 @@ export type DeleteBudgetMonthMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -680,7 +680,7 @@ export type DeleteBudgetMonthMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -734,7 +734,7 @@ export type CreateBudgetGroupMutation = {
             description: string,
             date: string,
             amount: number,
-            account:  {
+            account?:  {
               __typename: "BankAccount",
               id: string,
               name: string,
@@ -747,7 +747,7 @@ export type CreateBudgetGroupMutation = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -758,7 +758,7 @@ export type CreateBudgetGroupMutation = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -777,7 +777,7 @@ export type CreateBudgetGroupMutation = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -785,7 +785,7 @@ export type CreateBudgetGroupMutation = {
               createdAt: string,
               updatedAt: string,
               owner?: string | null,
-            },
+            } | null,
             budgetGroupItem?:  {
               __typename: "BudgetGroupItem",
               id: string,
@@ -801,7 +801,7 @@ export type CreateBudgetGroupMutation = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -812,7 +812,7 @@ export type CreateBudgetGroupMutation = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -831,7 +831,7 @@ export type CreateBudgetGroupMutation = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -844,7 +844,7 @@ export type CreateBudgetGroupMutation = {
             createdAt: string,
             updatedAt: string,
             budgetGroupItemTransactionsId?: string | null,
-            bankAccountTransactionsId: string,
+            bankAccountTransactionsId?: string | null,
             owner?: string | null,
           } | null >,
           nextToken?: string | null,
@@ -892,7 +892,7 @@ export type UpdateBudgetGroupMutation = {
             description: string,
             date: string,
             amount: number,
-            account:  {
+            account?:  {
               __typename: "BankAccount",
               id: string,
               name: string,
@@ -905,7 +905,7 @@ export type UpdateBudgetGroupMutation = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -916,7 +916,7 @@ export type UpdateBudgetGroupMutation = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -935,7 +935,7 @@ export type UpdateBudgetGroupMutation = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -943,7 +943,7 @@ export type UpdateBudgetGroupMutation = {
               createdAt: string,
               updatedAt: string,
               owner?: string | null,
-            },
+            } | null,
             budgetGroupItem?:  {
               __typename: "BudgetGroupItem",
               id: string,
@@ -959,7 +959,7 @@ export type UpdateBudgetGroupMutation = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -970,7 +970,7 @@ export type UpdateBudgetGroupMutation = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -989,7 +989,7 @@ export type UpdateBudgetGroupMutation = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -1002,7 +1002,7 @@ export type UpdateBudgetGroupMutation = {
             createdAt: string,
             updatedAt: string,
             budgetGroupItemTransactionsId?: string | null,
-            bankAccountTransactionsId: string,
+            bankAccountTransactionsId?: string | null,
             owner?: string | null,
           } | null >,
           nextToken?: string | null,
@@ -1050,7 +1050,7 @@ export type DeleteBudgetGroupMutation = {
             description: string,
             date: string,
             amount: number,
-            account:  {
+            account?:  {
               __typename: "BankAccount",
               id: string,
               name: string,
@@ -1063,7 +1063,7 @@ export type DeleteBudgetGroupMutation = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -1074,7 +1074,7 @@ export type DeleteBudgetGroupMutation = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -1093,7 +1093,7 @@ export type DeleteBudgetGroupMutation = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -1101,7 +1101,7 @@ export type DeleteBudgetGroupMutation = {
               createdAt: string,
               updatedAt: string,
               owner?: string | null,
-            },
+            } | null,
             budgetGroupItem?:  {
               __typename: "BudgetGroupItem",
               id: string,
@@ -1117,7 +1117,7 @@ export type DeleteBudgetGroupMutation = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -1128,7 +1128,7 @@ export type DeleteBudgetGroupMutation = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -1147,7 +1147,7 @@ export type DeleteBudgetGroupMutation = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -1160,7 +1160,7 @@ export type DeleteBudgetGroupMutation = {
             createdAt: string,
             updatedAt: string,
             budgetGroupItemTransactionsId?: string | null,
-            bankAccountTransactionsId: string,
+            bankAccountTransactionsId?: string | null,
             owner?: string | null,
           } | null >,
           nextToken?: string | null,
@@ -1200,7 +1200,7 @@ export type CreateBudgetGroupItemMutation = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -1213,7 +1213,7 @@ export type CreateBudgetGroupItemMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -1226,14 +1226,14 @@ export type CreateBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1248,7 +1248,7 @@ export type CreateBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1256,7 +1256,7 @@ export type CreateBudgetGroupItemMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -1272,14 +1272,14 @@ export type CreateBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1294,7 +1294,7 @@ export type CreateBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1307,7 +1307,7 @@ export type CreateBudgetGroupItemMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -1315,7 +1315,7 @@ export type CreateBudgetGroupItemMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -1331,7 +1331,7 @@ export type CreateBudgetGroupItemMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -1344,14 +1344,14 @@ export type CreateBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1366,7 +1366,7 @@ export type CreateBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1374,7 +1374,7 @@ export type CreateBudgetGroupItemMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -1390,14 +1390,14 @@ export type CreateBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1412,7 +1412,7 @@ export type CreateBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1425,7 +1425,7 @@ export type CreateBudgetGroupItemMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -1438,7 +1438,7 @@ export type CreateBudgetGroupItemMutation = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -1471,7 +1471,7 @@ export type UpdateBudgetGroupItemMutation = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -1484,7 +1484,7 @@ export type UpdateBudgetGroupItemMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -1497,14 +1497,14 @@ export type UpdateBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1519,7 +1519,7 @@ export type UpdateBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1527,7 +1527,7 @@ export type UpdateBudgetGroupItemMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -1543,14 +1543,14 @@ export type UpdateBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1565,7 +1565,7 @@ export type UpdateBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1578,7 +1578,7 @@ export type UpdateBudgetGroupItemMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -1586,7 +1586,7 @@ export type UpdateBudgetGroupItemMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -1602,7 +1602,7 @@ export type UpdateBudgetGroupItemMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -1615,14 +1615,14 @@ export type UpdateBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1637,7 +1637,7 @@ export type UpdateBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1645,7 +1645,7 @@ export type UpdateBudgetGroupItemMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -1661,14 +1661,14 @@ export type UpdateBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1683,7 +1683,7 @@ export type UpdateBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1696,7 +1696,7 @@ export type UpdateBudgetGroupItemMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -1709,7 +1709,7 @@ export type UpdateBudgetGroupItemMutation = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -1742,7 +1742,7 @@ export type DeleteBudgetGroupItemMutation = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -1755,7 +1755,7 @@ export type DeleteBudgetGroupItemMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -1768,14 +1768,14 @@ export type DeleteBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1790,7 +1790,7 @@ export type DeleteBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1798,7 +1798,7 @@ export type DeleteBudgetGroupItemMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -1814,14 +1814,14 @@ export type DeleteBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1836,7 +1836,7 @@ export type DeleteBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1849,7 +1849,7 @@ export type DeleteBudgetGroupItemMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -1857,7 +1857,7 @@ export type DeleteBudgetGroupItemMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -1873,7 +1873,7 @@ export type DeleteBudgetGroupItemMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -1886,14 +1886,14 @@ export type DeleteBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1908,7 +1908,7 @@ export type DeleteBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1916,7 +1916,7 @@ export type DeleteBudgetGroupItemMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -1932,14 +1932,14 @@ export type DeleteBudgetGroupItemMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -1954,7 +1954,7 @@ export type DeleteBudgetGroupItemMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -1967,7 +1967,7 @@ export type DeleteBudgetGroupItemMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -1980,7 +1980,7 @@ export type DeleteBudgetGroupItemMutation = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -2005,7 +2005,7 @@ export type CreateTransactionMutation = {
     description: string,
     date: string,
     amount: number,
-    account:  {
+    account?:  {
       __typename: "BankAccount",
       id: string,
       name: string,
@@ -2018,7 +2018,7 @@ export type CreateTransactionMutation = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -2031,7 +2031,7 @@ export type CreateTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -2047,7 +2047,7 @@ export type CreateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2055,7 +2055,7 @@ export type CreateTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -2074,7 +2074,7 @@ export type CreateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2087,7 +2087,7 @@ export type CreateTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -2095,7 +2095,7 @@ export type CreateTransactionMutation = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -2111,7 +2111,7 @@ export type CreateTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -2127,7 +2127,7 @@ export type CreateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2135,7 +2135,7 @@ export type CreateTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -2154,7 +2154,7 @@ export type CreateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2167,7 +2167,7 @@ export type CreateTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -2180,7 +2180,7 @@ export type CreateTransactionMutation = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -2188,7 +2188,7 @@ export type CreateTransactionMutation = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    },
+    } | null,
     budgetGroupItem?:  {
       __typename: "BudgetGroupItem",
       id: string,
@@ -2204,7 +2204,7 @@ export type CreateTransactionMutation = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -2217,7 +2217,7 @@ export type CreateTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -2233,7 +2233,7 @@ export type CreateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2241,7 +2241,7 @@ export type CreateTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -2260,7 +2260,7 @@ export type CreateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2273,7 +2273,7 @@ export type CreateTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -2281,7 +2281,7 @@ export type CreateTransactionMutation = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -2297,7 +2297,7 @@ export type CreateTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -2313,7 +2313,7 @@ export type CreateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2321,7 +2321,7 @@ export type CreateTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -2340,7 +2340,7 @@ export type CreateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2353,7 +2353,7 @@ export type CreateTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -2366,7 +2366,7 @@ export type CreateTransactionMutation = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -2379,7 +2379,7 @@ export type CreateTransactionMutation = {
     createdAt: string,
     updatedAt: string,
     budgetGroupItemTransactionsId?: string | null,
-    bankAccountTransactionsId: string,
+    bankAccountTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -2397,7 +2397,7 @@ export type UpdateTransactionMutation = {
     description: string,
     date: string,
     amount: number,
-    account:  {
+    account?:  {
       __typename: "BankAccount",
       id: string,
       name: string,
@@ -2410,7 +2410,7 @@ export type UpdateTransactionMutation = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -2423,7 +2423,7 @@ export type UpdateTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -2439,7 +2439,7 @@ export type UpdateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2447,7 +2447,7 @@ export type UpdateTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -2466,7 +2466,7 @@ export type UpdateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2479,7 +2479,7 @@ export type UpdateTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -2487,7 +2487,7 @@ export type UpdateTransactionMutation = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -2503,7 +2503,7 @@ export type UpdateTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -2519,7 +2519,7 @@ export type UpdateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2527,7 +2527,7 @@ export type UpdateTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -2546,7 +2546,7 @@ export type UpdateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2559,7 +2559,7 @@ export type UpdateTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -2572,7 +2572,7 @@ export type UpdateTransactionMutation = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -2580,7 +2580,7 @@ export type UpdateTransactionMutation = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    },
+    } | null,
     budgetGroupItem?:  {
       __typename: "BudgetGroupItem",
       id: string,
@@ -2596,7 +2596,7 @@ export type UpdateTransactionMutation = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -2609,7 +2609,7 @@ export type UpdateTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -2625,7 +2625,7 @@ export type UpdateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2633,7 +2633,7 @@ export type UpdateTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -2652,7 +2652,7 @@ export type UpdateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2665,7 +2665,7 @@ export type UpdateTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -2673,7 +2673,7 @@ export type UpdateTransactionMutation = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -2689,7 +2689,7 @@ export type UpdateTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -2705,7 +2705,7 @@ export type UpdateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2713,7 +2713,7 @@ export type UpdateTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -2732,7 +2732,7 @@ export type UpdateTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2745,7 +2745,7 @@ export type UpdateTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -2758,7 +2758,7 @@ export type UpdateTransactionMutation = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -2771,7 +2771,7 @@ export type UpdateTransactionMutation = {
     createdAt: string,
     updatedAt: string,
     budgetGroupItemTransactionsId?: string | null,
-    bankAccountTransactionsId: string,
+    bankAccountTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -2789,7 +2789,7 @@ export type DeleteTransactionMutation = {
     description: string,
     date: string,
     amount: number,
-    account:  {
+    account?:  {
       __typename: "BankAccount",
       id: string,
       name: string,
@@ -2802,7 +2802,7 @@ export type DeleteTransactionMutation = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -2815,7 +2815,7 @@ export type DeleteTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -2831,7 +2831,7 @@ export type DeleteTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2839,7 +2839,7 @@ export type DeleteTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -2858,7 +2858,7 @@ export type DeleteTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2871,7 +2871,7 @@ export type DeleteTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -2879,7 +2879,7 @@ export type DeleteTransactionMutation = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -2895,7 +2895,7 @@ export type DeleteTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -2911,7 +2911,7 @@ export type DeleteTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2919,7 +2919,7 @@ export type DeleteTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -2938,7 +2938,7 @@ export type DeleteTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -2951,7 +2951,7 @@ export type DeleteTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -2964,7 +2964,7 @@ export type DeleteTransactionMutation = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -2972,7 +2972,7 @@ export type DeleteTransactionMutation = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    },
+    } | null,
     budgetGroupItem?:  {
       __typename: "BudgetGroupItem",
       id: string,
@@ -2988,7 +2988,7 @@ export type DeleteTransactionMutation = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -3001,7 +3001,7 @@ export type DeleteTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -3017,7 +3017,7 @@ export type DeleteTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -3025,7 +3025,7 @@ export type DeleteTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -3044,7 +3044,7 @@ export type DeleteTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -3057,7 +3057,7 @@ export type DeleteTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -3065,7 +3065,7 @@ export type DeleteTransactionMutation = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -3081,7 +3081,7 @@ export type DeleteTransactionMutation = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -3097,7 +3097,7 @@ export type DeleteTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -3105,7 +3105,7 @@ export type DeleteTransactionMutation = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -3124,7 +3124,7 @@ export type DeleteTransactionMutation = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -3137,7 +3137,7 @@ export type DeleteTransactionMutation = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -3150,7 +3150,7 @@ export type DeleteTransactionMutation = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -3163,7 +3163,7 @@ export type DeleteTransactionMutation = {
     createdAt: string,
     updatedAt: string,
     budgetGroupItemTransactionsId?: string | null,
-    bankAccountTransactionsId: string,
+    bankAccountTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -3187,7 +3187,7 @@ export type CreateBankAccountMutation = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -3200,7 +3200,7 @@ export type CreateBankAccountMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -3213,14 +3213,14 @@ export type CreateBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3235,7 +3235,7 @@ export type CreateBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3243,7 +3243,7 @@ export type CreateBankAccountMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -3259,14 +3259,14 @@ export type CreateBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3281,7 +3281,7 @@ export type CreateBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3294,7 +3294,7 @@ export type CreateBankAccountMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -3302,7 +3302,7 @@ export type CreateBankAccountMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -3318,7 +3318,7 @@ export type CreateBankAccountMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -3331,14 +3331,14 @@ export type CreateBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3353,7 +3353,7 @@ export type CreateBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3361,7 +3361,7 @@ export type CreateBankAccountMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -3377,14 +3377,14 @@ export type CreateBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3399,7 +3399,7 @@ export type CreateBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3412,7 +3412,7 @@ export type CreateBankAccountMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -3425,7 +3425,7 @@ export type CreateBankAccountMutation = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -3455,7 +3455,7 @@ export type UpdateBankAccountMutation = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -3468,7 +3468,7 @@ export type UpdateBankAccountMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -3481,14 +3481,14 @@ export type UpdateBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3503,7 +3503,7 @@ export type UpdateBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3511,7 +3511,7 @@ export type UpdateBankAccountMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -3527,14 +3527,14 @@ export type UpdateBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3549,7 +3549,7 @@ export type UpdateBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3562,7 +3562,7 @@ export type UpdateBankAccountMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -3570,7 +3570,7 @@ export type UpdateBankAccountMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -3586,7 +3586,7 @@ export type UpdateBankAccountMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -3599,14 +3599,14 @@ export type UpdateBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3621,7 +3621,7 @@ export type UpdateBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3629,7 +3629,7 @@ export type UpdateBankAccountMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -3645,14 +3645,14 @@ export type UpdateBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3667,7 +3667,7 @@ export type UpdateBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3680,7 +3680,7 @@ export type UpdateBankAccountMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -3693,7 +3693,7 @@ export type UpdateBankAccountMutation = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -3723,7 +3723,7 @@ export type DeleteBankAccountMutation = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -3736,7 +3736,7 @@ export type DeleteBankAccountMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -3749,14 +3749,14 @@ export type DeleteBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3771,7 +3771,7 @@ export type DeleteBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3779,7 +3779,7 @@ export type DeleteBankAccountMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -3795,14 +3795,14 @@ export type DeleteBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3817,7 +3817,7 @@ export type DeleteBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3830,7 +3830,7 @@ export type DeleteBankAccountMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -3838,7 +3838,7 @@ export type DeleteBankAccountMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -3854,7 +3854,7 @@ export type DeleteBankAccountMutation = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -3867,14 +3867,14 @@ export type DeleteBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3889,7 +3889,7 @@ export type DeleteBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3897,7 +3897,7 @@ export type DeleteBankAccountMutation = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -3913,14 +3913,14 @@ export type DeleteBankAccountMutation = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -3935,7 +3935,7 @@ export type DeleteBankAccountMutation = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -3948,7 +3948,7 @@ export type DeleteBankAccountMutation = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -3961,7 +3961,7 @@ export type DeleteBankAccountMutation = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -4006,7 +4006,7 @@ export type GetBudgetMonthQuery = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -4022,7 +4022,7 @@ export type GetBudgetMonthQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -4030,7 +4030,7 @@ export type GetBudgetMonthQuery = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -4049,7 +4049,7 @@ export type GetBudgetMonthQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -4062,7 +4062,7 @@ export type GetBudgetMonthQuery = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -4125,7 +4125,7 @@ export type ListBudgetMonthsQuery = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -4136,7 +4136,7 @@ export type ListBudgetMonthsQuery = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -4155,7 +4155,7 @@ export type ListBudgetMonthsQuery = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -4210,7 +4210,7 @@ export type GetBudgetGroupQuery = {
             description: string,
             date: string,
             amount: number,
-            account:  {
+            account?:  {
               __typename: "BankAccount",
               id: string,
               name: string,
@@ -4223,7 +4223,7 @@ export type GetBudgetGroupQuery = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -4234,7 +4234,7 @@ export type GetBudgetGroupQuery = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -4253,7 +4253,7 @@ export type GetBudgetGroupQuery = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -4261,7 +4261,7 @@ export type GetBudgetGroupQuery = {
               createdAt: string,
               updatedAt: string,
               owner?: string | null,
-            },
+            } | null,
             budgetGroupItem?:  {
               __typename: "BudgetGroupItem",
               id: string,
@@ -4277,7 +4277,7 @@ export type GetBudgetGroupQuery = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -4288,7 +4288,7 @@ export type GetBudgetGroupQuery = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -4307,7 +4307,7 @@ export type GetBudgetGroupQuery = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -4320,7 +4320,7 @@ export type GetBudgetGroupQuery = {
             createdAt: string,
             updatedAt: string,
             budgetGroupItemTransactionsId?: string | null,
-            bankAccountTransactionsId: string,
+            bankAccountTransactionsId?: string | null,
             owner?: string | null,
           } | null >,
           nextToken?: string | null,
@@ -4371,7 +4371,7 @@ export type ListBudgetGroupsQuery = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -4384,14 +4384,14 @@ export type ListBudgetGroupsQuery = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -4406,7 +4406,7 @@ export type ListBudgetGroupsQuery = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -4414,7 +4414,7 @@ export type ListBudgetGroupsQuery = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -4430,14 +4430,14 @@ export type ListBudgetGroupsQuery = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -4452,7 +4452,7 @@ export type ListBudgetGroupsQuery = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -4465,7 +4465,7 @@ export type ListBudgetGroupsQuery = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -4506,7 +4506,7 @@ export type GetBudgetGroupItemQuery = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -4519,7 +4519,7 @@ export type GetBudgetGroupItemQuery = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -4532,14 +4532,14 @@ export type GetBudgetGroupItemQuery = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -4554,7 +4554,7 @@ export type GetBudgetGroupItemQuery = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -4562,7 +4562,7 @@ export type GetBudgetGroupItemQuery = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -4578,14 +4578,14 @@ export type GetBudgetGroupItemQuery = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -4600,7 +4600,7 @@ export type GetBudgetGroupItemQuery = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -4613,7 +4613,7 @@ export type GetBudgetGroupItemQuery = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -4621,7 +4621,7 @@ export type GetBudgetGroupItemQuery = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -4637,7 +4637,7 @@ export type GetBudgetGroupItemQuery = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -4650,14 +4650,14 @@ export type GetBudgetGroupItemQuery = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -4672,7 +4672,7 @@ export type GetBudgetGroupItemQuery = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -4680,7 +4680,7 @@ export type GetBudgetGroupItemQuery = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -4696,14 +4696,14 @@ export type GetBudgetGroupItemQuery = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -4718,7 +4718,7 @@ export type GetBudgetGroupItemQuery = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -4731,7 +4731,7 @@ export type GetBudgetGroupItemQuery = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -4744,7 +4744,7 @@ export type GetBudgetGroupItemQuery = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -4780,7 +4780,7 @@ export type ListBudgetGroupItemsQuery = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -4793,7 +4793,7 @@ export type ListBudgetGroupItemsQuery = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -4809,7 +4809,7 @@ export type ListBudgetGroupItemsQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -4817,7 +4817,7 @@ export type ListBudgetGroupItemsQuery = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -4836,7 +4836,7 @@ export type ListBudgetGroupItemsQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -4849,7 +4849,7 @@ export type ListBudgetGroupItemsQuery = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -4857,7 +4857,7 @@ export type ListBudgetGroupItemsQuery = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -4873,7 +4873,7 @@ export type ListBudgetGroupItemsQuery = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -4889,7 +4889,7 @@ export type ListBudgetGroupItemsQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -4897,7 +4897,7 @@ export type ListBudgetGroupItemsQuery = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -4916,7 +4916,7 @@ export type ListBudgetGroupItemsQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -4929,7 +4929,7 @@ export type ListBudgetGroupItemsQuery = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -4942,7 +4942,7 @@ export type ListBudgetGroupItemsQuery = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -4968,7 +4968,7 @@ export type GetTransactionQuery = {
     description: string,
     date: string,
     amount: number,
-    account:  {
+    account?:  {
       __typename: "BankAccount",
       id: string,
       name: string,
@@ -4981,7 +4981,7 @@ export type GetTransactionQuery = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -4994,7 +4994,7 @@ export type GetTransactionQuery = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -5010,7 +5010,7 @@ export type GetTransactionQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -5018,7 +5018,7 @@ export type GetTransactionQuery = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -5037,7 +5037,7 @@ export type GetTransactionQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -5050,7 +5050,7 @@ export type GetTransactionQuery = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -5058,7 +5058,7 @@ export type GetTransactionQuery = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -5074,7 +5074,7 @@ export type GetTransactionQuery = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -5090,7 +5090,7 @@ export type GetTransactionQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -5098,7 +5098,7 @@ export type GetTransactionQuery = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -5117,7 +5117,7 @@ export type GetTransactionQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -5130,7 +5130,7 @@ export type GetTransactionQuery = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -5143,7 +5143,7 @@ export type GetTransactionQuery = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -5151,7 +5151,7 @@ export type GetTransactionQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    },
+    } | null,
     budgetGroupItem?:  {
       __typename: "BudgetGroupItem",
       id: string,
@@ -5167,7 +5167,7 @@ export type GetTransactionQuery = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -5180,7 +5180,7 @@ export type GetTransactionQuery = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -5196,7 +5196,7 @@ export type GetTransactionQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -5204,7 +5204,7 @@ export type GetTransactionQuery = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -5223,7 +5223,7 @@ export type GetTransactionQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -5236,7 +5236,7 @@ export type GetTransactionQuery = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -5244,7 +5244,7 @@ export type GetTransactionQuery = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -5260,7 +5260,7 @@ export type GetTransactionQuery = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -5276,7 +5276,7 @@ export type GetTransactionQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -5284,7 +5284,7 @@ export type GetTransactionQuery = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -5303,7 +5303,7 @@ export type GetTransactionQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -5316,7 +5316,7 @@ export type GetTransactionQuery = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -5329,7 +5329,7 @@ export type GetTransactionQuery = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -5342,7 +5342,7 @@ export type GetTransactionQuery = {
     createdAt: string,
     updatedAt: string,
     budgetGroupItemTransactionsId?: string | null,
-    bankAccountTransactionsId: string,
+    bankAccountTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -5363,7 +5363,7 @@ export type ListTransactionsQuery = {
       description: string,
       date: string,
       amount: number,
-      account:  {
+      account?:  {
         __typename: "BankAccount",
         id: string,
         name: string,
@@ -5376,7 +5376,7 @@ export type ListTransactionsQuery = {
             description: string,
             date: string,
             amount: number,
-            account:  {
+            account?:  {
               __typename: "BankAccount",
               id: string,
               name: string,
@@ -5389,7 +5389,7 @@ export type ListTransactionsQuery = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -5400,7 +5400,7 @@ export type ListTransactionsQuery = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -5419,7 +5419,7 @@ export type ListTransactionsQuery = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -5427,7 +5427,7 @@ export type ListTransactionsQuery = {
               createdAt: string,
               updatedAt: string,
               owner?: string | null,
-            },
+            } | null,
             budgetGroupItem?:  {
               __typename: "BudgetGroupItem",
               id: string,
@@ -5443,7 +5443,7 @@ export type ListTransactionsQuery = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -5454,7 +5454,7 @@ export type ListTransactionsQuery = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -5473,7 +5473,7 @@ export type ListTransactionsQuery = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -5486,7 +5486,7 @@ export type ListTransactionsQuery = {
             createdAt: string,
             updatedAt: string,
             budgetGroupItemTransactionsId?: string | null,
-            bankAccountTransactionsId: string,
+            bankAccountTransactionsId?: string | null,
             owner?: string | null,
           } | null >,
           nextToken?: string | null,
@@ -5494,7 +5494,7 @@ export type ListTransactionsQuery = {
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
-      },
+      } | null,
       budgetGroupItem?:  {
         __typename: "BudgetGroupItem",
         id: string,
@@ -5510,7 +5510,7 @@ export type ListTransactionsQuery = {
             description: string,
             date: string,
             amount: number,
-            account:  {
+            account?:  {
               __typename: "BankAccount",
               id: string,
               name: string,
@@ -5523,7 +5523,7 @@ export type ListTransactionsQuery = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -5534,7 +5534,7 @@ export type ListTransactionsQuery = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -5553,7 +5553,7 @@ export type ListTransactionsQuery = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -5561,7 +5561,7 @@ export type ListTransactionsQuery = {
               createdAt: string,
               updatedAt: string,
               owner?: string | null,
-            },
+            } | null,
             budgetGroupItem?:  {
               __typename: "BudgetGroupItem",
               id: string,
@@ -5577,7 +5577,7 @@ export type ListTransactionsQuery = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -5588,7 +5588,7 @@ export type ListTransactionsQuery = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -5607,7 +5607,7 @@ export type ListTransactionsQuery = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -5620,7 +5620,7 @@ export type ListTransactionsQuery = {
             createdAt: string,
             updatedAt: string,
             budgetGroupItemTransactionsId?: string | null,
-            bankAccountTransactionsId: string,
+            bankAccountTransactionsId?: string | null,
             owner?: string | null,
           } | null >,
           nextToken?: string | null,
@@ -5633,7 +5633,7 @@ export type ListTransactionsQuery = {
       createdAt: string,
       updatedAt: string,
       budgetGroupItemTransactionsId?: string | null,
-      bankAccountTransactionsId: string,
+      bankAccountTransactionsId?: string | null,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
@@ -5658,7 +5658,7 @@ export type GetBankAccountQuery = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -5671,7 +5671,7 @@ export type GetBankAccountQuery = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -5684,14 +5684,14 @@ export type GetBankAccountQuery = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -5706,7 +5706,7 @@ export type GetBankAccountQuery = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -5714,7 +5714,7 @@ export type GetBankAccountQuery = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -5730,14 +5730,14 @@ export type GetBankAccountQuery = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -5752,7 +5752,7 @@ export type GetBankAccountQuery = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -5765,7 +5765,7 @@ export type GetBankAccountQuery = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -5773,7 +5773,7 @@ export type GetBankAccountQuery = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -5789,7 +5789,7 @@ export type GetBankAccountQuery = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -5802,14 +5802,14 @@ export type GetBankAccountQuery = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -5824,7 +5824,7 @@ export type GetBankAccountQuery = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -5832,7 +5832,7 @@ export type GetBankAccountQuery = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -5848,14 +5848,14 @@ export type GetBankAccountQuery = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -5870,7 +5870,7 @@ export type GetBankAccountQuery = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -5883,7 +5883,7 @@ export type GetBankAccountQuery = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -5896,7 +5896,7 @@ export type GetBankAccountQuery = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -5929,7 +5929,7 @@ export type ListBankAccountsQuery = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -5942,7 +5942,7 @@ export type ListBankAccountsQuery = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -5958,7 +5958,7 @@ export type ListBankAccountsQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -5966,7 +5966,7 @@ export type ListBankAccountsQuery = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -5985,7 +5985,7 @@ export type ListBankAccountsQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -5998,7 +5998,7 @@ export type ListBankAccountsQuery = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -6006,7 +6006,7 @@ export type ListBankAccountsQuery = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -6022,7 +6022,7 @@ export type ListBankAccountsQuery = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -6038,7 +6038,7 @@ export type ListBankAccountsQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -6046,7 +6046,7 @@ export type ListBankAccountsQuery = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -6065,7 +6065,7 @@ export type ListBankAccountsQuery = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -6078,7 +6078,7 @@ export type ListBankAccountsQuery = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -6091,7 +6091,7 @@ export type ListBankAccountsQuery = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -6144,7 +6144,7 @@ export type BudgetByMonthIdQuery = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -6155,7 +6155,7 @@ export type BudgetByMonthIdQuery = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -6174,7 +6174,7 @@ export type BudgetByMonthIdQuery = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -6235,7 +6235,7 @@ export type OnCreateBudgetMonthSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -6251,7 +6251,7 @@ export type OnCreateBudgetMonthSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -6259,7 +6259,7 @@ export type OnCreateBudgetMonthSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -6278,7 +6278,7 @@ export type OnCreateBudgetMonthSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -6291,7 +6291,7 @@ export type OnCreateBudgetMonthSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -6350,7 +6350,7 @@ export type OnUpdateBudgetMonthSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -6366,7 +6366,7 @@ export type OnUpdateBudgetMonthSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -6374,7 +6374,7 @@ export type OnUpdateBudgetMonthSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -6393,7 +6393,7 @@ export type OnUpdateBudgetMonthSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -6406,7 +6406,7 @@ export type OnUpdateBudgetMonthSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -6465,7 +6465,7 @@ export type OnDeleteBudgetMonthSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -6481,7 +6481,7 @@ export type OnDeleteBudgetMonthSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -6489,7 +6489,7 @@ export type OnDeleteBudgetMonthSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -6508,7 +6508,7 @@ export type OnDeleteBudgetMonthSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -6521,7 +6521,7 @@ export type OnDeleteBudgetMonthSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -6574,7 +6574,7 @@ export type OnCreateBudgetGroupSubscription = {
             description: string,
             date: string,
             amount: number,
-            account:  {
+            account?:  {
               __typename: "BankAccount",
               id: string,
               name: string,
@@ -6587,7 +6587,7 @@ export type OnCreateBudgetGroupSubscription = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -6598,7 +6598,7 @@ export type OnCreateBudgetGroupSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -6617,7 +6617,7 @@ export type OnCreateBudgetGroupSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -6625,7 +6625,7 @@ export type OnCreateBudgetGroupSubscription = {
               createdAt: string,
               updatedAt: string,
               owner?: string | null,
-            },
+            } | null,
             budgetGroupItem?:  {
               __typename: "BudgetGroupItem",
               id: string,
@@ -6641,7 +6641,7 @@ export type OnCreateBudgetGroupSubscription = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -6652,7 +6652,7 @@ export type OnCreateBudgetGroupSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -6671,7 +6671,7 @@ export type OnCreateBudgetGroupSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -6684,7 +6684,7 @@ export type OnCreateBudgetGroupSubscription = {
             createdAt: string,
             updatedAt: string,
             budgetGroupItemTransactionsId?: string | null,
-            bankAccountTransactionsId: string,
+            bankAccountTransactionsId?: string | null,
             owner?: string | null,
           } | null >,
           nextToken?: string | null,
@@ -6731,7 +6731,7 @@ export type OnUpdateBudgetGroupSubscription = {
             description: string,
             date: string,
             amount: number,
-            account:  {
+            account?:  {
               __typename: "BankAccount",
               id: string,
               name: string,
@@ -6744,7 +6744,7 @@ export type OnUpdateBudgetGroupSubscription = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -6755,7 +6755,7 @@ export type OnUpdateBudgetGroupSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -6774,7 +6774,7 @@ export type OnUpdateBudgetGroupSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -6782,7 +6782,7 @@ export type OnUpdateBudgetGroupSubscription = {
               createdAt: string,
               updatedAt: string,
               owner?: string | null,
-            },
+            } | null,
             budgetGroupItem?:  {
               __typename: "BudgetGroupItem",
               id: string,
@@ -6798,7 +6798,7 @@ export type OnUpdateBudgetGroupSubscription = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -6809,7 +6809,7 @@ export type OnUpdateBudgetGroupSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -6828,7 +6828,7 @@ export type OnUpdateBudgetGroupSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -6841,7 +6841,7 @@ export type OnUpdateBudgetGroupSubscription = {
             createdAt: string,
             updatedAt: string,
             budgetGroupItemTransactionsId?: string | null,
-            bankAccountTransactionsId: string,
+            bankAccountTransactionsId?: string | null,
             owner?: string | null,
           } | null >,
           nextToken?: string | null,
@@ -6888,7 +6888,7 @@ export type OnDeleteBudgetGroupSubscription = {
             description: string,
             date: string,
             amount: number,
-            account:  {
+            account?:  {
               __typename: "BankAccount",
               id: string,
               name: string,
@@ -6901,7 +6901,7 @@ export type OnDeleteBudgetGroupSubscription = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -6912,7 +6912,7 @@ export type OnDeleteBudgetGroupSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -6931,7 +6931,7 @@ export type OnDeleteBudgetGroupSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -6939,7 +6939,7 @@ export type OnDeleteBudgetGroupSubscription = {
               createdAt: string,
               updatedAt: string,
               owner?: string | null,
-            },
+            } | null,
             budgetGroupItem?:  {
               __typename: "BudgetGroupItem",
               id: string,
@@ -6955,7 +6955,7 @@ export type OnDeleteBudgetGroupSubscription = {
                   description: string,
                   date: string,
                   amount: number,
-                  account:  {
+                  account?:  {
                     __typename: "BankAccount",
                     id: string,
                     name: string,
@@ -6966,7 +6966,7 @@ export type OnDeleteBudgetGroupSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     owner?: string | null,
-                  },
+                  } | null,
                   budgetGroupItem?:  {
                     __typename: "BudgetGroupItem",
                     id: string,
@@ -6985,7 +6985,7 @@ export type OnDeleteBudgetGroupSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   budgetGroupItemTransactionsId?: string | null,
-                  bankAccountTransactionsId: string,
+                  bankAccountTransactionsId?: string | null,
                   owner?: string | null,
                 } | null >,
                 nextToken?: string | null,
@@ -6998,7 +6998,7 @@ export type OnDeleteBudgetGroupSubscription = {
             createdAt: string,
             updatedAt: string,
             budgetGroupItemTransactionsId?: string | null,
-            bankAccountTransactionsId: string,
+            bankAccountTransactionsId?: string | null,
             owner?: string | null,
           } | null >,
           nextToken?: string | null,
@@ -7037,7 +7037,7 @@ export type OnCreateBudgetGroupItemSubscription = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -7050,7 +7050,7 @@ export type OnCreateBudgetGroupItemSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -7063,14 +7063,14 @@ export type OnCreateBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7085,7 +7085,7 @@ export type OnCreateBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7093,7 +7093,7 @@ export type OnCreateBudgetGroupItemSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -7109,14 +7109,14 @@ export type OnCreateBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7131,7 +7131,7 @@ export type OnCreateBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7144,7 +7144,7 @@ export type OnCreateBudgetGroupItemSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -7152,7 +7152,7 @@ export type OnCreateBudgetGroupItemSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -7168,7 +7168,7 @@ export type OnCreateBudgetGroupItemSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -7181,14 +7181,14 @@ export type OnCreateBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7203,7 +7203,7 @@ export type OnCreateBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7211,7 +7211,7 @@ export type OnCreateBudgetGroupItemSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -7227,14 +7227,14 @@ export type OnCreateBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7249,7 +7249,7 @@ export type OnCreateBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7262,7 +7262,7 @@ export type OnCreateBudgetGroupItemSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -7275,7 +7275,7 @@ export type OnCreateBudgetGroupItemSubscription = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -7307,7 +7307,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -7320,7 +7320,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -7333,14 +7333,14 @@ export type OnUpdateBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7355,7 +7355,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7363,7 +7363,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -7379,14 +7379,14 @@ export type OnUpdateBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7401,7 +7401,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7414,7 +7414,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -7422,7 +7422,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -7438,7 +7438,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -7451,14 +7451,14 @@ export type OnUpdateBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7473,7 +7473,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7481,7 +7481,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -7497,14 +7497,14 @@ export type OnUpdateBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7519,7 +7519,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7532,7 +7532,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -7545,7 +7545,7 @@ export type OnUpdateBudgetGroupItemSubscription = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -7577,7 +7577,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -7590,7 +7590,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -7603,14 +7603,14 @@ export type OnDeleteBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7625,7 +7625,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7633,7 +7633,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -7649,14 +7649,14 @@ export type OnDeleteBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7671,7 +7671,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7684,7 +7684,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -7692,7 +7692,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -7708,7 +7708,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -7721,14 +7721,14 @@ export type OnDeleteBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7743,7 +7743,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7751,7 +7751,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -7767,14 +7767,14 @@ export type OnDeleteBudgetGroupItemSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -7789,7 +7789,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -7802,7 +7802,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -7815,7 +7815,7 @@ export type OnDeleteBudgetGroupItemSubscription = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -7839,7 +7839,7 @@ export type OnCreateTransactionSubscription = {
     description: string,
     date: string,
     amount: number,
-    account:  {
+    account?:  {
       __typename: "BankAccount",
       id: string,
       name: string,
@@ -7852,7 +7852,7 @@ export type OnCreateTransactionSubscription = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -7865,7 +7865,7 @@ export type OnCreateTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -7881,7 +7881,7 @@ export type OnCreateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -7889,7 +7889,7 @@ export type OnCreateTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -7908,7 +7908,7 @@ export type OnCreateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -7921,7 +7921,7 @@ export type OnCreateTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -7929,7 +7929,7 @@ export type OnCreateTransactionSubscription = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -7945,7 +7945,7 @@ export type OnCreateTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -7961,7 +7961,7 @@ export type OnCreateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -7969,7 +7969,7 @@ export type OnCreateTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -7988,7 +7988,7 @@ export type OnCreateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8001,7 +8001,7 @@ export type OnCreateTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -8014,7 +8014,7 @@ export type OnCreateTransactionSubscription = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -8022,7 +8022,7 @@ export type OnCreateTransactionSubscription = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    },
+    } | null,
     budgetGroupItem?:  {
       __typename: "BudgetGroupItem",
       id: string,
@@ -8038,7 +8038,7 @@ export type OnCreateTransactionSubscription = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -8051,7 +8051,7 @@ export type OnCreateTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -8067,7 +8067,7 @@ export type OnCreateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8075,7 +8075,7 @@ export type OnCreateTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -8094,7 +8094,7 @@ export type OnCreateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8107,7 +8107,7 @@ export type OnCreateTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -8115,7 +8115,7 @@ export type OnCreateTransactionSubscription = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -8131,7 +8131,7 @@ export type OnCreateTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -8147,7 +8147,7 @@ export type OnCreateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8155,7 +8155,7 @@ export type OnCreateTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -8174,7 +8174,7 @@ export type OnCreateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8187,7 +8187,7 @@ export type OnCreateTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -8200,7 +8200,7 @@ export type OnCreateTransactionSubscription = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -8213,7 +8213,7 @@ export type OnCreateTransactionSubscription = {
     createdAt: string,
     updatedAt: string,
     budgetGroupItemTransactionsId?: string | null,
-    bankAccountTransactionsId: string,
+    bankAccountTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -8230,7 +8230,7 @@ export type OnUpdateTransactionSubscription = {
     description: string,
     date: string,
     amount: number,
-    account:  {
+    account?:  {
       __typename: "BankAccount",
       id: string,
       name: string,
@@ -8243,7 +8243,7 @@ export type OnUpdateTransactionSubscription = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -8256,7 +8256,7 @@ export type OnUpdateTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -8272,7 +8272,7 @@ export type OnUpdateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8280,7 +8280,7 @@ export type OnUpdateTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -8299,7 +8299,7 @@ export type OnUpdateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8312,7 +8312,7 @@ export type OnUpdateTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -8320,7 +8320,7 @@ export type OnUpdateTransactionSubscription = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -8336,7 +8336,7 @@ export type OnUpdateTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -8352,7 +8352,7 @@ export type OnUpdateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8360,7 +8360,7 @@ export type OnUpdateTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -8379,7 +8379,7 @@ export type OnUpdateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8392,7 +8392,7 @@ export type OnUpdateTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -8405,7 +8405,7 @@ export type OnUpdateTransactionSubscription = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -8413,7 +8413,7 @@ export type OnUpdateTransactionSubscription = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    },
+    } | null,
     budgetGroupItem?:  {
       __typename: "BudgetGroupItem",
       id: string,
@@ -8429,7 +8429,7 @@ export type OnUpdateTransactionSubscription = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -8442,7 +8442,7 @@ export type OnUpdateTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -8458,7 +8458,7 @@ export type OnUpdateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8466,7 +8466,7 @@ export type OnUpdateTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -8485,7 +8485,7 @@ export type OnUpdateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8498,7 +8498,7 @@ export type OnUpdateTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -8506,7 +8506,7 @@ export type OnUpdateTransactionSubscription = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -8522,7 +8522,7 @@ export type OnUpdateTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -8538,7 +8538,7 @@ export type OnUpdateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8546,7 +8546,7 @@ export type OnUpdateTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -8565,7 +8565,7 @@ export type OnUpdateTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8578,7 +8578,7 @@ export type OnUpdateTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -8591,7 +8591,7 @@ export type OnUpdateTransactionSubscription = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -8604,7 +8604,7 @@ export type OnUpdateTransactionSubscription = {
     createdAt: string,
     updatedAt: string,
     budgetGroupItemTransactionsId?: string | null,
-    bankAccountTransactionsId: string,
+    bankAccountTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -8621,7 +8621,7 @@ export type OnDeleteTransactionSubscription = {
     description: string,
     date: string,
     amount: number,
-    account:  {
+    account?:  {
       __typename: "BankAccount",
       id: string,
       name: string,
@@ -8634,7 +8634,7 @@ export type OnDeleteTransactionSubscription = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -8647,7 +8647,7 @@ export type OnDeleteTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -8663,7 +8663,7 @@ export type OnDeleteTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8671,7 +8671,7 @@ export type OnDeleteTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -8690,7 +8690,7 @@ export type OnDeleteTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8703,7 +8703,7 @@ export type OnDeleteTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -8711,7 +8711,7 @@ export type OnDeleteTransactionSubscription = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -8727,7 +8727,7 @@ export type OnDeleteTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -8743,7 +8743,7 @@ export type OnDeleteTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8751,7 +8751,7 @@ export type OnDeleteTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -8770,7 +8770,7 @@ export type OnDeleteTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8783,7 +8783,7 @@ export type OnDeleteTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -8796,7 +8796,7 @@ export type OnDeleteTransactionSubscription = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -8804,7 +8804,7 @@ export type OnDeleteTransactionSubscription = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    },
+    } | null,
     budgetGroupItem?:  {
       __typename: "BudgetGroupItem",
       id: string,
@@ -8820,7 +8820,7 @@ export type OnDeleteTransactionSubscription = {
           description: string,
           date: string,
           amount: number,
-          account:  {
+          account?:  {
             __typename: "BankAccount",
             id: string,
             name: string,
@@ -8833,7 +8833,7 @@ export type OnDeleteTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -8849,7 +8849,7 @@ export type OnDeleteTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8857,7 +8857,7 @@ export type OnDeleteTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -8876,7 +8876,7 @@ export type OnDeleteTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8889,7 +8889,7 @@ export type OnDeleteTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -8897,7 +8897,7 @@ export type OnDeleteTransactionSubscription = {
             createdAt: string,
             updatedAt: string,
             owner?: string | null,
-          },
+          } | null,
           budgetGroupItem?:  {
             __typename: "BudgetGroupItem",
             id: string,
@@ -8913,7 +8913,7 @@ export type OnDeleteTransactionSubscription = {
                 description: string,
                 date: string,
                 amount: number,
-                account:  {
+                account?:  {
                   __typename: "BankAccount",
                   id: string,
                   name: string,
@@ -8929,7 +8929,7 @@ export type OnDeleteTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8937,7 +8937,7 @@ export type OnDeleteTransactionSubscription = {
                   createdAt: string,
                   updatedAt: string,
                   owner?: string | null,
-                },
+                } | null,
                 budgetGroupItem?:  {
                   __typename: "BudgetGroupItem",
                   id: string,
@@ -8956,7 +8956,7 @@ export type OnDeleteTransactionSubscription = {
                       createdAt: string,
                       updatedAt: string,
                       budgetGroupItemTransactionsId?: string | null,
-                      bankAccountTransactionsId: string,
+                      bankAccountTransactionsId?: string | null,
                       owner?: string | null,
                     } | null >,
                     nextToken?: string | null,
@@ -8969,7 +8969,7 @@ export type OnDeleteTransactionSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 budgetGroupItemTransactionsId?: string | null,
-                bankAccountTransactionsId: string,
+                bankAccountTransactionsId?: string | null,
                 owner?: string | null,
               } | null >,
               nextToken?: string | null,
@@ -8982,7 +8982,7 @@ export type OnDeleteTransactionSubscription = {
           createdAt: string,
           updatedAt: string,
           budgetGroupItemTransactionsId?: string | null,
-          bankAccountTransactionsId: string,
+          bankAccountTransactionsId?: string | null,
           owner?: string | null,
         } | null >,
         nextToken?: string | null,
@@ -8995,7 +8995,7 @@ export type OnDeleteTransactionSubscription = {
     createdAt: string,
     updatedAt: string,
     budgetGroupItemTransactionsId?: string | null,
-    bankAccountTransactionsId: string,
+    bankAccountTransactionsId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -9018,7 +9018,7 @@ export type OnCreateBankAccountSubscription = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -9031,7 +9031,7 @@ export type OnCreateBankAccountSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -9044,14 +9044,14 @@ export type OnCreateBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9066,7 +9066,7 @@ export type OnCreateBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9074,7 +9074,7 @@ export type OnCreateBankAccountSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -9090,14 +9090,14 @@ export type OnCreateBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9112,7 +9112,7 @@ export type OnCreateBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9125,7 +9125,7 @@ export type OnCreateBankAccountSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -9133,7 +9133,7 @@ export type OnCreateBankAccountSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -9149,7 +9149,7 @@ export type OnCreateBankAccountSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -9162,14 +9162,14 @@ export type OnCreateBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9184,7 +9184,7 @@ export type OnCreateBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9192,7 +9192,7 @@ export type OnCreateBankAccountSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -9208,14 +9208,14 @@ export type OnCreateBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9230,7 +9230,7 @@ export type OnCreateBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9243,7 +9243,7 @@ export type OnCreateBankAccountSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -9256,7 +9256,7 @@ export type OnCreateBankAccountSubscription = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -9285,7 +9285,7 @@ export type OnUpdateBankAccountSubscription = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -9298,7 +9298,7 @@ export type OnUpdateBankAccountSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -9311,14 +9311,14 @@ export type OnUpdateBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9333,7 +9333,7 @@ export type OnUpdateBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9341,7 +9341,7 @@ export type OnUpdateBankAccountSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -9357,14 +9357,14 @@ export type OnUpdateBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9379,7 +9379,7 @@ export type OnUpdateBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9392,7 +9392,7 @@ export type OnUpdateBankAccountSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -9400,7 +9400,7 @@ export type OnUpdateBankAccountSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -9416,7 +9416,7 @@ export type OnUpdateBankAccountSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -9429,14 +9429,14 @@ export type OnUpdateBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9451,7 +9451,7 @@ export type OnUpdateBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9459,7 +9459,7 @@ export type OnUpdateBankAccountSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -9475,14 +9475,14 @@ export type OnUpdateBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9497,7 +9497,7 @@ export type OnUpdateBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9510,7 +9510,7 @@ export type OnUpdateBankAccountSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -9523,7 +9523,7 @@ export type OnUpdateBankAccountSubscription = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -9552,7 +9552,7 @@ export type OnDeleteBankAccountSubscription = {
         description: string,
         date: string,
         amount: number,
-        account:  {
+        account?:  {
           __typename: "BankAccount",
           id: string,
           name: string,
@@ -9565,7 +9565,7 @@ export type OnDeleteBankAccountSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -9578,14 +9578,14 @@ export type OnDeleteBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9600,7 +9600,7 @@ export type OnDeleteBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9608,7 +9608,7 @@ export type OnDeleteBankAccountSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -9624,14 +9624,14 @@ export type OnDeleteBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9646,7 +9646,7 @@ export type OnDeleteBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9659,7 +9659,7 @@ export type OnDeleteBankAccountSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -9667,7 +9667,7 @@ export type OnDeleteBankAccountSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        },
+        } | null,
         budgetGroupItem?:  {
           __typename: "BudgetGroupItem",
           id: string,
@@ -9683,7 +9683,7 @@ export type OnDeleteBankAccountSubscription = {
               description: string,
               date: string,
               amount: number,
-              account:  {
+              account?:  {
                 __typename: "BankAccount",
                 id: string,
                 name: string,
@@ -9696,14 +9696,14 @@ export type OnDeleteBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9718,7 +9718,7 @@ export type OnDeleteBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9726,7 +9726,7 @@ export type OnDeleteBankAccountSubscription = {
                 createdAt: string,
                 updatedAt: string,
                 owner?: string | null,
-              },
+              } | null,
               budgetGroupItem?:  {
                 __typename: "BudgetGroupItem",
                 id: string,
@@ -9742,14 +9742,14 @@ export type OnDeleteBankAccountSubscription = {
                     description: string,
                     date: string,
                     amount: number,
-                    account:  {
+                    account?:  {
                       __typename: "BankAccount",
                       id: string,
                       name: string,
                       createdAt: string,
                       updatedAt: string,
                       owner?: string | null,
-                    },
+                    } | null,
                     budgetGroupItem?:  {
                       __typename: "BudgetGroupItem",
                       id: string,
@@ -9764,7 +9764,7 @@ export type OnDeleteBankAccountSubscription = {
                     createdAt: string,
                     updatedAt: string,
                     budgetGroupItemTransactionsId?: string | null,
-                    bankAccountTransactionsId: string,
+                    bankAccountTransactionsId?: string | null,
                     owner?: string | null,
                   } | null >,
                   nextToken?: string | null,
@@ -9777,7 +9777,7 @@ export type OnDeleteBankAccountSubscription = {
               createdAt: string,
               updatedAt: string,
               budgetGroupItemTransactionsId?: string | null,
-              bankAccountTransactionsId: string,
+              bankAccountTransactionsId?: string | null,
               owner?: string | null,
             } | null >,
             nextToken?: string | null,
@@ -9790,7 +9790,7 @@ export type OnDeleteBankAccountSubscription = {
         createdAt: string,
         updatedAt: string,
         budgetGroupItemTransactionsId?: string | null,
-        bankAccountTransactionsId: string,
+        bankAccountTransactionsId?: string | null,
         owner?: string | null,
       } | null >,
       nextToken?: string | null,

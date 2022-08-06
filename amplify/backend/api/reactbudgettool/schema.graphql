@@ -26,12 +26,12 @@ type Transaction @model @auth(rules: [{ allow: owner }]) {
   description: String!
   date: AWSDate!
   amount: Float!
-  account: BankAccount! @belongsTo
+  account: BankAccount @belongsTo
   budgetGroupItem: BudgetGroupItem @belongsTo
 }
 
 type BankAccount @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   name: String!
-  transactions: [Transaction]! @hasMany
+  transactions: [Transaction] @hasMany
 }

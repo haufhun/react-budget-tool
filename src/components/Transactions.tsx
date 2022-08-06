@@ -64,7 +64,7 @@ const TransactionsCardTable = ({
         >
           <Typography>{transaction.name}</Typography>
           <Typography>{transaction.date}</Typography>
-          <Typography>{transaction.account.name}</Typography>
+          <Typography>{transaction.account?.name ?? "null"}</Typography>
           <Typography>{transaction.budgetGroupItem?.name ?? "null"}</Typography>
           <Typography>{currency(transaction.amount)}</Typography>
 

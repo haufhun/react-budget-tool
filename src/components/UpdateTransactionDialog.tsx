@@ -6,10 +6,8 @@ import {
   DialogTitle,
   FormControl,
   IconButton,
-  InputAdornment,
   InputLabel,
   MenuItem,
-  OutlinedInput,
   Select,
   Stack,
   TextField,
@@ -51,7 +49,7 @@ function UpdateTransactionDialog({
   const [description, setDescription] = useState(transaction.description);
   const [date, setDate] = useState(transaction.date);
   const [amount, setAmount] = useState(transaction.amount.toString());
-  const [accountName, setAccountName] = useState(transaction.account.name);
+  const [accountName, setAccountName] = useState(transaction.account?.name);
   const [budgetGroupItemName, setBudgetGroupItemName] = useState(
     transaction.budgetGroupItem?.name
   );
