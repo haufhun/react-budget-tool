@@ -51,7 +51,7 @@ class BudgetGroupService {
       throw new Error(JSON.stringify(response.errors));
     }
 
-    return response.data?.createBudgetGroup!;
+    return response.data?.createBudgetGroup! as BudgetGroup;
   }
 
   async update(input: UpdateBudgetGroupInput): Promise<BudgetGroup> {

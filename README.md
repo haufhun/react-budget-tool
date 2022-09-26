@@ -1,3 +1,8 @@
+# Description
+
+This project is trying to clone the Everydollar tool using Amplify backend and React/MUI frontend.
+The project is incomplete so far.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
